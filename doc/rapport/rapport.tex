@@ -1,0 +1,67 @@
+% Document class 
+\documentclass[12pt, twoside]{report}
+
+% Custom packages file
+\usepackage{packages}
+\usepackage{styles}
+
+\begin{document}
+	
+	% Disable numbering
+	\pagenumbering{gobble}
+	
+	% Create title
+	\maketitle
+	%\input{Titre/Titre.tex}
+	\cleardoublepage
+	
+	% Start numbering
+	\pagenumbering{arabic}
+	
+	% Table of content
+	\tableofcontents
+	
+	
+	%------------------------------------------%
+	
+	\cleardoublepage
+	\part{Introduction}
+	\cleardoublepage
+	
+	\input{sections/01_Introduction.tex}
+	
+	%------------------------------------------%
+	
+	\cleardoublepage
+	\part{Pré-étude}
+	\cleardoublepage
+	
+	\input{sections/02_Pré-étude.tex}
+	
+	%------------------------------------------%
+	
+	\cleardoublepage
+	\part{Design}
+	\cleardoublepage
+	
+	\input{sections/03_Design.tex}
+	
+	%------------------------------------------%
+	
+	\cleardoublepage
+	\part{Fabrication}
+	\cleardoublepage
+	
+	\input{sections/04_Fabrication.tex}
+	
+	%------------------------------------------%
+	
+	\cleardoublepage
+	\part{Annexes}
+	\cleardoublepage
+	
+	\input{annexes/Journal de travail.tex}
+	
+	%------------------------------------------%
+	
+\end{document}

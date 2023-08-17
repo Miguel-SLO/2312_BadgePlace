@@ -1,23 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-08-17" view-index="0" gantt-divider-location="351" resource-divider-location="279" version="3.2.3247" locale="fr_FR">
-    <description/>
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="ETML-ES" webLink="http://" view-date="2023-08-11" view-index="0" gantt-divider-location="396" resource-divider-location="279" version="3.2.3247" locale="fr_FR">
+    <description>
+        <![CDATA[Travail de diplôme SLO
+Miguel Santos
+2023
+]]>
+    </description>
     <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="199" order="0"/>
-        <field id="tpd4" name="Date de début" width="75" order="1"/>
-        <field id="tpd5" name="Date de fin" width="76" order="2"/>
-        <option id="taskLabelUp" value="name"/>
-        <option id="taskLabelDown" value=""/>
-        <option id="taskLabelLeft" value=""/>
+        <field id="tpd3" name="Nom" width="225" order="0"/>
+        <field id="tpd4" name="Date de début" width="85" order="1"/>
+        <field id="tpd5" name="Date de fin" width="86" order="2"/>
+        <option id="taskLabelUp" value=""/>
+        <option id="taskLabelDown" value="taskDates"/>
+        <option id="taskLabelLeft" value="name"/>
+        <option id="taskLabelRight" value=""/>
         <option id="filter.completedTasks" value="false"/>
-        <timeline>
-            <![CDATA[4,2]]>
-        </timeline>
+        <option id="color.recent">
+            <![CDATA[#ccffff]]>
+        </option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="200" order="0"/>
         <field id="1" name="Rôle par défaut" width="75" order="1"/>
     </view>
     <!-- -->
-    <calendars>
+    <calendars base-id="Aucun">
         <day-types>
             <day-type id="0"/>
             <day-type id="1"/>
@@ -26,6 +32,9 @@
             <overriden-day-types/>
             <days/>
         </day-types>
+        <date year="2023" month="9" date="18" type="HOLIDAY" color="#ccffff">
+            <![CDATA[Jeûne Fédéral]]>
+        </date>
     </calendars>
     <tasks empty-milestones="true">
         <taskproperties>
@@ -40,13 +49,16 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Début" color="#ff6666" meeting="true" start="2023-08-21" duration="0" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true"/>
+        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="0" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Rédaction" color="#ff6666" meeting="false" start="2023-08-21" duration="25" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true">
+            <depend id="1" type="2" difference="0" hardness="Strong"/>
+            <depend id="4" type="2" difference="0" hardness="Rubber"/>
+        </task>
         <task id="3" name="Retour donnée" color="#ff6666" meeting="true" start="2023-08-25" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true"/>
         <task id="1" name="Remise des mémoires" color="#ff6666" meeting="true" start="2023-09-26" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true"/>
         <task id="4" name="Remise affiche et résumé" color="#ff6666" meeting="true" start="2023-09-27" duration="0" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true"/>
         <task id="2" name="Portes ouvertes" color="#ff6666" meeting="true" start="2023-09-29" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true"/>
-        <task id="5" name="Présentation orale" color="#ff6666" meeting="false" start="2023-10-04" duration="3" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true"/>
-        <task id="6" name="Cérémonie diplôme" color="#ff6666" meeting="true" start="2023-10-13" duration="0" complete="0" thirdDate="2023-08-16" thirdDate-constraint="0" priority="4" expand="true"/>
+        <task id="5" name="Défense orale" color="#ff6666" meeting="false" start="2023-10-04" duration="3" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>

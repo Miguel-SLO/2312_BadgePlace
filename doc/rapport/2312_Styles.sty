@@ -1,8 +1,9 @@
-\ProvidesPackage{styles}
+\ProvidesPackage{2312_Styles}
 
 % Sections numerotation style
 \renewcommand\thesection{\arabic{section}}
 
+% Margin and size of the pages
 \geometry{
 	a4paper,
 	left=30mm,
@@ -11,6 +12,17 @@
 	bottom=25mm
 }
 
+% Title page informations
 \title{2312 Badge pour place de travail SLO}
 \date{\today}
 \author{Miguel Santos}
+
+% Documents links style
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.8)  21 AUG 2023 13:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.8)  21 AUG 2023 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -263,23 +263,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Chapitre 1.
-) (./2312_Sections/2312_Annexes.tex [5
+) (./2312_Sections/2312_Pre-etude.tex [5
 
 ] [6
 
-] [7
+]
+<2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg, id=35, 812.28468pt x 1071
+.25218pt>
+File: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg Graphic file (type jp
+g)
+<use 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg>
+Package pdftex.def Info: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg  u
+sed on input line 9.
+(pdftex.def)             Requested size: 318.66948pt x 420.25491pt.
+)
+(./2312_Sections/2312_Annexes.tex [7 <./2312_Images/2312_Pre-etude/Screenshot_N
+FC_Tools.jpg>] [8
 
-] [8
+] [9
 
-]) [9
+] [10
+
+]) [11
 
 ] (./2312_BadgePlace.aux) ) 
 Here is how much of TeX's memory you used:
- 4457 strings out of 474968
- 76743 string characters out of 5780081
- 523845 words of memory out of 5000000
- 25915 multiletter control sequences out of 15000+600000
- 479854 words of font info for 49 fonts, out of 8000000 for 9000
+ 4486 strings out of 474968
+ 77760 string characters out of 5780081
+ 522855 words of memory out of 5000000
+ 25936 multiletter control sequences out of 15000+600000
+ 480529 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,6n,91p,316b,428s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super
@@ -287,13 +300,14 @@ Here is how much of TeX's memory you used:
 00.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:
 /texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/texlive/2
 022/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><c:/texlive/2022/texmf-
-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/texmf-dist/fonts
-/type1/public/cm-super/sfrm1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/pub
-lic/cm-super/sfrm2074.pfb>
-Output written on 2312_BadgePlace.pdf (11 pages, 107193 bytes).
+dist/fonts/type1/public/cm-super/sfcc1200.pfb><c:/texlive/2022/texmf-dist/fonts
+/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-sup
+er/sfrm2074.pfb>
+Output written on 2312_BadgePlace.pdf (13 pages, 283122 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

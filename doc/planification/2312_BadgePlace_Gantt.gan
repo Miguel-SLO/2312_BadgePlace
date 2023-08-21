@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Diplôme - SLO - Santos" company="ETML-ES" webLink="https://www.etml-es.ch/" view-date="2023-08-15" view-index="0" gantt-divider-location="432" resource-divider-location="279" version="3.2.3247" locale="fr_CH">
+    <description>
+        <![CDATA[Travail de diplôme SLO
+Miguel Santos
+2023
+]]>
+    </description>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Name" width="180" order="0"/>
+        <field id="tpd4" name="Begin date" width="89" order="1"/>
+        <field id="tpd5" name="End date" width="81" order="2"/>
+        <field id="tpd7" name="Completion" width="81" order="3"/>
+        <option id="taskLabelDown" value="taskDates"/>
+        <option id="taskLabelLeft" value="name"/>
+        <option id="filter.completedTasks" value="false"/>
+        <timeline>
+            <![CDATA[3]]>
+        </timeline>
+        <option id="color.recent">
+            <![CDATA[#ff6666 #ccffff]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="200" order="0"/>
+        <field id="1" name="Default role" width="75" order="1"/>
+    </view>
+    <!-- -->
+    <calendars base-id="none">
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+        <date year="2023" month="9" date="18" type="HOLIDAY" color="#ccffff">
+            <![CDATA[Jeûne Fédéral]]>
+        </date>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="0" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
+            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="2" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-23" duration="3" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
+                <depend id="3" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="3" name="Revue de schémas" color="#ff6666" meeting="true" start="2023-08-28" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true">
+                <depend id="18" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="18" name="PCB" color="#ff6666" meeting="false" start="2023-08-28" duration="4" complete="0" thirdDate="2023-08-28" thirdDate-constraint="0" expand="true">
+                <depend id="21" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="21" name="Commandes" color="#ff6666" meeting="false" start="2023-09-01" duration="1" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+                <depend id="22" type="2" difference="0" hardness="Rubber"/>
+                <depend id="23" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="22" name="Réception PCB" color="#ff6666" meeting="true" start="2023-09-08" duration="0" complete="0" thirdDate="2023-09-08" thirdDate-constraint="1" priority="4" expand="true">
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="20" name="Montage" color="#ff6666" meeting="false" start="2023-09-08" duration="1" complete="0" thirdDate="2023-08-22" thirdDate-constraint="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="23" name="Software RPI" color="#ff6666" meeting="false" start="2023-09-04" duration="4" complete="0" thirdDate="2023-08-17" thirdDate-constraint="0" expand="true"/>
+            <task id="19" name="Firmware PCB" color="#ff6666" meeting="false" start="2023-09-11" duration="5" complete="0" thirdDate="2023-09-13" thirdDate-constraint="0" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" name="Mise en service" color="#ff6666" meeting="false" start="2023-09-19" duration="11" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true"/>
+            <task id="9" name="Documents" color="#ff6666" meeting="false" start="2023-08-21" duration="25" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true"/>
+            <task id="1" name="Remise des mémoires" color="#ff6666" meeting="true" start="2023-09-26" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true"/>
+            <task id="4" name="Remise affiche et résumé" color="#ff6666" meeting="true" start="2023-09-27" duration="0" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true"/>
+            <task id="2" name="Portes ouvertes" color="#ff6666" meeting="true" start="2023-09-29" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true"/>
+            <task id="5" name="Défense orale" color="#ff6666" meeting="false" start="2023-10-04" duration="3" complete="0" thirdDate="2023-10-04" thirdDate-constraint="1" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Miguel Santos" function="Default:1" contacts="miguel.santos@etml-es.ch" phone="0793494698">
+            <rate name="standard" value="35"/>
+        </resource>
+        <resource id="1" name="Serge Castoldi" function="1" contacts="castoldi.serge@etml-es.ch" phone="012316465"/>
+        <resource id="2" name="" function="2" contacts="" phone=""/>
+        <resource id="3" name="" function="2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="14" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous>
+        <previous-tasks name="2312_Initial">
+            <previous-task id="10" start="2023-08-21" duration="34" meeting="false" super="true"/>
+            <previous-task id="15" start="2023-08-21" duration="2" meeting="false" super="false"/>
+            <previous-task id="17" start="2023-08-23" duration="3" meeting="false" super="false"/>
+            <previous-task id="3" start="2023-08-28" duration="0" meeting="true" super="false"/>
+            <previous-task id="18" start="2023-08-28" duration="4" meeting="false" super="false"/>
+            <previous-task id="21" start="2023-09-01" duration="1" meeting="false" super="false"/>
+            <previous-task id="22" start="2023-09-08" duration="0" meeting="true" super="false"/>
+            <previous-task id="20" start="2023-09-08" duration="1" meeting="false" super="false"/>
+            <previous-task id="23" start="2023-09-04" duration="4" meeting="false" super="false"/>
+            <previous-task id="19" start="2023-09-11" duration="5" meeting="false" super="false"/>
+            <previous-task id="14" start="2023-09-19" duration="11" meeting="false" super="false"/>
+            <previous-task id="9" start="2023-08-21" duration="25" meeting="false" super="false"/>
+            <previous-task id="1" start="2023-09-26" duration="0" meeting="true" super="false"/>
+            <previous-task id="4" start="2023-09-27" duration="0" meeting="true" super="false"/>
+            <previous-task id="2" start="2023-09-29" duration="0" meeting="true" super="false"/>
+            <previous-task id="5" start="2023-10-04" duration="3" meeting="false" super="false"/>
+        </previous-tasks>
+    </previous>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+    <roles>
+        <role id="1" name="Maître de diplôme"/>
+        <role id="2" name="Expert"/>
+    </roles>
+</project>

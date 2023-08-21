@@ -4,4 +4,6 @@
 \contentsline {section}{\numberline {1}Contexte}{5}{}%
 \contentsline {section}{\numberline {2}But du projet}{5}{}%
 \contentsline {section}{\numberline {3}Cahier des charges}{5}{}%
-\contentsline {part}{II\hspace {1em}Annexes}{7}{}%
+\contentsline {part}{II\hspace {1em}Pré-étude}{6}{}%
+\contentsline {section}{\numberline {4}RFID}{7}{}%
+\contentsline {part}{III\hspace {1em}Annexes}{9}{}%

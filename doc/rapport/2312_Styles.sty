@@ -26,3 +26,24 @@
 	pdftitle={Overleaf Example},
 	pdfpagemode=FullScreen,
 }
+
+% Chapter style formating
+\newlength\chapnumb
+\setlength\chapnumb{3cm}
+
+\titleformat{\chapter}[block] {
+	\normalfont\sffamily}{}{0pt} {
+	\parbox[b]{\chapnumb}{
+		\fontsize{70}{70}\selectfont\thechapter}
+	\parbox[b]{\dimexpr\textwidth-\chapnumb\relax}{
+		\raggedleft
+		\hfill{\Huge#1}\\ % Font size for title
+		\vspace{0pt} % Space between text and line
+		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}
+	}
+}
+
+\titlespacing*{\chapter}{0pt}{10pt}{10pt} % Space on left, before and after chapter
+
+\renewcommand{\cfttoctitlefont}{\Large\bfseries\centering} % Format du titre "Table des matières"
+\renewcommand{\cftaftertoctitle}{\hfill} % Espacement après le titre

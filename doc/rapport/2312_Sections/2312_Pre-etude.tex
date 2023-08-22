@@ -23,6 +23,8 @@ Utilisation des puces "ST25 Dynamic NFC Tags" de STM. \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Alimentation}
+L'entiereté du circuit sera alimenté par 3V3 car le microcontrôleur et le module rfid utilisent tout deux du 3V3. 
+Donc j'utilise un module monobloc d'alimentation 230V à 3V3. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ethernet}
@@ -31,4 +33,10 @@ Utilisation des puces "ST25 Dynamic NFC Tags" de STM. \\
 \section{Boitier}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{}
+\section{Relais}
+J'ai du faire le choix d'un relais pour commuter le 230VAC. J'ai choisi un relais capable de supporter un courant suffisamment élevé pour supporter le courant maximal que peut fournir la prise murale. J'ai dû m'assurer que la tension de contrôle soit aussi assez basse pour pouvoir être controlé par le microcontroleur.
+J'ai fait le choix aussi d'un relai à verrouillage pour permettre de réduire la consommation de courant après la commutation en conservant ainsi son état.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Base de donnée}
+La base de donnée sera géré par un Raspberry Pi. Cette solution offre la flexibilité d'un ordinateur avec une consommation minime. La gestion sera réalisé en langage Python.

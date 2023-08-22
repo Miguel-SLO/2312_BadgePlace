@@ -53,11 +53,11 @@ Miguel Santos
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="0" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
-            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="2" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="2" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
+            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="3" complete="60" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-23" duration="3" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
+            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-24" duration="2" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
                 <depend id="3" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="3" name="Revue de schémas" color="#ff6666" meeting="true" start="2023-08-28" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true">

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.21)  22 AUG 2023 21:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.21)  22 AUG 2023 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -329,7 +329,7 @@ Package: titlesec 2021/07/05 v2.14 Sectioning titles
 y
 Package: titletoc 2021/07/05 v2.14 TOC entries
 \ttl@leftsep=\dimen170
-)) (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
+) (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has chapter divisions on input line 51.
 \cftparskip=\skip53
@@ -368,9 +368,18 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 \cftbeforetabskip=\skip84
 \cfttabindent=\skip85
 \cfttabnumwidth=\skip86
+))
+(C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/tocbibind\tocbibind.st
+y
+Package: tocbibind 2010/10/13 v1.5k extra ToC listings
+Package tocbibind Info: The document has chapter divisions on input line 50.
+
+
+Package tocbibind Note: Using chapter style headings, unless overridden.
+
 ) (2312_Styles.sty
 Package: 2312_Styles 
-Package hyperref Info: Option `colorlinks' set `true' on input line 28.
+Package hyperref Info: Option `colorlinks' set `true' on input line 31.
 \chapnumb=\skip87
 ) (2312_BadgePlace.aux)
 \openout1 = `2312_BadgePlace.aux'.
@@ -403,7 +412,7 @@ LaTeX Info: Redefining \up on input line 8.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
+* modes: twoside showframe 
 * h-part:(L,W,R)=(85.35826pt, 455.24411pt, 56.9055pt)
 * v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
 * \paperwidth=597.50787pt
@@ -521,17 +530,7 @@ Overfull \hbox (5.08798pt too wide) in paragraph at lines 2--2
 | [] []
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 9--10
-
- []
-
-<2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg, id=89, 812.28468pt x 134.
+<2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg, id=95, 812.28468pt x 134.
 75343pt>
 File: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg Graphic file (type jp
 g)
@@ -539,11 +538,6 @@ g)
 Package pdftex.def Info: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg  u
 sed on input line 15.
 (pdftex.def)             Requested size: 318.66948pt x 52.8641pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--23
-
- []
-
 [5
 
  <./2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg>])
@@ -554,7 +548,14 @@ Overfull \hbox (5.08798pt too wide) in paragraph at lines 1--1
 | [] []
  []
 
-) [7
+) (2312_BadgePlace.bbl [7
+
+]
+Overfull \hbox (5.08798pt too wide) in paragraph at lines 2--2
+| [] []
+ []
+
+) [8
 
 ] (2312_BadgePlace.aux)
  ***********
@@ -562,16 +563,16 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-30>
  ***********
 Package rerunfilecheck Info: File `2312_BadgePlace.out' has not changed.
-(rerunfilecheck)             Checksum: A2B04DFC31E69CF5AE6EAE6D9EAEBF62;1084.
+(rerunfilecheck)             Checksum: 2DA05E8782155FAF63BF9782374C7185;1194.
  ) 
 Here is how much of TeX's memory you used:
- 12314 strings out of 475550
- 201352 string characters out of 5762061
+ 12426 strings out of 475550
+ 203408 string characters out of 5762061
  1924238 words of memory out of 5000000
- 33331 multiletter control sequences out of 15000+600000
+ 33433 multiletter control sequences out of 15000+600000
  574534 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,6n,107p,417b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,6n,107p,417b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecc
 c1200.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
 600\ecrm1200.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen
@@ -580,9 +581,9 @@ knappen/ec/dpi600\ecbx1728.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/l
 jfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fon
 ts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk><C:/Users/Miguel/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on 2312_BadgePlace.pdf (9 pages, 131256 bytes).
+Output written on 2312_BadgePlace.pdf (10 pages, 141444 bytes).
 PDF statistics:
- 312 PDF objects out of 1000 (max. 8388607)
- 21 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 343 PDF objects out of 1000 (max. 8388607)
+ 24 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

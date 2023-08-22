@@ -1,5 +1,8 @@
 \ProvidesPackage{2312_Styles}
 
+
+
+
 % Sections numerotation style
 \renewcommand\thesection{\arabic{section}}
 
@@ -11,7 +14,7 @@
 	top=25mm,
 	bottom=25mm
 }
-
+\pretolerance=150
 % Title page informations
 \title{2312 Badge pour place de travail SLO}
 \date{\today}
@@ -39,11 +42,12 @@
 		\raggedleft
 		\hfill{\Huge#1}\\ % Font size for title
 		\vspace{0pt} % Space between text and line
-		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}
+		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.5pt}
 	}
 }
 
 \titlespacing*{\chapter}{0pt}{10pt}{10pt} % Space on left, before and after chapter
 
-\renewcommand{\cfttoctitlefont}{\Large\bfseries\centering} % Format du titre "Table des matières"
-\renewcommand{\cftaftertoctitle}{\hfill} % Espacement après le titre
+% Table of content title formating
+\renewcommand{\cfttoctitlefont}{\Large\bfseries\centering} 
+\renewcommand{\cftaftertoctitle}{\hfill} % Space after TOC title

@@ -31,11 +31,16 @@ Donc j'utilise un module monobloc d'alimentation 230V à 3V3.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Boitier}
+Le boitier sera réalisé en impression 3D. Cette méthode offre l'avantage d'une plus grande flexibilité.
+Pour des raisons de sécurité, le plastique utilisé devra être résistant à la chaleur et non sensible à l'humidité. C'est le cas du PLA qui ne peut donc pas être utilisé dans cette application ou il y a de la haute tension.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Relais}
-J'ai du faire le choix d'un relais pour commuter le 230VAC. J'ai choisi un relais capable de supporter un courant suffisamment élevé pour supporter le courant maximal que peut fournir la prise murale. J'ai dû m'assurer que la tension de contrôle soit aussi assez basse pour pouvoir être controlé par le microcontroleur.
+J'ai du faire le choix d'un relais pour commuter le 230VAC. J'ai choisi un relais capable de supporter un courant suffisamment élevé pour supporter le courant maximal que peut fournir la prise murale. J'ai dû m'assurer que la tension de contrôle soit aussi assez basse pour pouvoir correspondre à l'alimentation de mon circuit.
 J'ai fait le choix aussi d'un relai à verrouillage pour permettre de réduire la consommation de courant après la commutation en conservant ainsi son état.
+
+Le relais nécessite d'avoir une diode en série de ses bobines de set et reset (voir datasheet).
+De plus, un circuit de protection doit être mis en place. Et il faut des mosfet pour les piloter.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Base de donnée}

@@ -11,5 +11,3 @@
 \contentsline {section}{\numberline {6}Connecteurs 230VAC}{6}{section.2.6}%
 \contentsline {section}{\numberline {7}Base de donnée}{6}{section.2.7}%
 \contentsline {chapter}{\numberline {3}Annexes}{7}{chapter.3}%
-\contentsline {chapter}{Bibliographie}{8}{chapter*.1}%
-\contentsfinish 

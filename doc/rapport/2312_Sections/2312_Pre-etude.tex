@@ -17,9 +17,13 @@ La figure \ref{fig:screenshotnfctools} illustre le standard adopté par le badge
 	\label{fig:screenshotnfctools}
 \end{figure}
 
-Je me suis ensuite mis en quête d'un lecteur RFID adapté à cette technologie. J'ai pu voir 
+Je me suis alors mis en recherche d'un lecteur RFID. J'ai fait le choix d'un module "tout-en-un" pour faciliter le design, notamment de l'antenne. Deux modules se sont distingués : 
 
-\href{https://www.mikroe.com/rfid-click}{Module MIKROE utilisé précédemment}
+\vspace{5pt}
+\href{https://www.mikroe.com/rfid-click}{Module MikroE "RFID CLICK"} : Ce module a été utilisé dans des projets précédents. Il est disponible en quantité suffisante et fait partie des prix les plus bas. Néanmoins, il a le désavantage de devoir être monté sur le PCB en prenant un espace non négligeable. De plus, cela offre peu de flexibilité quant à son placement et augmente le risque que le badge ait des difficultés à être lu une fois le boitier monté. 
+
+\vspace{5pt}
+\href{https://www.mikroe.com/rfid-click}{Module Eccel "RFID NFC Chilli UART-B1"} : Ce module offre le principale avantage d'être plus flexible dans son placement. Il est facilement contrôlable par l'UART et toute la documentation sur les commandes à utiliser sont disponibles. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Alimentation}
@@ -41,6 +45,11 @@ J'ai fait le choix aussi d'un relai à verrouillage pour permettre de réduire l
 
 Le relais nécessite d'avoir une diode en série de ses bobines de set et reset (voir datasheet).
 De plus, un circuit de protection doit être mis en place. Et il faut des mosfet pour les piloter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Connecteurs 230VAC}
+Les connecteurs doivent être en mesure de supporter le courant maximal qui puisse être fourni par une prise murale. Ils doivent aussi présenter suffisamment d'isolation pour la tension du réseau.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Base de donnée}

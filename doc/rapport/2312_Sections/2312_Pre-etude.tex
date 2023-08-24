@@ -5,20 +5,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{RFID}
 
-Des badges RFID sont mis à disposition des élèves pendant toute la durée de leur formation au sein de l'ETML-ES. Ceux-ci seront utilisés dans ce projet afin d'éviter aux élèves la nécessité de multiples badges.
+Des badges sont mis à disposition des élèves de l'ETML-ES pendant toute la durée de leur formation, notamment pour l'accès au bâtiment et aux imprimantes. Ceux-ci seront utilisés dans ce projet afin d'éviter aux élèves la nécessité de multiples badges.
 
 La technologie du badge a pu être identifiée en utilisant un smartphone (Samsung S23 Ultra) doté de l'application "NFC Tools" (Version 8.9) disponible sur le "Play Store".
 
-La figure \ref{fig:screenshotnfctools} illustre le standard adopté par le badge, en mettant en évidence le fabricant ainsi que le modèle de la puce interne. Des informations techniques plus détaillées sont également disponibles sur le site web du fabricant. \cite{MIFAREClassicEV1}
+La figure \ref{fig:screenshotnfctools} illustre le standard adopté par le badge, en mettant en évidence le fabricant ainsi que le modèle de la puce interne. Des informations techniques plus détaillées sont également disponibles sur le site web du fabricant \cite{MIFAREClassicEV1}.
+
+En résumé, le badge communique à l'aide d'une puce RFID à une fréquence de 13,56 MHz et dispose d'une mémoire d'un kilo-octet.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{2312_Images/2312_Pre-etude/Screenshot_NFC_Tools}
-	\caption{Type de tag obtenu grâce à "NFC Tools"}
+	\includegraphics[width=0.75\textwidth]{2312_Images/2312_Pre-etude/Screenshot_NFC_Tools}
+	\caption{Technologie du badge, obtenu grâce à "NFC Tools"}
 	\label{fig:screenshotnfctools}
 \end{figure}
 
-Je me suis alors mis en recherche d'un lecteur RFID. J'ai fait le choix d'un module "tout-en-un" pour faciliter le design, notamment de l'antenne. Deux modules se sont distingués : 
+Lors de la recherche d'un lecteur compatible, le choix s'est porté vers un module "tout-en-un" afin de simplifier la conception, notamment en ce qui concerne l'antenne.
+
+\noindent
+Deux modules se sont démarqués :
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		Nom               & RFID CLICK       & Chilli UART-1B     \\ \hline
+		Image             &                  &                    \\ \hline
+		Fabricant         & MikroElektronika & Eccel Technologies \\ \hline
+		Numéro de produit &                  &                    \\ \hline
+		Prix              & 25 CHF           & 35 CHF             \\ \hline
+		Avantages         &                  &                    \\ \hline
+		Inconvénients     &                  &                    \\ \hline
+	\end{tabular}
+	\caption{Comparaison des modules RFID}
+	\label{tab:comp-rfid}
+\end{table}
+
 
 \vspace{5pt}
 \href{https://www.mikroe.com/rfid-click}{Module MikroE "RFID CLICK"} : Ce module a été utilisé dans des projets précédents. Il est disponible en quantité suffisante et fait partie des prix les plus bas. Néanmoins, il a le désavantage de devoir être monté sur le PCB en prenant un espace non négligeable. De plus, cela offre peu de flexibilité quant à son placement et augmente le risque que le badge ait des difficultés à être lu une fois le boitier monté. 

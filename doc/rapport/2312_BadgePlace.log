@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.23)  23 AUG 2023 20:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.8.23)  24 AUG 2023 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -139,7 +139,17 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen159
 \Gin@req@width=\dimen160
-) (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.sty
+) (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen161
+\ar@mcellbox=\box51
+\extrarowheight=\dimen162
+\NC@list=\toks22
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box52
+)
+(C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.sty
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l3
 keys2e.sty
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
@@ -149,7 +159,7 @@ Package: expl3 2023-08-11 L3 programming layer (loader)
 ftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count272
-\l__pdf_internal_box=\box51
+\l__pdf_internal_box=\box53
 ))
 Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
 )
@@ -226,7 +236,7 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count277
 )
-\@linkdim=\dimen161
+\@linkdim=\dimen163
 \Hy@linkcounter=\count278
 \Hy@pagecounter=\count279
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
@@ -257,7 +267,7 @@ Package hyperref Info: Bookmarks ON on input line 4434.
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4772.
-\XeTeXLinkMargin=\dimen162
+\XeTeXLinkMargin=\dimen164
 
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -268,8 +278,8 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
 \Fld@menulength=\count282
-\Field@Width=\dimen163
-\Fld@charsize=\dimen164
+\Field@Width=\dimen165
+\Fld@charsize=\dimen166
 Package hyperref Info: Hyper figures OFF on input line 6051.
 Package hyperref Info: Link nesting OFF on input line 6056.
 Package hyperref Info: Hyper index ON on input line 6059.
@@ -309,19 +319,19 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
-\Hy@SectionHShift=\skip50
+\Hy@SectionHShift=\skip52
 )
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2021/07/05 v2.14 Sectioning titles
-\ttl@box=\box52
-\beforetitleunit=\skip51
-\aftertitleunit=\skip52
-\ttl@plus=\dimen165
-\ttl@minus=\dimen166
-\ttl@toksa=\toks22
-\titlewidth=\dimen167
-\titlewidthlast=\dimen168
-\titlewidthfirst=\dimen169
+\ttl@box=\box54
+\beforetitleunit=\skip53
+\aftertitleunit=\skip54
+\ttl@plus=\dimen167
+\ttl@minus=\dimen168
+\ttl@toksa=\toks23
+\titlewidth=\dimen169
+\titlewidthlast=\dimen170
+\titlewidthfirst=\dimen171
 )) (2312_Styles.sty
 Package: 2312_Styles 
 Package hyperref Info: Option `colorlinks' set `true' on input line 29.
@@ -388,16 +398,16 @@ LaTeX Info: Redefining \up on input line 8.
 kii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count288
-\scratchdimen=\dimen170
-\scratchbox=\box53
+\scratchdimen=\dimen172
+\scratchbox=\box55
 \nofMPsegments=\count289
 \nofMParguments=\count290
-\everyMPshowfont=\toks23
+\everyMPshowfont=\toks24
 \MPscratchCnt=\count291
-\MPscratchDim=\dimen171
+\MPscratchDim=\dimen173
 \MPnumerator=\count292
 \makeMPintoPDFobject=\count293
-\everyMPtoPDFconversion=\toks24
+\everyMPtoPDFconversion=\toks25
 )
 (C:\Users\Miguel\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-
 base.sty
@@ -474,12 +484,9 @@ File: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg Graphic file (type jp
 g)
 <use 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg>
 Package pdftex.def Info: 2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg  u
-sed on input line 16.
-(pdftex.def)             Requested size: 308.71106pt x 51.213pt.
-
-Underfull \vbox (badness 8075) has occurred while \output is active []
-
- [5
+sed on input line 18.
+(pdftex.def)             Requested size: 330.76329pt x 54.87093pt.
+[5
 
  <./2312_Images/2312_Pre-etude/Screenshot_NFC_Tools.jpg>])
 (2312_Sections/2312_Annexes.tex [6]
@@ -497,13 +504,13 @@ Package rerunfilecheck Info: File `2312_BadgePlace.out' has not changed.
 (rerunfilecheck)             Checksum: 585DA60B308A61E32C2F911106B69891;1232.
  ) 
 Here is how much of TeX's memory you used:
- 11910 strings out of 475502
- 194838 string characters out of 5761341
- 1924248 words of memory out of 5000000
- 32979 multiletter control sequences out of 15000+600000
+ 11977 strings out of 475502
+ 195895 string characters out of 5761341
+ 1926248 words of memory out of 5000000
+ 33042 multiletter control sequences out of 15000+600000
  571644 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,6n,107p,558b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,8n,107p,558b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecc
 c1200.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
 600\ecbx1728.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen
@@ -512,9 +519,9 @@ knappen/ec/dpi600\ecbx1200.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fonts/pk/l
 jfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Miguel\AppData\Local\MiKTeX\fon
 ts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk><C:/Users/Miguel/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on 2312_BadgePlace.pdf (10 pages, 140305 bytes).
+Output written on 2312_BadgePlace.pdf (10 pages, 142977 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
+ 346 PDF objects out of 1000 (max. 8388607)
+ 27 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

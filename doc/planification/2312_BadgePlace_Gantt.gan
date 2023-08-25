@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Diplôme - SLO - Santos" company="ETML-ES" webLink="https://www.etml-es.ch/" view-date="2023-08-10" view-index="0" gantt-divider-location="432" resource-divider-location="279" version="3.2.3247" locale="fr_CH">
+<?xml version="1.0" encoding="UTF-8"?><project name="Diplôme - SLO - Santos" company="ETML-ES" webLink="https://www.etml-es.ch/" view-date="2023-08-15" view-index="0" gantt-divider-location="432" resource-divider-location="279" version="3.2.3247" locale="fr_FR">
     <description>
         <![CDATA[Travail de diplôme SLO
 Miguel Santos
@@ -6,10 +6,10 @@ Miguel Santos
 ]]>
     </description>
     <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Name" width="180" order="0"/>
-        <field id="tpd4" name="Begin date" width="89" order="1"/>
-        <field id="tpd5" name="End date" width="81" order="2"/>
-        <field id="tpd7" name="Completion" width="81" order="3"/>
+        <field id="tpd3" name="Nom" width="180" order="0"/>
+        <field id="tpd4" name="Date de début" width="89" order="1"/>
+        <field id="tpd5" name="Date de fin" width="81" order="2"/>
+        <field id="tpd7" name="Avancée" width="81" order="3"/>
         <option id="taskLabelDown" value="taskDates"/>
         <option id="taskLabelLeft" value="name"/>
         <option id="filter.completedTasks" value="false"/>
@@ -21,8 +21,8 @@ Miguel Santos
         </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Name" width="200" order="0"/>
-        <field id="1" name="Default role" width="75" order="1"/>
+        <field id="0" name="Nom" width="200" order="0"/>
+        <field id="1" name="Rôle par défaut" width="75" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="none">
@@ -51,11 +51,11 @@ Miguel Santos
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="3" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
-            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="3" complete="80" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="4" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
+            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="4" complete="80" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-24" duration="2" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
+            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-25" duration="1" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
                 <depend id="3" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="3" name="Revue de schémas" color="#ff6666" meeting="true" start="2023-08-28" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true">

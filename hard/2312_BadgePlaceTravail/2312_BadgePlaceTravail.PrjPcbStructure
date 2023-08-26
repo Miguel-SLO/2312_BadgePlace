@@ -1,4 +1,6 @@
-Record=TopLevelDocument|FileName=2312_Alimentation.SchDoc|SheetNumber=1
-Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Interface.SchDoc|SheetNumber=2
-Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Microcontrôleur.SchDoc|SheetNumber=1
-Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Puissance.SchDoc|SheetNumber=3
+Record=TopLevelDocument|FileName=2312_SchemaBloc.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=2312_SchemaBloc.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=2312_Ethernet.SchDoc|SheetNumber=4|SymbolType=Normal|RawFileName=2312_Ethernet.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=2312_SchemaBloc.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=2312_Interface.SchDoc|SheetNumber=6|SymbolType=Normal|RawFileName=2312_Interface.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=2312_SchemaBloc.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=2312_Communication.SchDoc|SheetNumber=5|SymbolType=Normal|RawFileName=2312_Communication.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=2312_SchemaBloc.SchDoc|Designator=Microcontrôleur|SchDesignator=Microcontrôleur|FileName=2312_Microcontroleur.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=2312_Microcontroleur.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=2312_SchemaBloc.SchDoc|Designator=Puissance|SchDesignator=Puissance|FileName=2312_Puissance.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=2312_Puissance.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 

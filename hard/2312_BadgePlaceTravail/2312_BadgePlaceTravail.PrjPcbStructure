@@ -1,1 +1,4 @@
 Record=TopLevelDocument|FileName=2312_Alimentation.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Interface.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Microcontrôleur.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=2312_Alimentation.SchDoc|FileName=2312_Puissance.SchDoc|SheetNumber=3

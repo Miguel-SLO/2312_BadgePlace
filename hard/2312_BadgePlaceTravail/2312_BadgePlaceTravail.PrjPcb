@@ -237,6 +237,23 @@ GenerateClassCluster=0
 DocumentUniqueId=GHZQWBZQ
 
 [Document12]
+DocumentPath=2312_ESP32.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=NJXOSTRH
+
+[Document13]
 DocumentPath=2312_Ethernet.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -253,8 +270,8 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=RYIINKWG
 
-[Document13]
-DocumentPath=2312_Communication.SchDoc
+[Document14]
+DocumentPath=2312_RFID.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -270,7 +287,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SPRFHUOC
 
-[Document14]
+[Document15]
 DocumentPath=2312_Interface.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -287,7 +304,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AIYJVCAQ
 
-[Document15]
+[Document16]
 DocumentPath=..\2312_Composants\WCAP-CSGP (rev22f)\WCAP-CSGP.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -304,7 +321,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=XLFPAAVO
 
-[Document16]
+[Document17]
 DocumentPath=..\2312_Composants\WCAP-CSGP (rev22f)\WCAP-CSGP.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -321,7 +338,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document17]
+[Document18]
 DocumentPath=..\2312_Composants\WCAP-PSHP (rev22c)\WCAP-PSHP.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -338,7 +355,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AXXJMYUR
 
-[Document18]
+[Document19]
 DocumentPath=..\2312_Composants\WCAP-PSHP (rev22c)\WCAP-PSHP.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -355,7 +372,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=BJCHJOVA
 
-[Document19]
+[Document20]
 DocumentPath=..\2312_Composants\PIC32MX795F512H-80I-PT\PIC32MX795F512H-80I_PT.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -372,7 +389,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document20]
+[Document21]
 DocumentPath=..\2312_Composants\PIC32MX795F512H-80I-PT\PIC32MX795F512H-80I_PT.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -389,7 +406,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=BZTQOFCY
 
-[Document21]
+[Document22]
 DocumentPath=..\2312_Composants\WR-TBL (rev23d)\WR-TBL.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -406,7 +423,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document22]
+[Document23]
 DocumentPath=..\2312_Composants\WR-TBL (rev23d)\WR-TBL_Wire Protector_5.00mm.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -423,7 +440,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document23]
+[Document24]
 DocumentPath=..\2312_Composants\LAN8720A-CP-TR-ABC\LAN8720A-CP-TR-ABC.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -440,7 +457,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document24]
+[Document25]
 DocumentPath=..\2312_Composants\LAN8720A-CP-TR-ABC\LAN8720A-CP-TR-ABC.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -457,7 +474,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OYSTAVRR
 
-[Document25]
+[Document26]
 DocumentPath=..\2312_Composants\2312-MS-0805\2312-MS-0805.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -474,7 +491,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QBFJGZSP
 
-[Document26]
+[Document27]
 DocumentPath=..\2312_Composants\2312-MS-0805\2312-MS-0805.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -491,7 +508,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QFCAUQBE
 
-[Document27]
+[Document28]
 DocumentPath=..\2312_Composants\CRJ011-ML3-TH\CUI_CRJ011-ML3-TH.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -508,7 +525,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MPMGBSWB
 
-[Document28]
+[Document29]
 DocumentPath=..\2312_Composants\CRJ011-ML3-TH\CUI_CRJ011-ML3-TH.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -525,7 +542,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PNTRSLNJ
 
-[Document29]
+[Document30]
 DocumentPath=2312_SchemaBloc.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -542,7 +559,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TIBODHRV
 
-[Document30]
+[Document31]
 DocumentPath=..\2312_Composants\WL-SFTW (rev22b)\WL-SFTW.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -559,7 +576,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AXXJMYUR
 
-[Document31]
+[Document32]
 DocumentPath=..\2312_Composants\WL-SFTW (rev22b)\WL-SFTW.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -576,7 +593,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SEGYHXWM
 
-[Document32]
+[Document33]
 DocumentPath=..\2312_Composants\TLC5973D\TLC5973D.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -593,7 +610,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=DNPOOVYT
 
-[Document33]
+[Document34]
 DocumentPath=..\2312_Composants\TLC5973D\TLC5973D.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -610,7 +627,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=GLGJQQUT
 
-[Document34]
+[Document35]
 DocumentPath=..\2312_Composants\MMBTA06-7-F\MMBTA06-7-F.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -627,7 +644,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VHJOOOKH
 
-[Document35]
+[Document36]
 DocumentPath=..\2312_Composants\MMBTA06-7-F\MMBTA06-7-F.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -644,7 +661,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JVHTISAB
 
-[Document36]
+[Document37]
 DocumentPath=..\2312_Composants\MBR0580S1-7\MBR0580S1-7.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -661,7 +678,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QVWMONWY
 
-[Document37]
+[Document38]
 DocumentPath=..\2312_Composants\MBR0580S1-7\MBR0580S1-7.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -678,7 +695,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ADLIMXEO
 
-[Document38]
+[Document39]
 DocumentPath=..\2312_Composants\CUI_CMT-0904-83T\CMT-0904-83T.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -695,7 +712,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document39]
+[Document40]
 DocumentPath=..\2312_Composants\CUI_CMT-0904-83T\CMT-0904-83T.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -712,7 +729,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ESXZWINT
 
-[Document40]
+[Document41]
 DocumentPath=..\2312_Composants\SOCKET mikroBUS 16 SMD\SOCKET mikroBUS 16 SMD.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -729,7 +746,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document41]
+[Document42]
 DocumentPath=..\2312_Composants\SOCKET mikroBUS 16 SMD\SOCKET mikroBUS 16 SMD.SCHLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -746,7 +763,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OWNGYBDU
 
-[Document42]
+[Document43]
 DocumentPath=..\2312_Composants\WR-WTB (rev22b)\WR-WTB.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -763,7 +780,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=NDHWSEEI
 
-[Document43]
+[Document44]
 DocumentPath=..\2312_Composants\WR-WTB (rev22b)\WR-WTB.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -780,7 +797,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PVVCDAXV
 
-[Document44]
+[Document45]
 DocumentPath=..\2312_Composants\ESP32-C3-WROOM-02-N4\ESP32-C3-WROOM-02-N4.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -797,7 +814,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=BRIBEAVU
 
-[Document45]
+[Document46]
 DocumentPath=..\2312_Composants\ESP32-C3-WROOM-02-N4\ESP32-C3-WROOM-02-N4.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -814,7 +831,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=BHSUJXLL
 
-[Document46]
+[Document47]
 DocumentPath=..\2312_Composants\WR-PHD (rev22b)\WR-PHD.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -831,7 +848,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=UPGIVYMA
 
-[Document47]
+[Document48]
 DocumentPath=..\2312_Composants\WR-PHD (rev22b)\WR-PHD_Pin Header.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -848,7 +865,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document48]
+[Document49]
 DocumentPath=..\2312_Composants\WR-PHD (rev22b)\WR-PHD_Socket Header.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -865,7 +882,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document49]
+[Document50]
 DocumentPath=..\2312_Composants\WCAP-CSRF (rev22e)\WCAP-CSRF.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -882,7 +899,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document50]
+[Document51]
 DocumentPath=..\2312_Composants\WCAP-CSRF (rev22e)\WCAP-CSRF.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -899,7 +916,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document51]
+[Document52]
 DocumentPath=..\2312_Composants\WE-XTAL (rev22a)\WE-XTAL.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -916,7 +933,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document52]
+[Document53]
 DocumentPath=..\2312_Composants\WE-XTAL (rev22a)\WE-XTAL.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -933,7 +950,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HUELROCL
 
-[Document53]
+[Document54]
 DocumentPath=..\2312_Composants\WS-TASV (rev22c)\WS-TASV.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -950,7 +967,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AXXJMYUR
 
-[Document54]
+[Document55]
 DocumentPath=..\2312_Composants\WS-TASV (rev22c)\WS-TASV.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -966,23 +983,6 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
-
-[Document55]
-DocumentPath=2312_ESP32.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=NJXOSTRH
 
 [Configuration1]
 Name=Sources
@@ -1102,12 +1102,22 @@ OutputName20=WireList Netlist
 OutputDocumentPath20=
 OutputVariantName20=
 OutputDefault20=0
+OutputType21=XSpiceNetlist
+OutputName21=Mixed Sim Netlist
+OutputDocumentPath21=
+OutputVariantName21=
+OutputDefault21=0
 
 [OutputGroup2]
 Name=Simulator Outputs
 Description=
-TargetPrinter=\\prt00001\ETML-SEB-Print
+TargetPrinter=Canon TS6100 series
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
+OutputType1=AdvSimNetlist
+OutputName1=Mixed Sim
+OutputDocumentPath1=
+OutputVariantName1=
+OutputDefault1=0
 
 [OutputGroup3]
 Name=Documentation Outputs

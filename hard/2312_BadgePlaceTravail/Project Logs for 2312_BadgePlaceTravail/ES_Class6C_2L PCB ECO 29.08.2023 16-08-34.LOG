@@ -1,0 +1,176 @@
+Removed Pin From Net: NetName=U2TX Pin=TP1-1
+Removed Pin From Net: NetName=U2RX Pin=TP2-1
+Removed Pin From Net: NetName=NetP6_2 Pin=TP3-1
+Removed Pin From Net: NetName=NetP6_1 Pin=TP4-1
+Removed Member From Class: ClassName=Communication Member=TP1
+Removed Member From Class: ClassName=Communication Member=TP2
+Removed Member From Class: ClassName=Interface Member=TP3
+Removed Member From Class: ClassName=Interface Member=TP4
+Change Component Footprint: Designator=D1 Old Footprint=MBR0580S1-7_DIO New Footprint=MBR0580S1-7_DIO-M
+Change Component Footprint: Designator=D2 Old Footprint=MBR0580S1-7_DIO New Footprint=MBR0580S1-7_DIO-M
+Change Component Comment : Designator=C14 Old Comment=1µF New Comment=885012207022
+Change Component Comment : Designator=C16 Old Comment=1µF New Comment=885012207022
+Change Component Comment : Designator=C18 Old Comment=1µF New Comment=885012207022
+Change Component Comment : Designator=C20 Old Comment=1µF New Comment=885012207022
+Change Component Comment : Designator=C22 Old Comment=1µF New Comment=885012207022
+Change Component Comment : Designator=Y1 Old Comment=8MHz New Comment=830020423
+Change Component Comment : Designator=C24 Old Comment=10µF New Comment=885012107004
+Change Component Comment : Designator=C6 Old Comment=10µF New Comment=885012207003
+Change Component Comment : Designator=C12 Old Comment=22nF New Comment=885012207013
+Change Component Comment : Designator=C3 Old Comment=22pF New Comment=885012007002
+Change Component Comment : Designator=C4 Old Comment=22pF New Comment=885012007002
+Change Component Comment : Designator=Y2 Old Comment=50MHz, 3.3V New Comment=831055872
+Change Component Comment : Designator=C2 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C5 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C7 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C8 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C9 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C10 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C11 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C13 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C15 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C17 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C19 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C23 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C25 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C26 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C27 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C28 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C29 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C30 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C31 Old Comment=100nF New Comment=885012207016
+Change Component Comment : Designator=C21 Old Comment=470pF New Comment=885012007007
+Change Component Comment : Designator=C1 Old Comment=470µF New Comment=875115150005
+Change Component Comment : Designator=MIKROBUS1 Old Comment=MIKROBUS HOST SMD 16 New Comment=MIKROE-4248
+Change Component Comment : Designator=Q1 Old Comment=MMBTA06LT3G New Comment=MMBTA06-7-F
+Change Component Comment : Designator=Q2 Old Comment=MMBTA06LT3G New Comment=MMBTA06-7-F
+Change Component Comment : Designator=Q3 Old Comment=MMBTA06LT3G New Comment=MMBTA06-7-F
+Change Component Comment : Designator=D3 Old Comment=Red & Green & Blue, 120° New Comment=150141M173100
+Change Component Comment : Designator=D4 Old Comment=Red & Green & Blue, 120° New Comment=150141M173100
+Change Component Comment : Designator=D5 Old Comment=Red & Green & Blue, 120° New Comment=150141M173100
+Change Component Designator: OldDesignator=TP5 NewDesignator=TP1
+Change Component Description : Designator=LS1 Old Description= New Description=Buzzer Magnetic, 15O
+Change Component Description : Designator=MIKROBUS1 Old Description= New Description=mikroBUS socket 
+Change Component Description : Designator=R34 Old Description= New Description=SMD Resistor 0805, 0O
+Change Component Description : Designator=R38 Old Description= New Description=SMD Resistor 0805, 0O
+Change Component Description : Designator=R1 Old Description= New Description=SMD Resistor 0805, 1.4kO
+Change Component Description : Designator=R8 Old Description= New Description=SMD Resistor 0805, 1.4kO
+Change Component Description : Designator=R13 Old Description= New Description=SMD Resistor 0805, 1.5kO
+Change Component Description : Designator=R12 Old Description= New Description=SMD Resistor 0805, 1kO
+Change Component Description : Designator=R40 Old Description= New Description=SMD Resistor 0805, 2.6kO
+Change Component Description : Designator=R41 Old Description= New Description=SMD Resistor 0805, 2.6kO
+Change Component Description : Designator=R42 Old Description= New Description=SMD Resistor 0805, 2.6kO
+Change Component Description : Designator=R6 Old Description= New Description=SMD Resistor 0805, 2O
+Change Component Description : Designator=R7 Old Description= New Description=SMD Resistor 0805, 2O
+Change Component Description : Designator=R14 Old Description= New Description=SMD Resistor 0805, 4.7kO
+Change Component Description : Designator=R15 Old Description= New Description=SMD Resistor 0805, 4.7kO
+Change Component Description : Designator=R16 Old Description= New Description=SMD Resistor 0805, 4.7kO
+Change Component Description : Designator=R17 Old Description= New Description=SMD Resistor 0805, 4.7kO
+Change Component Description : Designator=R32 Old Description= New Description=SMD Resistor 0805, 4.7kO
+Change Component Description : Designator=R9 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R10 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R11 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R35 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R36 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R37 Old Description= New Description=SMD Resistor 0805, 10kO
+Change Component Description : Designator=R31 Old Description= New Description=SMD Resistor 0805, 12.1kO
+Change Component Description : Designator=R22 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R23 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R24 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R26 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R27 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R28 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R29 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R33 Old Description= New Description=SMD Resistor 0805, 33O
+Change Component Description : Designator=R18 Old Description= New Description=SMD Resistor 0805, 51O
+Change Component Description : Designator=R19 Old Description= New Description=SMD Resistor 0805, 51O
+Change Component Description : Designator=R20 Old Description= New Description=SMD Resistor 0805, 51O
+Change Component Description : Designator=R21 Old Description= New Description=SMD Resistor 0805, 51O
+Change Component Description : Designator=R3 Old Description= New Description=SMD Resistor 0805, 140O
+Change Component Description : Designator=R4 Old Description= New Description=SMD Resistor 0805, 140O
+Change Component Description : Designator=R39 Old Description= New Description=SMD Resistor 0805, 140O
+Change Component Description : Designator=R25 Old Description= New Description=SMD Resistor 0805, 270O
+Change Component Description : Designator=R30 Old Description= New Description=SMD Resistor 0805, 270O
+Change Component Description : Designator=R2 Old Description= New Description=SMD Resistor 0805, DNP
+Change Component Description : Designator=R5 Old Description= New Description=SMD Resistor 0805, DNP
+Change Component Description : Designator=D1 Old Description=No Description Available New Description=Diode Shottky, 500mA, 80V
+Change Component Description : Designator=D2 Old Description=No Description Available New Description=Diode Shottky, 500mA, 80V
+Change Component Description : Designator=D6 Old Description=No Description Available New Description=Diode Shottky, 500mA, 80V
+Change Component Description : Designator=U2 Old Description=No Description Available New Description=PHY Transceiver LAN8720A
+Change Component Description : Designator=U1 Old Description=No Description Available New Description=PIC32MX795F512H-80I/PT
+Change Component Description : Designator=U4 Old Description=No Description Available New Description=Triple LEDS driver, PWM controlled
+Change Component Description : Designator=U5 Old Description=No Description Available New Description=Triple LEDS driver, PWM controlled
+Change Component Description : Designator=U6 Old Description=No Description Available New Description=Triple LEDS driver, PWM controlled
+Change component parameters: Designator = "R6" ("R6"); Footprint = "2312-RES-0805"; UniqueID = "\DWTOAXRZ\QBLGPIZD" ("\DWTOAXRZ\QBLGPIZD")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R7" ("R7"); Footprint = "2312-RES-0805"; UniqueID = "\DWTOAXRZ\DNFJDYKO" ("\DWTOAXRZ\DNFJDYKO")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R18" ("R18"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\YSLJGLAJ" ("\YXAZHALX\YSLJGLAJ")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "51"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R19" ("R19"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\OTVQCNRN" ("\YXAZHALX\OTVQCNRN")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "51"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R20" ("R20"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\UVKLKLGZ" ("\YXAZHALX\UVKLKLGZ")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "51"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R21" ("R21"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\QFKQUGFG" ("\YXAZHALX\QFKQUGFG")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "51"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R25" ("R25"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\FAQPEFFA" ("\YXAZHALX\FAQPEFFA")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "270"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R30" ("R30"); Footprint = "2312-RES-0805"; UniqueID = "\YXAZHALX\UFLGRQAP" ("\YXAZHALX\UFLGRQAP")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "270"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R40" ("R40"); Footprint = "2312-RES-0805"; UniqueID = "\TIOSTLTB\YDAIINYP" ("\TIOSTLTB\YDAIINYP")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "2.7k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R41" ("R41"); Footprint = "2312-RES-0805"; UniqueID = "\TIOSTLTB\XUZRPSFQ" ("\TIOSTLTB\XUZRPSFQ")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "2.7k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R42" ("R42"); Footprint = "2312-RES-0805"; UniqueID = "\TIOSTLTB\AXWPESRB" ("\TIOSTLTB\AXWPESRB")
+Change component parameters (AddParameter): Name = "Resistance"; Value = "2.7k"; VariantName = "[No Variations]"
+Add Pin To Net: Unknown Pin: Pin Q1-BASE
+Add Pin To Net: Unknown Pin: Pin Q1-COLLECTOR
+Add Pin To Net: Unknown Pin: Pin Q1-EMITTER
+Add Pin To Net: Unknown Pin: Pin Q2-BASE
+Add Pin To Net: Unknown Pin: Pin Q2-COLLECTOR
+Add Pin To Net: Unknown Pin: Pin Q2-EMITTER
+Add Pin To Net: Unknown Pin: Pin Q3-BASE
+Add Pin To Net: Unknown Pin: Pin Q3-COLLECTOR
+Add Pin To Net: Unknown Pin: Pin Q3-EMITTER
+Add Pin To Net: Unknown Pin: Pin R1-0
+Add Pin To Net: Unknown Pin: Pin R2-0
+Add Pin To Net: Unknown Pin: Pin R3-0
+Add Pin To Net: Unknown Pin: Pin R4-0
+Add Pin To Net: Unknown Pin: Pin R5-0
+Add Pin To Net: Unknown Pin: Pin R6-0
+Add Pin To Net: Unknown Pin: Pin R7-0
+Add Pin To Net: Unknown Pin: Pin R8-0
+Add Pin To Net: Unknown Pin: Pin R9-0
+Add Pin To Net: Unknown Pin: Pin R10-0
+Add Pin To Net: Unknown Pin: Pin R11-0
+Add Pin To Net: Unknown Pin: Pin R12-0
+Add Pin To Net: Unknown Pin: Pin R13-0
+Add Pin To Net: Unknown Pin: Pin R14-0
+Add Pin To Net: Unknown Pin: Pin R15-0
+Add Pin To Net: Unknown Pin: Pin R16-0
+Add Pin To Net: Unknown Pin: Pin R17-0
+Add Pin To Net: Unknown Pin: Pin R18-0
+Add Pin To Net: Unknown Pin: Pin R19-0
+Add Pin To Net: Unknown Pin: Pin R20-0
+Add Pin To Net: Unknown Pin: Pin R21-0
+Add Pin To Net: Unknown Pin: Pin R22-0
+Add Pin To Net: Unknown Pin: Pin R23-0
+Add Pin To Net: Unknown Pin: Pin R24-0
+Add Pin To Net: Unknown Pin: Pin R25-0
+Add Pin To Net: Unknown Pin: Pin R26-0
+Add Pin To Net: Unknown Pin: Pin R27-0
+Add Pin To Net: Unknown Pin: Pin R28-0
+Add Pin To Net: Unknown Pin: Pin R29-0
+Add Pin To Net: Unknown Pin: Pin R30-0
+Add Pin To Net: Unknown Pin: Pin R31-0
+Add Pin To Net: Unknown Pin: Pin R32-0
+Add Pin To Net: Unknown Pin: Pin R33-0
+Add Pin To Net: Unknown Pin: Pin R34-0
+Add Pin To Net: Unknown Pin: Pin R35-0
+Add Pin To Net: Unknown Pin: Pin R36-0
+Add Pin To Net: Unknown Pin: Pin R37-0
+Add Pin To Net: Unknown Pin: Pin R38-0
+Add Pin To Net: Unknown Pin: Pin R39-0
+Add Pin To Net: Unknown Pin: Pin R40-0
+Add Pin To Net: Unknown Pin: Pin R41-0
+Add Pin To Net: Unknown Pin: Pin R42-0

@@ -374,11 +374,55 @@ Configuration17_Item8=CArc=Full|CFill=Full|Comment=Full|Coordinate=Full|CPad=Ful
 Configuration17_Name9=OutputConfigurationParameter9
 Configuration17_Item9=CArc=Full|CFill=Full|Comment=Full|Coordinate=Full|CPad=Full|CRegion=Full|CText=Full|CTrack=Full|CVia=Full|Designator=Full|Dimension=Full|DLayer1=TopLayer|DLayer2=BottomLayer|FArc=Full|FFill=Full|FPad=Full|FRegion=Full|FText=Full|FTrack=Full|FVia=Full|Layer=Mechanical27|Polygon=Full|PrintOutIndex=1|Record=PcbPrintLayer
 PcbPrintPreferences17=
+OutputType18=BOM_PartType
+OutputName18=Active BOM (complete)
+OutputCategory18=Report
+OutputDocumentPath18=[ActiveBOM Document]
+OutputVariantName18=
+OutputEnabled18=0
+OutputEnabled18_OutputMedium1=0
+OutputEnabled18_OutputMedium2=0
+OutputEnabled18_OutputMedium3=0
+OutputEnabled18_OutputMedium4=0
+OutputEnabled18_OutputMedium5=0
+OutputEnabled18_OutputMedium6=0
+OutputDefault18=0
+PageOptions18=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
+Configuration18_Name1=ColumnNameFormat
+Configuration18_Item1=CaptionAsName
+Configuration18_Name2=General
+Configuration18_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=True|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=C:\Users\migsantos\MIGSAN_GIT\2312_BadgePlace\hard\2312_BadgePlaceTravail-BOM-TEMPLATE.xlsx|TemplateVaultGuid=|TemplateItemGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1200|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=CHF|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=0|UseDirectApi=False|BomSetName=
+Configuration18_Name3=GroupOrder
+Configuration18_Item3=
+Configuration18_Name4=SortOrder
+Configuration18_Item4=Manufacturer 1=Down
+Configuration18_Name5=VisibleOrder
+Configuration18_Item5=Line #=54|Designator=80|Description=589|Quantity=67|Manufacturer 1=102|Manufacturer Part Number 1=169|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|In stock=100
+Configuration18_Name6=VisibleOrder_Base
+Configuration18_Item6=Line #=54|Designator=80|Description=589|Quantity=67|Manufacturer 1=102|Manufacturer Part Number 1=169|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|In stock=100
+Configuration18_Name7=VisibleOrder_Consolidated
+Configuration18_Item7=Line #=100|Comment=100|Description=100|Designator=100|Revision ID=100|Revision State=100|Revision Status=100|Quantity=100|Manufacturer 1=102|Manufacturer Part Number 1=169|Manufacturer Lifecycle 1=147|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|Supplier Subtotal 1=122
+Configuration18_Name8=VisibleOrder_Flat
+Configuration18_Item8=Line #=54|Comment=52|Description=82|Designator=94|Revision ID=128|Revision State=103|Revision Status=101|Manufacturer 1=102|Manufacturer Part Number 1=169|Manufacturer Lifecycle 1=147|Supplier 1=75|Supplier Part Number 1=142|Supplier Unit Price 1=127|Supplier Subtotal 1=122
+OutputType19=BOM_PartType
+OutputName19=Active BOM (Saphir)
+OutputCategory19=Report
+OutputDocumentPath19=[ActiveBOM Document]
+OutputVariantName19=
+OutputEnabled19=0
+OutputEnabled19_OutputMedium1=0
+OutputEnabled19_OutputMedium2=0
+OutputEnabled19_OutputMedium3=0
+OutputEnabled19_OutputMedium4=0
+OutputEnabled19_OutputMedium5=0
+OutputEnabled19_OutputMedium6=0
+OutputDefault19=0
+PageOptions19=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=1.00|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=7|PrintQuality=-3|MediaType=1|DitherType=10|PrintScaleMode=1|PaperKind=A4|PaperIndex=9
 
 [PublishSettings]
 OutputFilePath2=D:\Users\Jose\OneDrive\Documents\4.1-ETML-ES\2-PCAO\Altium\Projects\ES_Templates\ES_Proj_6C_2L\Project Outputs for ES_Proj_6C_2L\Export\
 ReleaseManaged2=1
-OutputBasePath2=Project Outputs for P3_FlapsSensor_v21
+OutputBasePath2=Project Outputs for 2312_BadgePlaceTravail
 OutputPathMedia2=[Media Name]
 OutputPathMediaValue2=
 OutputPathOutputer2=
@@ -391,7 +435,7 @@ OutputFileNameSpecial2=
 OpenOutput2=1
 OutputFilePath3=D:\Users\Jose\OneDrive\Documents\4.1-ETML-ES\2-PCAO\Altium\Projects\USBKey2018_JMO\Project Outputs for USB_Key\DesignDocs\
 ReleaseManaged3=1
-OutputBasePath3=Project Outputs for P3_FlapsSensor_v21
+OutputBasePath3=Project Outputs for 2312_BadgePlaceTravail
 OutputPathMedia3=[Media Name]
 OutputPathMediaValue3==ProjectName
 OutputPathOutputer3=
@@ -418,7 +462,7 @@ PDFACompliance3=Disabled
 PDFVersion3=Default
 OutputFilePath4=D:\Users\Jose\OneDrive\Documents\4.1-ETML-ES\2-PCAO\Altium\Projects\ES_Templates\ES_Proj_6C_2L\Project Outputs for ES_Proj_6C_2L\EuroCircuits\
 ReleaseManaged4=1
-OutputBasePath4=Project Outputs for P3_FlapsSensor_v21
+OutputBasePath4=Project Outputs for 2312_BadgePlaceTravail
 OutputPathMedia4=[Media Name]
 OutputPathMediaValue4=P3FlapsV3_EC
 OutputPathOutputer4=
@@ -431,7 +475,7 @@ OutputFileNameSpecial4=
 OpenOutput4=0
 OutputFilePath5=D:\Users\Public\Documents\Altium\Projects\Essais\GenererOutjobs\Project Outputs for GenererOutJobs\Video\P3_FlapsSensor_v20.asf
 ReleaseManaged5=1
-OutputBasePath5=Project Outputs for P3_FlapsSensor_v21
+OutputBasePath5=Project Outputs for 2312_BadgePlaceTravail
 OutputPathMedia5=[Media Name]
 OutputPathMediaValue5=
 OutputPathOutputer5=[Output Type]
@@ -468,7 +512,7 @@ WmvVideoCodecName5=Windows Media Video V7
 WmvQuality5=80
 OutputFilePath6=D:\Users\Jose\OneDrive\Documents\4.1-ETML-ES\2-PCAO\Altium\Projects\ES_Templates\ES_Proj_6C_2L\Project Outputs for ES_Proj_6C_2L\Reports\
 ReleaseManaged6=1
-OutputBasePath6=Project Outputs for P3_FlapsSensor_v21
+OutputBasePath6=Project Outputs for 2312_BadgePlaceTravail
 OutputPathMedia6=[Media Name]
 OutputPathMediaValue6=
 OutputPathOutputer6=

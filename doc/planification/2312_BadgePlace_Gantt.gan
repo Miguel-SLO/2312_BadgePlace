@@ -10,8 +10,10 @@ Miguel Santos
         <field id="tpd4" name="Date de début" width="89" order="1"/>
         <field id="tpd5" name="Date de fin" width="81" order="2"/>
         <field id="tpd7" name="Avancée" width="81" order="3"/>
+        <option id="taskLabelUp" value=""/>
         <option id="taskLabelDown" value="taskDates"/>
         <option id="taskLabelLeft" value="name"/>
+        <option id="taskLabelRight" value=""/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
             <![CDATA[3]]>
@@ -51,43 +53,39 @@ Miguel Santos
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="4" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
-            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="4" complete="80" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+        <task id="10" name="Travail de diplôme" color="#ff6666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-08-21" duration="34" complete="12" thirdDate="2023-08-21" thirdDate-constraint="0" expand="true">
+            <task id="15" name="Pré-étude" color="#ff6666" meeting="false" start="2023-08-21" duration="4" complete="100" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-25" duration="1" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true">
-                <depend id="3" type="2" difference="0" hardness="Strong"/>
-            </task>
-            <task id="3" name="Revue de schémas" color="#ff6666" meeting="true" start="2023-08-28" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true">
+            <task id="17" name="Schémas" color="#ff6666" meeting="false" start="2023-08-25" duration="3" complete="100" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true"/>
+            <task id="3" name="Revue de schémas" color="#ff6666" meeting="true" start="2023-08-29" duration="0" complete="0" thirdDate="2023-08-11" thirdDate-constraint="0" priority="4" expand="true">
                 <depend id="24" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="24" name="Commandes composants" color="#ff6666" meeting="false" start="2023-08-28" duration="1" complete="0" thirdDate="2023-08-31" thirdDate-constraint="0" expand="true" cost-manual-value="35.0" cost-calculated="true">
+            <task id="24" name="Commandes composants" color="#ff6666" meeting="false" start="2023-08-29" duration="1" complete="100" thirdDate="2023-08-31" thirdDate-constraint="0" expand="true" cost-manual-value="35.0" cost-calculated="true">
                 <depend id="18" type="2" difference="0" hardness="Strong"/>
                 <depend id="20" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="18" name="PCB" color="#ff6666" meeting="false" start="2023-08-29" duration="4" complete="0" thirdDate="2023-08-28" thirdDate-constraint="0" expand="true">
-                <depend id="25" type="2" difference="0" hardness="Strong"/>
-            </task>
-            <task id="25" name="Revue PCB" color="#ff6666" meeting="true" start="2023-09-04" duration="0" complete="0" thirdDate="2023-08-25" thirdDate-constraint="0" expand="true">
+            <task id="18" name="PCB" color="#ff6666" meeting="false" start="2023-08-30" duration="3" complete="0" thirdDate="2023-08-28" thirdDate-constraint="0" expand="true"/>
+            <task id="25" name="Revue PCB" color="#ff6666" meeting="true" start="2023-09-01" duration="0" complete="0" thirdDate="2023-08-25" thirdDate-constraint="0" expand="true">
                 <depend id="21" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="21" name="Commande PCB" color="#ff6666" meeting="true" start="2023-09-04" duration="0" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
+            <task id="21" name="Commande PCB" color="#ff6666" meeting="true" start="2023-09-01" duration="0" complete="0" thirdDate="2023-08-07" thirdDate-constraint="0" expand="true">
                 <depend id="20" type="2" difference="7" hardness="Strong"/>
                 <depend id="26" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="20" name="Montage &amp; tests" color="#ff6666" meeting="false" start="2023-09-13" duration="2" complete="0" thirdDate="2023-08-22" thirdDate-constraint="0" expand="true">
+            <task id="20" name="Montage &amp; tests" color="#ff6666" meeting="false" start="2023-09-12" duration="2" complete="0" thirdDate="2023-08-22" thirdDate-constraint="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="26" name="Modélisation 3D" color="#ff6666" meeting="false" start="2023-09-04" duration="2" complete="0" thirdDate="2023-09-13" thirdDate-constraint="0" expand="true" cost-manual-value="35.0" cost-calculated="true">
+            <task id="26" name="Modélisation 3D" color="#ff6666" meeting="false" start="2023-09-04" duration="2" complete="0" thirdDate="2023-09-04" thirdDate-constraint="1" expand="true" cost-manual-value="35.0" cost-calculated="true">
                 <depend id="23" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="23" name="Software RPI" color="#ff6666" meeting="false" start="2023-09-06" duration="5" complete="0" thirdDate="2023-08-17" thirdDate-constraint="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="19" name="Firmware PCB" color="#ff6666" meeting="false" start="2023-09-15" duration="5" complete="0" thirdDate="2023-09-13" thirdDate-constraint="0" expand="true">
+            <task id="19" name="Firmware PCB" color="#ff6666" meeting="false" start="2023-09-14" duration="5" complete="0" thirdDate="2023-09-13" thirdDate-constraint="0" expand="true">
                 <depend id="14" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="14" name="Mise en service" color="#ff6666" meeting="false" start="2023-09-25" duration="7" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true">
+            <task id="14" name="Mise en service" color="#ff6666" meeting="false" start="2023-09-22" duration="7" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true">
                 <depend id="5" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="9" name="Documents" color="#ff6666" meeting="false" start="2023-08-21" duration="31" complete="0" thirdDate="2023-08-15" thirdDate-constraint="0" expand="true"/>

@@ -1,0 +1,59 @@
+Added Pin To Net: NetName=NetD1_1 Pin=Q1-1
+Added Pin To Net: NetName=NetD2_1 Pin=Q2-1
+Added Pin To Net: NetName=NetD3_1 Pin=Q3-1
+Added Pin To Net: NetName=GND Pin=Q3-3
+Add Pin To Net: Unknown Pin: Pin R4-0
+Add Pin To Net: Unknown Pin: Pin R5-0
+Add Pin To Net: Unknown Pin: Pin R6-0
+Add Pin To Net: Unknown Pin: Pin R7-0
+Add Pin To Net: Unknown Pin: Pin R8-0
+Add Pin To Net: Unknown Pin: Pin R9-0
+Add Pin To Net: Unknown Pin: Pin R10-0
+Add Pin To Net: Unknown Pin: Pin R11-0
+Add Pin To Net: Unknown Pin: Pin R12-0
+Add Pin To Net: Unknown Pin: Pin R13-0
+Add Pin To Net: Unknown Pin: Pin R14-0
+Add Pin To Net: Unknown Pin: Pin R15-0
+Add Pin To Net: Unknown Pin: Pin R16-0
+Add Pin To Net: Unknown Pin: Pin R17-0
+Add Pin To Net: Unknown Pin: Pin R18-0
+Add Pin To Net: Unknown Pin: Pin R19-0
+Add Pin To Net: Unknown Pin: Pin R20-0
+Add Pin To Net: Unknown Pin: Pin R21-0
+Add Pin To Net: Unknown Pin: Pin R22-0
+Add Pin To Net: Unknown Pin: Pin R23-0
+Add Pin To Net: Unknown Pin: Pin R24-0
+Add Pin To Net: Unknown Pin: Pin R25-0
+Add Pin To Net: Unknown Pin: Pin R26-0
+Add Pin To Net: Unknown Pin: Pin R27-0
+Add Pin To Net: Unknown Pin: Pin R28-0
+Add Pin To Net: Unknown Pin: Pin R29-0
+Add Pin To Net: Unknown Pin: Pin R30-0
+Add Pin To Net: Unknown Pin: Pin R31-0
+Add Pin To Net: Unknown Pin: Pin R32-0
+Add Pin To Net: Unknown Pin: Pin R33-0
+Add Pin To Net: Unknown Pin: Pin R34-0
+Add Pin To Net: Unknown Pin: Pin R35-0
+Add Pin To Net: Unknown Pin: Pin R36-0
+Add Pin To Net: Unknown Pin: Pin R37-0
+Add Pin To Net: Unknown Pin: Pin R38-0
+Add Pin To Net: Unknown Pin: Pin R41-0
+Add Pin To Net: Unknown Pin: Pin R42-0
+Add Pin To Net: Unknown Pin: Pin R43-0
+Add Pin To Net: Unknown Pin: Pin R44-0
+Add Pin To Net: Unknown Pin: Pin R45-0
+Added Pin To Net: NetName=NetQ1_2 Pin=Q1-2
+Added Pin To Net: NetName=NetQ1_2 Pin=R5-1
+Added Net: Name=NetQ1_2
+Added Pin To Net: NetName=NetQ1_3 Pin=Q1-3
+Added Pin To Net: NetName=NetQ1_3 Pin=R6-1
+Added Net: Name=NetQ1_3
+Added Pin To Net: NetName=NetQ2_2 Pin=Q2-2
+Added Pin To Net: NetName=NetQ2_2 Pin=R4-1
+Added Pin To Net: NetName=NetQ2_2 Pin=R8-1
+Added Net: Name=NetQ2_2
+Added Pin To Net: NetName=NetQ2_3 Pin=Q2-3
+Added Pin To Net: NetName=NetQ2_3 Pin=R7-1
+Added Net: Name=NetQ2_3
+Added Pin To Net: NetName=NetQ3_2 Pin=Q3-2
+Added Net: Name=NetQ3_2

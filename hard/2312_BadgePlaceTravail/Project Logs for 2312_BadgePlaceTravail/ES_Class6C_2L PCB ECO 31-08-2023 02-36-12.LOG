@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=MB-CS Pin=P11-1
+Removed Pin From Net: NetName=MB-MOSI Pin=P11-2
+Removed Pin From Net: NetName=MB-MISO Pin=P11-3
+Removed Pin From Net: NetName=MB-SCK Pin=P11-4
+Removed Pin From Net: NetName=GND Pin=TP2-1
+Removed Pin From Net: NetName=GND Pin=TP3-1
+Removed Member From Class: ClassName=2312_SchemaBloc Member=TP2
+Removed Member From Class: ClassName=2312_SchemaBloc Member=TP3
+Added Pin To Net: NetName=MB-MOSI Pin=P11-1
+Added Pin To Net: NetName=MB-MISO Pin=P11-2
+Added Pin To Net: NetName=MB-SCK Pin=P11-3
+Added Pin To Net: NetName=MB-CS Pin=P11-4
+Change Room Name: Old Name=RFID New Name=Communication

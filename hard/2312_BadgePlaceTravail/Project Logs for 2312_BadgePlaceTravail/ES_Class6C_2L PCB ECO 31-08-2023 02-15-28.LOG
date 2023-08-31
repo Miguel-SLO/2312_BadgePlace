@@ -1,0 +1,42 @@
+Added Component: Designator=J1(691137710002)
+Add component (AddParameter): Name = "Application"; Value = "Pressure Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "Terminal Blocks"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Website Link"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.we-online.com/redexpert/article/691137710002?ad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet Link"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.we-online.com/redexpert/spec/691137710002?ad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Elektronik"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "691137710002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Match Code"; Value = "WR-TBL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Pins"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature Max"; Value = "120°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature Min"; Value = "-30°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Orientation"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "5mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current"; Value = "16A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage"; Value = "300V"; VariantName = "[No Variations]"
+Added Component: Designator=XF1(696106003002)
+Add component (AddParameter): Name = "Category"; Value = "Fuse Holder"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Website Link"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.we-online.com/redexpert/article/696106003002?ad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet Link"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.we-online.com/redexpert/spec/696106003002?ad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Fuse Size"; Value = "5x20mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Elektronik"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "696106003002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Match Code"; Value = "WR-FSH"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature Max"; Value = "120°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature Min"; Value = "-30°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=AC-L-IN Pin=J1-1
+Added Pin To Net: NetName=AC-L-SW Pin=J1-2
+Added Pin To Net: NetName=AC-L-SW Pin=XF1-1
+Added Pin To Net: NetName=AC-L-XF Pin=XF1-2
+Added Member To Class: ClassName=Puissance Member=Component J1 691137710002
+Added Member To Class: ClassName=Puissance Member=Component XF1 696106003002
+Added Room: Name=Puissance

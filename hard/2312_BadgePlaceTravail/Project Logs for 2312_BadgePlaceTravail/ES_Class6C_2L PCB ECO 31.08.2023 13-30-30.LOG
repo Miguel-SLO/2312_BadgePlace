@@ -1,0 +1,165 @@
+Removed Pin From Net: NetName=AC-L-IN Pin=J1-1
+Removed Pin From Net: NetName=AC-N Pin=J2-1
+Removed Pin From Net: NetName=AC-L-IN Pin=J2-3
+Removed Pin From Net: NetName=AC-L-OUT Pin=J3-1
+Removed Pin From Net: NetName=EARTH Pin=J3-2
+Removed Pin From Net: NetName=AC-N Pin=J3-3
+Removed Pin From Net: NetName=GND Pin=P10-1
+Removed Pin From Net: NetName=GND Pin=P10-2
+Removed Pin From Net: NetName=MCLR Pin=U2-15
+Removed Member From Class: ClassName=Puissance Member=J3
+Removed Member From Class: ClassName=Puissance Member=XF1
+Change Component Footprint: Designator=P10 Old Footprint=61300211121 New Footprint=61300411121
+Change Footprint: Footprint Not Found 691401700002B
+Change Footprint: Footprint Not Found 691401700004B
+Change Component Comment : Designator=P10 Old Comment=61300211121 New Comment=61300411121
+Change Component Comment : Designator=J1 Old Comment=691137710002 New Comment=691401700002B
+Change Component Comment : Designator=J2 Old Comment=691137710003 New Comment=691401700004B
+Change Component Designator: OldDesignator=J4 NewDesignator=J3
+Change Component Designator: OldDesignator=R18 NewDesignator=R19
+Change Component Designator: OldDesignator=R19 NewDesignator=R20
+Change Component Designator: OldDesignator=R20 NewDesignator=R21
+Change Component Designator: OldDesignator=R21 NewDesignator=R22
+Change Component Designator: OldDesignator=R22 NewDesignator=R18
+Change Component Designator: OldDesignator=R28 NewDesignator=R30
+Change Component Designator: OldDesignator=R29 NewDesignator=R31
+Change Component Designator: OldDesignator=R30 NewDesignator=R28
+Change Component Designator: OldDesignator=R31 NewDesignator=R29
+Change component parameters: Designator = "J1" ("J1"); Footprint = "691137710002"; UniqueID = "\DWTOAXRZ\ROAIFLJR" ("\DWTOAXRZ\ROAIFLJR")
+Change component parameters (AddParameter): Name = "Application"; Value = "Screwless"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Category"; Value = "Terminal Blocks"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Website Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.we-online.com/redexpert/article/691401700002B?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.we-online.com/redexpert/spec/691401700002B?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "Wurth Elektronik"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = "691401700002B"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Match Code"; Value = "WR-TBL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Pins"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Max"; Value = "105°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Min"; Value = "-40°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Orientation"; Value = "Vertical"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pitch"; Value = "5mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rated Current"; Value = "10A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Working Voltage"; Value = "300V"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J2" ("J2"); Footprint = "691137710003"; UniqueID = "\DWTOAXRZ\MJOIWQVS" ("\DWTOAXRZ\MJOIWQVS")
+Change component parameters (AddParameter): Name = "Application"; Value = "Screwless"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Category"; Value = "Terminal Blocks"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Website Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.we-online.com/redexpert/article/691401700004B?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.we-online.com/redexpert/spec/691401700004B?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "Wurth Elektronik"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = "691401700004B"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Match Code"; Value = "WR-TBL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Pins"; Value = "4"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Max"; Value = "105°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Min"; Value = "-40°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Orientation"; Value = "Vertical"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pitch"; Value = "5mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rated Current"; Value = "10A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Working Voltage"; Value = "300V"; VariantName = "[No Variations]"
+Change component parameters: Designator = "P10" ("P10"); Footprint = "61300211121"; UniqueID = "\WAEHGTAP" ("\WAEHGTAP")
+Change component parameters (AddParameter): Name = "Category"; Value = "Board-to-Board Connectors"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Website Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.we-online.com/redexpert/article/61300411121?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet Link"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.we-online.com/redexpert/spec/61300411121?ad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Contact Resistance"; Value = "20mO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Gender"; Value = "Pin Header"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "Wurth Elektronik"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = "61300411121"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Match Code"; Value = "WR-PHD"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Pins"; Value = "4"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Max"; Value = "105°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature Min"; Value = "-40°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Orientation"; Value = "Vertical"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packaging"; Value = "Bag"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rated Current"; Value = "3A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Withstanding Voltage"; Value = "500V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Working Voltage"; Value = "250V"; VariantName = "[No Variations]"
+Added Component: Designator=TP2(KSTN-5019_V)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.keyelco.com/"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.keyelco.com/product-pdf.cfm?p=1357"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Silver"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "03/2014"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Quantity"; Value = "1000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "1-Pin Surface Mount Device, Body 3.81 x 2.03 mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "5019"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Tape and Reel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHSCompliant"; Value = "True"; VariantName = "[No Variations]"
+Added Component: Designator=TP3(KSTN-5019_V)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.keyelco.com/"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.keyelco.com/product-pdf.cfm?p=1357"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Silver"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "03/2014"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Quantity"; Value = "1000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "1-Pin Surface Mount Device, Body 3.81 x 2.03 mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "5019"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Tape and Reel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHSCompliant"; Value = "True"; VariantName = "[No Variations]"
+Added Component: Designator=TP4(KSTN-5019_V)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.keyelco.com/"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.keyelco.com/product-pdf.cfm?p=1357"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Silver"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "03/2014"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Quantity"; Value = "1000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "1-Pin Surface Mount Device, Body 3.81 x 2.03 mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "5019"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Tape and Reel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHSCompliant"; Value = "True"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=AC-N Pin=J1-1
+Added Pin To Net: NetName=AC-L-IN Pin=J1-2
+Added Pin To Net: NetName=AC-L-OUT Pin=J2-1
+Added Pin To Net: NetName=EARTH Pin=J2-3
+Add Pin To Net: Unknown Pin: Pin J2-4
+Added Pin To Net: NetName=AC-L-IN Pin=K1-3
+Added Pin To Net: NetName=MB-RST Pin=P10-1
+Added Pin To Net: NetName=MB-INT Pin=P10-2
+Added Pin To Net: NetName=MB-PWM Pin=P10-3
+Added Pin To Net: NetName=MB-AN Pin=P10-4
+Added Pin To Net: NetName=AC-L-IN Pin=PS1-1
+Added Pin To Net: NetName=DEBUG Pin=TP2-1
+Added Pin To Net: NetName=GND Pin=TP3-1
+Added Pin To Net: NetName=GND Pin=TP4-1
+Added Pin To Net: NetName=NetC11_1 Pin=U2-15
+Change Net Name : Old Net Name=NetC11_1 New Net Name=nRST
+Change Net Name : Old Net Name=NetJ4_10 New Net Name=NetJ3_10
+Change Net Name : Old Net Name=NetJ4_11 New Net Name=NetJ3_11
+Change Net Name : Old Net Name=NetJ4_P7 New Net Name=NetJ3_P7
+Change Net Name : Old Net Name=NetR16_1 New Net Name=URXD_1
+Change Net Name : Old Net Name=NetR17_1 New Net Name=URXD_0
+Change Net Name : Old Net Name=NetR22_1 New Net Name=UTXD_0
+Change Net Name : Old Net Name=NetR23_1 New Net Name=UTXD_1
+Change Net Name : Old Net Name=NetR29_2 New Net Name=NetR31_2
+Added Differential Pair: Name=URXD
+Added Differential Pair: Name=UTXD
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component TP2 5019
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component TP3 5019
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component TP4 5019

@@ -1,0 +1,10 @@
+Change Component Footprint: Designator=J1 Old Footprint=691137710002 New Footprint=691401700002B
+Change Component Footprint: Designator=J2 Old Footprint=691137710003 New Footprint=691401700004B
+Added Pin To Net: NetName=AC-N Pin=J2-4
+Added Pin To Net: NetName=AC-N Pin=J2-4
+Added Member To Class: ClassName=Ethernet Member=Component J3 CRJ011-ML3-TH
+Added Member To Class: ClassName=Ethernet Member=Component R18 RES-0805
+Added Member To Class: ClassName=Ethernet Member=Component R20 RES-0805
+Added Member To Class: ClassName=Ethernet Member=Component R22 RES-0805
+Added Member To Class: ClassName=Ethernet Member=Component R30 RES-0805
+Added Member To Class: ClassName=Ethernet Member=Component R31 RES-0805

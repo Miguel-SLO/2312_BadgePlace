@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=EN Pin=U1-18
+Change Component Description : Designator=U1 Old Description=PIC32MX795F512H-80I/PT New Description=No Description Available
+Added Pin To Net: NetName=EN Pin=U1-53
+Added Pin To Net: NetName=NetU1_18 Pin=U1-18
+Added Net: Name=NetU1_18

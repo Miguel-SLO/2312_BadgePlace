@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=MB-RST Pin=P9-1
+Removed Pin From Net: NetName=MB-INT Pin=P9-2
+Removed Pin From Net: NetName=MB-PWM Pin=P9-3
+Removed Pin From Net: NetName=MB-AN Pin=P9-4
+Added Pin To Net: NetName=MB-AN Pin=P9-1
+Added Pin To Net: NetName=MB-PWM Pin=P9-2
+Added Pin To Net: NetName=MB-RST Pin=P9-3
+Added Pin To Net: NetName=MB-INT Pin=P9-4
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component P6 61300211121
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component P8 61300211121
+Added Member To Class: ClassName=2312_SchemaBloc Member=Component P10 61300411121

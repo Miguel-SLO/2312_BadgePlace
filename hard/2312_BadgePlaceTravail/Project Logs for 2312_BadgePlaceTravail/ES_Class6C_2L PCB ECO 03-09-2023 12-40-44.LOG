@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=+3V3 Pin=C1-1
+Removed Pin From Net: NetName=+3V3 Pin=C2-2
+Removed Pin From Net: NetName=+3V3 Pin=P4-1
+Removed Pin From Net: NetName=+3V3 Pin=PS1-5
+Added Pin To Net: NetName=VOUT Pin=C1-1
+Added Pin To Net: NetName=VOUT Pin=C2-2
+Added Pin To Net: NetName=VOUT Pin=P4-1
+Added Pin To Net: NetName=VOUT Pin=PS1-5
+Added Net: Name=VOUT
+Added Member To Class: ClassName=Puissance Member=Component R3 RES-0805
+Added Member To Class: ClassName=Puissance Member=Component R4 RES-0805
+Added Member To Class: ClassName=Puissance Member=Component R5 RES-0805
+Added Member To Class: ClassName=Puissance Member=Component R6 RES-0805
+Added Member To Class: ClassName=Puissance Member=Component R7 RES-0805
+Added Member To Class: ClassName=Puissance Member=Component R8 RES-0805

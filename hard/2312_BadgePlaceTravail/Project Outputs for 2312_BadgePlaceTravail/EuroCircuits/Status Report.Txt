@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [ES_Class6C_2L.PcbDoc]
+   Generated File[ES_Class6C_2L.TXT]
+   Generated File[ES_Class6C_2L.LDP]
+   Generated File[ES_Class6C_2L.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 21:13:21 On 03.09.2023

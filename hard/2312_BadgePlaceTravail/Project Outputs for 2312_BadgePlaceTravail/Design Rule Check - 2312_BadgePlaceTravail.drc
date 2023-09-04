@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : C:\Users\migsantos\MIGSAN_GIT\2312_BadgePlace\hard\2312_BadgePlaceTravail\2312_BadgePlaceTravail.PcbDoc
 Date     : 04.09.2023
-Time     : 10:22:27
+Time     : 10:32:26
 
 Processing Rule : Clearance Constraint (Gap=2.5mm) (InNetClass('AC-230V')),(InNetClass('AC-230V'))
 Rule Violations :0

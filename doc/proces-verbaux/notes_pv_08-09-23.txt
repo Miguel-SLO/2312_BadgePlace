@@ -1,0 +1,26 @@
+- refaire le planning sur excel avec dates plus justes
+
+- Faire les machines d'états
+- Flowchart uniquement sur infos que j'ai réalisé moi même
+- Tableau décrivant fonctions utilisés etc..
+- Tableau décrivants variables etc...
+
+
+Chapitre "pre-test soft"
+- Parties testés (rfid)
+
+Priorités :
+
+- RFID
+- ESP32 (com avec Putty) (validé chaine de communication)
+- GPIO et PWM
+- Raspi
+- Ethernet
+
+Jusqu'à Lundi : Rapport -> PCB
+Mardi soir : Carte fini avec tests (sans 230VAC)
+Mercredi : Mise en route soft mplab + structure firmware
+- rfid
+- wifi
+- (pwm)
+

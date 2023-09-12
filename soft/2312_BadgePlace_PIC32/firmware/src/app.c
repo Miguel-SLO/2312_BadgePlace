@@ -144,16 +144,7 @@ void APP_Tasks ( void )
         {            
             DEBUGToggle();
             
-            DRV_TMR2_Start();
-            DRV_OC1_Start();            
-            
-
-            DRV_OC1_Stop();
-            
-            DRV_OC1_Start();
-            
-            appData.state = APP_STATE_SERVICE_TASKS;
-            
+            appData.state = APP_STATE_SERVICE_TASKS;            
             break;
         }
 

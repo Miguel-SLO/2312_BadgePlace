@@ -125,6 +125,22 @@ void __ISR(_TIMER_3_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance2(void)
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }
  
+void __ISR(_ETH_VECTOR, ipl5AUTO) _IntHandler_ETHMAC(void)
+{
+    DRV_ETHMAC_Tasks_ISR((SYS_MODULE_OBJ)0);
+}
+
+/* This function is used by ETHMAC driver */
+bool SYS_INT_SourceRestore(INT_SOURCE src, int level)
+{
+    if(level)
+    {
+        SYS_INT_SourceEnable(src);
+    }
+
+    return level;
+}
+
 /*******************************************************************************
  End of File
 */

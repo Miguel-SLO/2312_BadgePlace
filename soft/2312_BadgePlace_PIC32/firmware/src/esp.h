@@ -114,6 +114,7 @@ typedef struct
     ESP_STATES state;
 
     /* TODO: Define any additional data used by the application. */
+    DRV_HANDLE handleUSART0;
 
 } ESP_DATA;
 

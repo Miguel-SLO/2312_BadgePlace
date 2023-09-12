@@ -1,10 +1,7 @@
 build/2312_Config/production/_ext/604921471/sys_ports_static.o: \
  ../src/system_config/2312_Config/framework/system/ports/src/sys_ports_static.c \
  ../src/system_config/2312_Config/system_config.h \
- ../../../../../../framework/system/ports/sys_ports.h \
- ../../../../../../framework/system/ports/sys_ports_definitions.h \
- ../../../../../../framework/system/common/sys_common.h \
- ../../../../../../framework/system/common/sys_module.h \
+ ../src/system_config/2312_Config/bsp/bsp.h \
  ../../../../../../framework/peripheral/ports/plib_ports.h \
  ../../../../../../framework/peripheral/ports/processor/ports_processor.h \
  ../../../../../../framework/peripheral/ports/processor/ports_p32xxxx.h \
@@ -36,6 +33,10 @@ build/2312_Config/production/_ext/604921471/sys_ports_static.o: \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
+ ../../../../../../framework/system/ports/sys_ports.h \
+ ../../../../../../framework/system/ports/sys_ports_definitions.h \
+ ../../../../../../framework/system/common/sys_common.h \
+ ../../../../../../framework/system/common/sys_module.h \
  ../../../../../../framework/system/int/sys_int.h \
  ../../../../../../framework/peripheral/int/plib_int.h \
  ../../../../../../framework/peripheral/int/processor/int_processor.h \
@@ -80,13 +81,7 @@ build/2312_Config/production/_ext/604921471/sys_ports_static.o: \
 
 ../src/system_config/2312_Config/system_config.h:
 
-../../../../../../framework/system/ports/sys_ports.h:
-
-../../../../../../framework/system/ports/sys_ports_definitions.h:
-
-../../../../../../framework/system/common/sys_common.h:
-
-../../../../../../framework/system/common/sys_module.h:
+../src/system_config/2312_Config/bsp/bsp.h:
 
 ../../../../../../framework/peripheral/ports/plib_ports.h:
 
@@ -149,6 +144,14 @@ build/2312_Config/production/_ext/604921471/sys_ports_static.o: \
 ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h:
 
 ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h:
+
+../../../../../../framework/system/ports/sys_ports.h:
+
+../../../../../../framework/system/ports/sys_ports_definitions.h:
+
+../../../../../../framework/system/common/sys_common.h:
+
+../../../../../../framework/system/common/sys_module.h:
 
 ../../../../../../framework/system/int/sys_int.h:
 

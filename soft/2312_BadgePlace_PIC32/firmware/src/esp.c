@@ -77,6 +77,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 ESP_DATA espData;
+static enum 
+{
+    USART_BM_INIT,
+    USART_BM_WORKING,
+    USART_BM_DONE,
+} usartBMState;
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -93,6 +100,38 @@ ESP_DATA espData;
 // *****************************************************************************
 // *****************************************************************************
 
+/******************************************************************************
+  Function:
+    static void USART_Task (void)
+    
+   Remarks:
+    Feeds the USART transmitter by reading characters from a specified pipe.  The pipeRead function is a 
+    standard interface that allows data to be exchanged between different automatically 
+    generated application modules.  Typically, the pipe is connected to the application's
+    USART receive function, but could be any other Harmony module which supports the pipe interface. 
+*/
+static void USART_Task (void)
+{
+    switch (usartBMState)
+    {
+        default:
+        case USART_BM_INIT:
+        {
+            usartBMState = USART_BM_WORKING;
+            break;
+        }
+
+        case USART_BM_WORKING:
+        {
+
+        }
+
+        case USART_BM_DONE:
+        {
+            break;
+        }
+    }
+}
 
 /* TODO:  Add any necessary local functions.
 */
@@ -117,6 +156,7 @@ void ESP_Initialize ( void )
     /* Place the App state machine in its initial state. */
     espData.state = ESP_STATE_INIT;
 
+    espData.handleUSART0 = DRV_HANDLE_INVALID;
     
     /* TODO: Initialize your application's state machine and other
      * parameters.
@@ -143,9 +183,16 @@ void ESP_Tasks ( void )
         {
             bool appInitialized = true;
        
+            if (espData.handleUSART0 == DRV_HANDLE_INVALID)
+            {
+                espData.handleUSART0 = DRV_USART_Open(ESP_DRV_USART, DRV_IO_INTENT_READWRITE|DRV_IO_INTENT_NONBLOCKING);
+                appInitialized &= ( DRV_HANDLE_INVALID != espData.handleUSART0 );
+            }
         
             if (appInitialized)
             {
+                /* initialize the USART state machine */
+                usartBMState = USART_BM_INIT;
             
                 espData.state = ESP_STATE_SERVICE_TASKS;
             }
@@ -154,6 +201,7 @@ void ESP_Tasks ( void )
 
         case ESP_STATE_SERVICE_TASKS:
         {
+			USART_Task();
         
             break;
         }

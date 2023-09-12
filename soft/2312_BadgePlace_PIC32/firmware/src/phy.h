@@ -72,6 +72,13 @@ extern "C" {
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
+typedef enum
+{
+    PHY_TCPIP_WAIT_FOR_IP,
+    PHY_TCPIP_WAITING_FOR_COMMAND,
+    PHY_TCPIP_WAIT_FOR_CONNECTION,
+    PHY_TCPIP_TX_DONE
+} PHY_TCP_CLIENT_TX_STATES;
 
 // *****************************************************************************
 /* Application states
@@ -91,6 +98,7 @@ typedef enum
 	PHY_STATE_SERVICE_TASKS,
 
 	/* TODO: Define states used by the application state machine. */
+	PHY_STATE_ERROR
 
 } PHY_STATES;
 
@@ -114,6 +122,9 @@ typedef struct
     PHY_STATES state;
 
     /* TODO: Define any additional data used by the application. */
+	TCP_SOCKET socket;
+	TCP_PORT port;
+	PHY_TCP_CLIENT_TX_STATES txTaskState;
 
 } PHY_DATA;
 

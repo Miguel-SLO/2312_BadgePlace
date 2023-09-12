@@ -67,10 +67,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 /*** DEVCFG1 ***/
 
-#pragma config FNOSC =      FRCPLL
+#pragma config FNOSC =      PRIPLL
 #pragma config FSOSCEN =    OFF
 #pragma config IESO =       ON
-#pragma config POSCMOD =    OFF
+#pragma config POSCMOD =    XT
 #pragma config OSCIOFNC =   OFF
 #pragma config FPBDIV =     DIV_1
 #pragma config FCKSM =      CSECMD
@@ -82,12 +82,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #pragma config FPLLMUL =    MUL_20
 #pragma config FPLLODIV =   DIV_1
 #pragma config UPLLIDIV =   DIV_2
-#pragma config UPLLEN =     OFF
+#pragma config UPLLEN =     ON
 /*** DEVCFG3 ***/
 
 #pragma config USERID =     0xffff
 #pragma config FSRSSEL =    PRIORITY_7
-#pragma config FMIIEN =     ON
+#pragma config FMIIEN =     OFF
 #pragma config FETHIO =     ON
 #pragma config FCANIO =     ON
 #pragma config FUSBIDIO =   ON
@@ -99,7 +99,74 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+
+/* MIIM Driver Configuration */
+static const DRV_MIIM_INIT drvMiimInitData =
+{
+    .moduleInit = {SYS_MODULE_POWER_RUN_FULL},
+    .ethphyId = DRV_MIIM_ETH_MODULE_ID,
+};
 // <editor-fold defaultstate="collapsed" desc="DRV_USART Initialization Data">
+
+const DRV_USART_INIT drvUsart0InitData =
+{
+    .moduleInit.value = DRV_USART_POWER_STATE_IDX0,
+    .usartID = DRV_USART_PERIPHERAL_ID_IDX0, 
+    .mode = DRV_USART_OPER_MODE_IDX0,
+    .flags = DRV_USART_INIT_FLAGS_IDX0,
+    .brgClock = DRV_USART_BRG_CLOCK_IDX0,
+    .lineControl = DRV_USART_LINE_CNTRL_IDX0,
+    .baud = DRV_USART_BAUD_RATE_IDX0,
+    .handshake = DRV_USART_HANDSHAKE_MODE_IDX0,
+    .linesEnable = DRV_USART_LINES_ENABLE_IDX0,
+    .interruptTransmit = DRV_USART_XMIT_INT_SRC_IDX0,
+    .interruptReceive = DRV_USART_RCV_INT_SRC_IDX0,
+    .interruptError = DRV_USART_ERR_INT_SRC_IDX0,
+    .dmaChannelTransmit = DMA_CHANNEL_NONE,
+    .dmaInterruptTransmit = DRV_USART_XMIT_INT_SRC_IDX0,    
+    .dmaChannelReceive = DMA_CHANNEL_NONE,
+    .dmaInterruptReceive = DRV_USART_RCV_INT_SRC_IDX0,    
+};
+
+const DRV_USART_INIT drvUsart1InitData =
+{
+    .moduleInit.value = DRV_USART_POWER_STATE_IDX1,
+    .usartID = DRV_USART_PERIPHERAL_ID_IDX1, 
+    .mode = DRV_USART_OPER_MODE_IDX1,
+    .flags = DRV_USART_INIT_FLAGS_IDX1,
+    .brgClock = DRV_USART_BRG_CLOCK_IDX1,
+    .lineControl = DRV_USART_LINE_CNTRL_IDX1,
+    .baud = DRV_USART_BAUD_RATE_IDX1,
+    .handshake = DRV_USART_HANDSHAKE_MODE_IDX1,
+    .linesEnable = DRV_USART_LINES_ENABLE_IDX1,
+    .interruptTransmit = DRV_USART_XMIT_INT_SRC_IDX1,
+    .interruptReceive = DRV_USART_RCV_INT_SRC_IDX1,
+    .interruptError = DRV_USART_ERR_INT_SRC_IDX1,
+    .dmaChannelTransmit = DMA_CHANNEL_NONE,
+    .dmaInterruptTransmit = DRV_USART_XMIT_INT_SRC_IDX1,
+    .dmaChannelReceive = DMA_CHANNEL_NONE,
+    .dmaInterruptReceive= DRV_USART_RCV_INT_SRC_IDX1,
+};
+
+const DRV_USART_INIT drvUsart2InitData =
+{
+    .moduleInit.value = DRV_USART_POWER_STATE_IDX2,
+    .usartID = DRV_USART_PERIPHERAL_ID_IDX2, 
+    .mode = DRV_USART_OPER_MODE_IDX2,
+    .flags = DRV_USART_INIT_FLAGS_IDX2,
+    .brgClock = DRV_USART_BRG_CLOCK_IDX2,
+    .lineControl = DRV_USART_LINE_CNTRL_IDX2,
+    .baud = DRV_USART_BAUD_RATE_IDX2,
+    .handshake = DRV_USART_HANDSHAKE_MODE_IDX2,
+    .linesEnable = DRV_USART_LINES_ENABLE_IDX2,
+    .interruptTransmit = DRV_USART_XMIT_INT_SRC_IDX2,
+    .interruptReceive = DRV_USART_RCV_INT_SRC_IDX2,
+    .interruptError = DRV_USART_ERR_INT_SRC_IDX2,
+    .dmaChannelTransmit = DMA_CHANNEL_NONE,
+    .dmaInterruptTransmit = DRV_USART_XMIT_INT_SRC_IDX2,
+    .dmaChannelReceive = DMA_CHANNEL_NONE,
+    .dmaInterruptReceive = DRV_USART_RCV_INT_SRC_IDX2,
+};
 // </editor-fold>
 
 // *****************************************************************************
@@ -116,12 +183,216 @@ SYSTEM_OBJECTS sysObj;
 // Section: Module Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="SYS_TMR Initialization Data">
+/*** TMR Service Initialization Data ***/
+const SYS_TMR_INIT sysTmrInitData =
+{
+    .moduleInit = {SYS_MODULE_POWER_RUN_FULL},
+    .drvIndex = DRV_TMR_INDEX_0,
+    .tmrFreq = 1000, 
+};
+// </editor-fold>
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Library/Stack Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="TCP/IP Stack Initialization Data">
+// *****************************************************************************
+// *****************************************************************************
+// Section: TCPIP Data
+// *****************************************************************************
+// *****************************************************************************
+
+/*** ARP Service Initialization Data ***/
+const TCPIP_ARP_MODULE_CONFIG tcpipARPInitData =
+{ 
+    .cacheEntries       = TCPIP_ARP_CACHE_ENTRIES,     
+    .deleteOld          = TCPIP_ARP_CACHE_DELETE_OLD,    
+    .entrySolvedTmo     = TCPIP_ARP_CACHE_SOLVED_ENTRY_TMO, 
+    .entryPendingTmo    = TCPIP_ARP_CACHE_PENDING_ENTRY_TMO, 
+    .entryRetryTmo      = TCPIP_ARP_CACHE_PENDING_RETRY_TMO, 
+    .permQuota          = TCPIP_ARP_CACHE_PERMANENT_QUOTA, 
+    .purgeThres         = TCPIP_ARP_CACHE_PURGE_THRESHOLD, 
+    .purgeQuanta        = TCPIP_ARP_CACHE_PURGE_QUANTA, 
+    .retries            = TCPIP_ARP_CACHE_ENTRY_RETRIES, 
+    .gratProbeCount     = TCPIP_ARP_GRATUITOUS_PROBE_COUNT,
+};
+
+
+/*** Announce Discovery Initialization Data ***/
+const TCPIP_ANNOUNCE_MODULE_CONFIG tcpipAnnounceInitData =
+{ 
+};
+
+/*** UDP Sockets Initialization Data ***/
+const TCPIP_UDP_MODULE_CONFIG tcpipUDPInitData =
+{
+    .nSockets       = TCPIP_UDP_MAX_SOCKETS,
+    .sktTxBuffSize  = TCPIP_UDP_SOCKET_DEFAULT_TX_SIZE, 
+};
+
+/*** TCP Sockets Initialization Data ***/
+const TCPIP_TCP_MODULE_CONFIG tcpipTCPInitData =
+{
+    .nSockets       = TCPIP_TCP_MAX_SOCKETS,
+    .sktTxBuffSize  = TCPIP_TCP_SOCKET_DEFAULT_TX_SIZE, 
+    .sktRxBuffSize  = TCPIP_TCP_SOCKET_DEFAULT_RX_SIZE,
+};
+
+
+
+
+
+
+/*** DHCP client Initialization Data ***/
+const TCPIP_DHCP_MODULE_CONFIG tcpipDHCPInitData =
+{     
+    .dhcpEnable     = TCPIP_DHCP_CLIENT_ENABLED,   
+    .dhcpTmo        = TCPIP_DHCP_TIMEOUT,
+    .dhcpCliPort    = TCPIP_DHCP_CLIENT_CONNECT_PORT,
+    .dhcpSrvPort    = TCPIP_DHCP_SERVER_LISTEN_PORT,
+
+};
+
+
+
+/*** NBNS Server Initialization Data ***/
+const TCPIP_NBNS_MODULE_CONFIG tcpipNBNSInitData =
+{ 
+};
+
+
+/*** ETH PHY Initialization Data ***/
+
+
+
+const DRV_ETHPHY_INIT tcpipPhyInitData =
+{
+    .moduleInit             = {SYS_MODULE_POWER_RUN_FULL},
+    .ethphyId               = TCPIP_EMAC_MODULE_ID,
+    .phyAddress             = TCPIP_EMAC_PHY_ADDRESS,
+    .phyFlags               = TCPIP_EMAC_PHY_CONFIG_FLAGS,
+    .pPhyObject             = &DRV_ETHPHY_OBJECT_SMSC_LAN8740,
+    .resetFunction          = 0,
+    .pMiimObject            = &DRV_MIIM_OBJECT_BASE_Default,
+    .pMiimInit              = &drvMiimInitData,
+    .miimIndex              = DRV_MIIM_DRIVER_INDEX,
+};
+
+/*** ETH MAC Initialization Data ***/
+const TCPIP_MODULE_MAC_PIC32INT_CONFIG tcpipMACPIC32INTInitData =
+{ 
+    .nTxDescriptors         = TCPIP_EMAC_TX_DESCRIPTORS,
+    .rxBuffSize             = TCPIP_EMAC_RX_BUFF_SIZE,
+    .nRxDescriptors         = TCPIP_EMAC_RX_DESCRIPTORS,
+    .nRxDedicatedBuffers    = TCPIP_EMAC_RX_DEDICATED_BUFFERS,
+    .nRxInitBuffers         = TCPIP_EMAC_RX_INIT_BUFFERS,
+    .rxLowThreshold         = TCPIP_EMAC_RX_LOW_THRESHOLD,
+    .rxLowFill              = TCPIP_EMAC_RX_LOW_FILL,
+    .linkInitDelay          = TCPIP_EMAC_PHY_LINK_INIT_DELAY,
+    .ethFlags               = TCPIP_EMAC_ETH_OPEN_FLAGS,
+    .ethModuleId            = TCPIP_EMAC_MODULE_ID,
+    .pPhyBase               = &DRV_ETHPHY_OBJECT_BASE_Default,
+    .pPhyInit               = &tcpipPhyInitData,
+};
+
+
+
+
+/*** Zeroconfig initialization data ***/
+const ZCLL_MODULE_CONFIG tcpipZCLLInitData =
+{
+};
+
+
+
+
+
+
+
+
+TCPIP_STACK_HEAP_INTERNAL_CONFIG tcpipHeapConfig =
+{
+    .heapType = TCPIP_STACK_HEAP_TYPE_INTERNAL_HEAP,
+    .heapFlags = TCPIP_STACK_HEAP_USE_FLAGS,
+    .heapUsage = TCPIP_STACK_HEAP_USAGE_CONFIG,
+    .malloc_fnc = TCPIP_STACK_MALLOC_FUNC,
+    .calloc_fnc = TCPIP_STACK_CALLOC_FUNC,
+    .free_fnc = TCPIP_STACK_FREE_FUNC,
+    .heapSize = TCPIP_STACK_DRAM_SIZE,
+};
+ 
+const TCPIP_NETWORK_CONFIG __attribute__((unused))  TCPIP_HOSTS_CONFIGURATION[] =
+{
+/*** Network Configuration Index 0 ***/
+    {
+        TCPIP_NETWORK_DEFAULT_INTERFACE_NAME_IDX0,       // interface
+        TCPIP_NETWORK_DEFAULT_HOST_NAME_IDX0,            // hostName
+        TCPIP_NETWORK_DEFAULT_MAC_ADDR_IDX0,             // macAddr
+        TCPIP_NETWORK_DEFAULT_IP_ADDRESS_IDX0,           // ipAddr
+        TCPIP_NETWORK_DEFAULT_IP_MASK_IDX0,              // ipMask
+        TCPIP_NETWORK_DEFAULT_GATEWAY_IDX0,              // gateway
+        TCPIP_NETWORK_DEFAULT_DNS_IDX0,                  // priDNS
+        TCPIP_NETWORK_DEFAULT_SECOND_DNS_IDX0,           // secondDNS
+        TCPIP_NETWORK_DEFAULT_POWER_MODE_IDX0,           // powerMode
+        TCPIP_NETWORK_DEFAULT_INTERFACE_FLAGS_IDX0,      // startFlags
+       &TCPIP_NETWORK_DEFAULT_MAC_DRIVER_IDX0,           // pMacObject
+    },
+};
+
+const TCPIP_STACK_MODULE_CONFIG TCPIP_STACK_MODULE_CONFIG_TBL [] =
+{
+    {TCPIP_MODULE_IPV4,             0},
+    {TCPIP_MODULE_ARP,              &tcpipARPInitData},             // TCPIP_MODULE_ARP
+    {TCPIP_MODULE_UDP,              &tcpipUDPInitData},             // TCPIP_MODULE_UDP
+    {TCPIP_MODULE_TCP,              &tcpipTCPInitData},             // TCPIP_MODULE_TCP
+    {TCPIP_MODULE_DHCP_CLIENT,      &tcpipDHCPInitData},            // TCPIP_MODULE_DHCP_CLIENT
+    {TCPIP_MODULE_ANNOUNCE,         &tcpipAnnounceInitData},        // TCPIP_MODULE_ANNOUNCE
+    {TCPIP_MODULE_NBNS,             &tcpipNBNSInitData},            // TCPIP_MODULE_NBNS
+
+    {TCPIP_MODULE_ZCLL,             0},                             // TCPIP_MODULE_ZCLL,
+    { TCPIP_MODULE_MANAGER,         &tcpipHeapConfig },             // TCPIP_MODULE_MANAGER
+    // MAC modules
+    {TCPIP_MODULE_MAC_PIC32INT,     &tcpipMACPIC32INTInitData},     // TCPIP_MODULE_MAC_PIC32INT
+
+};
+
+/*********************************************************************
+ * Function:        SYS_MODULE_OBJ TCPIP_STACK_Init()
+ *
+ * PreCondition:    None
+ *
+ * Input:
+ *
+ * Output:          valid system module object if Stack and its componets are initialized
+ *                  SYS_MODULE_OBJ_INVALID otherwise
+ *
+ * Overview:        The function starts the initialization of the stack.
+ *                  If an error occurs, the SYS_ERROR() is called
+ *                  and the function de-initialize itself and will return false.
+ *
+ * Side Effects:    None
+ *
+ * Note:            This function must be called before any of the
+ *                  stack or its component routines are used.
+ *
+ ********************************************************************/
+
+SYS_MODULE_OBJ TCPIP_STACK_Init()
+{
+    TCPIP_STACK_INIT    tcpipInit;
+
+    tcpipInit.moduleInit.sys.powerState = SYS_MODULE_POWER_RUN_FULL;
+    tcpipInit.pNetConf = TCPIP_HOSTS_CONFIGURATION;
+    tcpipInit.nNets = sizeof (TCPIP_HOSTS_CONFIGURATION) / sizeof (*TCPIP_HOSTS_CONFIGURATION);
+    tcpipInit.pModConfig = TCPIP_STACK_MODULE_CONFIG_TBL;
+    tcpipInit.nModules = sizeof (TCPIP_STACK_MODULE_CONFIG_TBL) / sizeof (*TCPIP_STACK_MODULE_CONFIG_TBL);
+
+    return TCPIP_STACK_Initialize(0, &tcpipInit.moduleInit);
+}
+// </editor-fold>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -146,9 +417,14 @@ void SYS_Initialize ( void* data )
     SYS_CLK_Initialize( NULL );
     SYS_DEVCON_Initialize(SYS_DEVCON_INDEX_0, (SYS_MODULE_INIT*)NULL);
     SYS_DEVCON_PerformanceConfig(SYS_CLK_SystemFrequencyGet());
-    SYS_DEVCON_JTAGDisable();
+    SYS_DEVCON_JTAGEnable();
+
+    /* Board Support Package Initialization */
+    BSP_Initialize();        
 
     /* Initialize Drivers */
+    /* Initialize the MIIM Driver */
+    sysObj.drvMiim = DRV_MIIM_Initialize(DRV_MIIM_INDEX_0, (const SYS_MODULE_INIT  * const)&drvMiimInitData);
     /* Initialize the OC Driver */
     DRV_OC0_Initialize();
     DRV_OC1_Initialize();
@@ -159,9 +435,9 @@ void SYS_Initialize ( void* data )
     /*Initialize TMR2 */
     DRV_TMR2_Initialize();
  
-     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
-    sysObj.drvUsart1 = DRV_USART_Initialize(DRV_USART_INDEX_1, (SYS_MODULE_INIT *)NULL);
-    sysObj.drvUsart2 = DRV_USART_Initialize(DRV_USART_INDEX_2, (SYS_MODULE_INIT *)NULL);
+     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
+    sysObj.drvUsart1 = DRV_USART_Initialize(DRV_USART_INDEX_1, (SYS_MODULE_INIT *)&drvUsart1InitData);
+    sysObj.drvUsart2 = DRV_USART_Initialize(DRV_USART_INDEX_2, (SYS_MODULE_INIT *)&drvUsart2InitData);
     SYS_INT_VectorPrioritySet(INT_VECTOR_UART1, INT_PRIORITY_LEVEL1);
     SYS_INT_VectorSubprioritySet(INT_VECTOR_UART1, INT_SUBPRIORITY_LEVEL0);
     SYS_INT_VectorPrioritySet(INT_VECTOR_UART2, INT_PRIORITY_LEVEL1);
@@ -175,7 +451,23 @@ void SYS_Initialize ( void* data )
     /*** Interrupt Service Initialization Code ***/
     SYS_INT_Initialize();
 
+    /*** Random Service Initialization Code ***/
+    SYS_RANDOM_Initialize(0, 0);
+
+    /*** TMR Service Initialization Code ***/
+    sysObj.sysTmr  = SYS_TMR_Initialize(SYS_TMR_INDEX_0, (const SYS_MODULE_INIT  * const)&sysTmrInitData);
+
     /* Initialize Middleware */
+
+    /* set priority for ETHERNET interrupt source */
+    SYS_INT_VectorPrioritySet(INT_VECTOR_ETH, INT_PRIORITY_LEVEL5);
+
+    /* set sub-priority for ETHERNET interrupt source */
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_ETH, INT_SUBPRIORITY_LEVEL3);
+    /* TCPIP Stack Initialization */
+    sysObj.tcpip = TCPIP_STACK_Init();
+    SYS_ASSERT(sysObj.tcpip != SYS_MODULE_OBJ_INVALID, "TCPIP_STACK_Init Failed" );
+
 
     /* Enable Global Interrupts */
     SYS_INT_Enable();

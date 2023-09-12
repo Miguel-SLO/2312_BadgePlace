@@ -53,10 +53,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/devcon/sys_devcon.h"
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
+#include "system/random/sys_random.h"
+#include "system/tmr/sys_tmr.h"
 #include "driver/tmr/drv_tmr_static.h"
 #include "peripheral/int/plib_int.h"
-#include "driver/usart/drv_usart_static.h"
+#include "driver/usart/drv_usart.h"
 #include "system/ports/sys_ports.h"
+#include "tcpip/tcpip.h"
+#include "driver/ethmac/drv_ethmac.h"
+#include "driver/miim/drv_miim.h"
 #include "app.h"
 #include "phy.h"
 #include "esp.h"
@@ -97,6 +102,7 @@ extern "C" {
 
 typedef struct
 {
+    SYS_MODULE_OBJ  sysTmr;
     SYS_MODULE_OBJ  drvTmr0;
     SYS_MODULE_OBJ  drvTmr1;
     SYS_MODULE_OBJ  drvTmr2;
@@ -104,6 +110,8 @@ typedef struct
     SYS_MODULE_OBJ  drvUsart0;
     SYS_MODULE_OBJ  drvUsart1;
     SYS_MODULE_OBJ  drvUsart2;
+    SYS_MODULE_OBJ  tcpip;
+    SYS_MODULE_OBJ  drvMiim;
 
 } SYSTEM_OBJECTS;
 

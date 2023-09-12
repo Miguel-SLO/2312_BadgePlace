@@ -77,6 +77,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 */
 
 PHY_DATA phyData;
+static char phyServerIP[] = "192.168.100.101";
+static char phyMsg[] = "Hello Server!";
+
+static SYS_STATUS          	phy_tcpipStat;
+static TCPIP_NET_HANDLE    	phy_netH;
+static int                 	phy_nNets;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -93,6 +99,84 @@ PHY_DATA phyData;
 // *****************************************************************************
 // *****************************************************************************
 
+/******************************************************************************
+  Function:
+    static void TCP_Client_TX_Task (void)
+    
+   Remarks:
+    Feeds the USB write function. 
+*/
+static void TCP_Client_TX_Task (void)
+{
+	static IPV4_ADDR ipAddr;
+	int i;
+
+	switch (phyData.txTaskState)
+	{
+        case PHY_TCPIP_WAIT_FOR_IP:
+        {
+            phy_nNets = TCPIP_STACK_NumberOfNetworksGet();
+
+            for (i = 0; i < phy_nNets; i++)
+            {
+                phy_netH = TCPIP_STACK_IndexToNet(i);
+                ipAddr.Val = TCPIP_STACK_NetAddress(phy_netH);
+                if(TCPIP_STACK_NetIsReady(phy_netH))
+                {
+                    phyData.txTaskState = PHY_TCPIP_WAITING_FOR_COMMAND;
+                }
+            }
+            break;
+        }
+        case PHY_TCPIP_WAITING_FOR_COMMAND:
+        {
+            IPV4_ADDR addr;
+            
+            TCPIP_Helper_StringToIPAddress(phyServerIP, &addr);
+            phyData.socket = TCPIP_TCP_ClientOpen(IP_ADDRESS_TYPE_IPV4,phyData.port,
+                                                    (IP_MULTI_ADDRESS*) &addr);
+            
+            if (phyData.socket == INVALID_SOCKET)
+            {
+                phyData.txTaskState = PHY_TCPIP_WAITING_FOR_COMMAND;
+            }
+
+            phyData.txTaskState = PHY_TCPIP_WAIT_FOR_CONNECTION;
+            break;
+        }
+        break;
+
+        case PHY_TCPIP_WAIT_FOR_CONNECTION:
+        {
+            char buffer[256];
+            if (!TCPIP_TCP_IsConnected(phyData.socket))
+            {
+                break;
+            }
+            if(TCPIP_TCP_PutIsReady(phyData.socket) == 0)
+            {
+                break;
+            }
+
+            sprintf(buffer, "Message: %s\r\n", phyMsg);
+            TCPIP_TCP_ArrayPut(phyData.socket, (uint8_t*)buffer, strlen(buffer));
+            phyData.txTaskState = PHY_TCPIP_TX_DONE;
+        }
+        break;
+
+        case PHY_TCPIP_TX_DONE:
+		{
+			break;
+		}
+
+        /* The default state should never be executed. */
+        default:
+        {
+            /* TODO: Handle error in application's state machine. */
+            break;
+        }
+    }
+}
 
 /* TODO:  Add any necessary local functions.
 */
@@ -117,6 +201,7 @@ void PHY_Initialize ( void )
     /* Place the App state machine in its initial state. */
     phyData.state = PHY_STATE_INIT;
 
+	phyData.port = 49152;
     
     /* TODO: Initialize your application's state machine and other
      * parameters.
@@ -134,6 +219,7 @@ void PHY_Initialize ( void )
 
 void PHY_Tasks ( void )
 {
+    int i;
 
     /* Check the application's current state. */
     switch ( phyData.state )
@@ -143,6 +229,24 @@ void PHY_Tasks ( void )
         {
             bool appInitialized = true;
        
+            phy_tcpipStat = TCPIP_STACK_Status(sysObj.tcpip);
+            if(phy_tcpipStat < 0)
+            {   // some error occurred
+                phyData.state = PHY_STATE_ERROR;
+				appInitialized = false;
+            }
+            else if(phy_tcpipStat == SYS_STATUS_READY)
+            {
+                // now that the stack is ready we can check the
+                // available interfaces
+                phy_nNets = TCPIP_STACK_NumberOfNetworksGet();
+                for(i = 0; i < phy_nNets; i++)
+                {
+                    phy_netH = TCPIP_STACK_IndexToNet(i);
+                }
+                phyData.txTaskState = PHY_TCPIP_WAIT_FOR_IP;
+            }
+
         
             if (appInitialized)
             {
@@ -154,12 +258,17 @@ void PHY_Tasks ( void )
 
         case PHY_STATE_SERVICE_TASKS:
         {
+            TCP_Client_TX_Task();
         
             break;
         }
 
         /* TODO: implement your application state machine.*/
         
+        case PHY_STATE_ERROR:
+        {
+			break;
+		}
 
         /* The default state should never be executed. */
         default:

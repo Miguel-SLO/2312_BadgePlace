@@ -1,0 +1,3 @@
+Chemin d'accès du répertoire GIT :
+
+C:\microchip\harmony\v2_06\apps\2312_BadgePlace

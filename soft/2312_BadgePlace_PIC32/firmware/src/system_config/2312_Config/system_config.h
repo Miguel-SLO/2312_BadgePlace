@@ -145,45 +145,45 @@ extern "C" {
 #define DEBUG_PIN PORTS_BIT_POS_9
 #define DEBUG_PIN_MASK (0x1 << 9)
 
-/*** Functions for MIKROE-INT pin ***/
-#define MIKROE-INT_PORT PORT_CHANNEL_B
-#define MIKROE-INT_PIN PORTS_BIT_POS_5
-#define MIKROE-INT_PIN_MASK (0x1 << 5)
+/*** Functions for MIKROE_INT pin ***/
+#define MIKROE_INT_PORT PORT_CHANNEL_B
+#define MIKROE_INT_PIN PORTS_BIT_POS_5
+#define MIKROE_INT_PIN_MASK (0x1 << 5)
 
-/*** Functions for MIKROE-PWM pin ***/
-#define MIKROE-PWM_PORT PORT_CHANNEL_B
-#define MIKROE-PWM_PIN PORTS_BIT_POS_4
-#define MIKROE-PWM_PIN_MASK (0x1 << 4)
+/*** Functions for MIKROE_PWM pin ***/
+#define MIKROE_PWM_PORT PORT_CHANNEL_B
+#define MIKROE_PWM_PIN PORTS_BIT_POS_4
+#define MIKROE_PWM_PIN_MASK (0x1 << 4)
 
-/*** Functions for MIKROE-AN pin ***/
-#define MIKROE-AN_PORT PORT_CHANNEL_B
-#define MIKROE-AN_PIN PORTS_BIT_POS_3
-#define MIKROE-AN_PIN_MASK (0x1 << 3)
+/*** Functions for MIKROE_AN pin ***/
+#define MIKROE_AN_PORT PORT_CHANNEL_B
+#define MIKROE_AN_PIN PORTS_BIT_POS_3
+#define MIKROE_AN_PIN_MASK (0x1 << 3)
 
-/*** Functions for MIKROE-CS pin ***/
-#define MIKROE-CS_PORT PORT_CHANNEL_B
-#define MIKROE-CS_PIN PORTS_BIT_POS_2
-#define MIKROE-CS_PIN_MASK (0x1 << 2)
+/*** Functions for MIKROE_CS pin ***/
+#define MIKROE_CS_PORT PORT_CHANNEL_B
+#define MIKROE_CS_PIN PORTS_BIT_POS_2
+#define MIKROE_CS_PIN_MASK (0x1 << 2)
 
-/*** Functions for MIKROE-RST pin ***/
-#define MIKROE-RST_PORT PORT_CHANNEL_B
-#define MIKROE-RST_PIN PORTS_BIT_POS_6
-#define MIKROE-RST_PIN_MASK (0x1 << 6)
+/*** Functions for MIKROE_RST pin ***/
+#define MIKROE_RST_PORT PORT_CHANNEL_B
+#define MIKROE_RST_PIN PORTS_BIT_POS_6
+#define MIKROE_RST_PIN_MASK (0x1 << 6)
 
-/*** Functions for ESP-EN pin ***/
-#define ESP-EN_PORT PORT_CHANNEL_D
-#define ESP-EN_PIN PORTS_BIT_POS_5
-#define ESP-EN_PIN_MASK (0x1 << 5)
+/*** Functions for ESP_EN pin ***/
+#define ESP_EN_PORT PORT_CHANNEL_D
+#define ESP_EN_PIN PORTS_BIT_POS_5
+#define ESP_EN_PIN_MASK (0x1 << 5)
 
-/*** Functions for AC-RST pin ***/
-#define AC-RST_PORT PORT_CHANNEL_F
-#define AC-RST_PIN PORTS_BIT_POS_0
-#define AC-RST_PIN_MASK (0x1 << 0)
+/*** Functions for AC_RST pin ***/
+#define AC_RST_PORT PORT_CHANNEL_F
+#define AC_RST_PIN PORTS_BIT_POS_0
+#define AC_RST_PIN_MASK (0x1 << 0)
 
-/*** Functions for AC-SET pin ***/
-#define AC-SET_PORT PORT_CHANNEL_F
-#define AC-SET_PIN PORTS_BIT_POS_1
-#define AC-SET_PIN_MASK (0x1 << 1)
+/*** Functions for AC_SET pin ***/
+#define AC_SET_PORT PORT_CHANNEL_F
+#define AC_SET_PIN PORTS_BIT_POS_1
+#define AC_SET_PIN_MASK (0x1 << 1)
 
 
 /*** Application Instance 0 Configuration ***/

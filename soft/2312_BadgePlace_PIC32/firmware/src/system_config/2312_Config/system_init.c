@@ -99,6 +99,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="DRV_USART Initialization Data">
+// </editor-fold>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -157,7 +159,16 @@ void SYS_Initialize ( void* data )
     /*Initialize TMR2 */
     DRV_TMR2_Initialize();
  
- 
+     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
+    sysObj.drvUsart1 = DRV_USART_Initialize(DRV_USART_INDEX_1, (SYS_MODULE_INIT *)NULL);
+    sysObj.drvUsart2 = DRV_USART_Initialize(DRV_USART_INDEX_2, (SYS_MODULE_INIT *)NULL);
+    SYS_INT_VectorPrioritySet(INT_VECTOR_UART1, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART1, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_VectorPrioritySet(INT_VECTOR_UART2, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART2, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_VectorPrioritySet(INT_VECTOR_UART5, INT_PRIORITY_LEVEL1);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART5, INT_SUBPRIORITY_LEVEL0);
+
     /* Initialize System Services */
     SYS_PORTS_Initialize();
 
@@ -171,6 +182,12 @@ void SYS_Initialize ( void* data )
 
     /* Initialize the Application */
     APP_Initialize();
+    PHY_Initialize();
+    ESP_Initialize();
+    RFID_Initialize();
+    MIKROE_Initialize();
+    LEDS_Initialize();
+    BUZZER_Initialize();
 }
 
 

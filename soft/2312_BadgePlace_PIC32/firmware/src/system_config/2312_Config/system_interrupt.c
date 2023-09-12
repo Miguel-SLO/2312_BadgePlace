@@ -61,6 +61,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system/common/sys_common.h"
 #include "app.h"
+#include "phy.h"
+#include "esp.h"
+#include "rfid.h"
+#include "mikroe.h"
+#include "leds.h"
+#include "buzzer.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -68,12 +74,47 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
+void __ISR(_UART_1_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance0(void)
+{
+    DRV_USART_TasksTransmit(sysObj.drvUsart0);
+    DRV_USART_TasksError(sysObj.drvUsart0);
+    DRV_USART_TasksReceive(sysObj.drvUsart0);
+}
+ 
+ 
+ 
+
+void __ISR(_UART_2_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance1(void)
+{
+    DRV_USART_TasksTransmit(sysObj.drvUsart1);
+    DRV_USART_TasksError(sysObj.drvUsart1);
+    DRV_USART_TasksReceive(sysObj.drvUsart1);
+}
+ 
+ 
+ 
+
+void __ISR(_UART_5_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance2(void)
+{
+    DRV_USART_TasksTransmit(sysObj.drvUsart2);
+    DRV_USART_TasksError(sysObj.drvUsart2);
+    DRV_USART_TasksReceive(sysObj.drvUsart2);
+}
+ 
+ 
+ 
 
  
 
-void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
+ 
+
+ 
+ 
+ 
+
+void __ISR(_TIMER_5_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
 {
-    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_5);
 }
 void __ISR(_TIMER_2_VECTOR, ipl6AUTO) IntHandlerDrvTmrInstance1(void)
 {

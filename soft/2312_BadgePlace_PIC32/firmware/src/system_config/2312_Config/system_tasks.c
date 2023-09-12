@@ -79,6 +79,12 @@ void SYS_Tasks ( void )
 
     /* Maintain the application's state machine. */
     APP_Tasks();
+    PHY_Tasks();
+    ESP_Tasks();
+    RFID_Tasks();
+    MIKROE_Tasks();
+    LEDS_Tasks();
+    BUZZER_Tasks();
 }
 
 

@@ -30,90 +30,110 @@
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver/tmr</Path>
       </File>
       <File dnOrder="4">
+        <Name dnOrder="0">sys_dma.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/system/dma</Path>
+      </File>
+      <File dnOrder="5">
+        <Name dnOrder="0">sys_dma_definitions.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/system/dma</Path>
+      </File>
+      <File dnOrder="6">
         <Name dnOrder="0">osal.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/osal</Path>
       </File>
-      <File dnOrder="5">
+      <File dnOrder="7">
         <Name dnOrder="0">tmr_definitions_pic32m.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver/tmr</Path>
       </File>
-      <File dnOrder="6">
+      <File dnOrder="8">
         <Name dnOrder="0">sys_ports.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/ports</Path>
       </File>
-      <File dnOrder="7">
+      <File dnOrder="9">
         <Name dnOrder="0">driver.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver</Path>
       </File>
-      <File dnOrder="8">
+      <File dnOrder="10">
         <Name dnOrder="0">sys_common.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
       </File>
-      <File dnOrder="9">
+      <File dnOrder="11">
         <Name dnOrder="0">sys_buffer.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
       </File>
-      <File dnOrder="10">
+      <File dnOrder="12">
         <Name dnOrder="0">sys_int_pic32.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/framework/system/int/src</Path>
       </File>
-      <File dnOrder="11">
+      <File dnOrder="13">
+        <Name dnOrder="0">drv_usart_definitions.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/driver/usart</Path>
+      </File>
+      <File dnOrder="14">
         <Name dnOrder="0">sys_clk_compatibility.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/clk</Path>
       </File>
-      <File dnOrder="12">
+      <File dnOrder="15">
         <Name dnOrder="0">sys_clk.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/clk</Path>
       </File>
-      <File dnOrder="13">
+      <File dnOrder="16">
         <Name dnOrder="0">sys_ports_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/ports</Path>
       </File>
-      <File dnOrder="14">
+      <File dnOrder="17">
         <Name dnOrder="0">osal_impl_basic.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/osal</Path>
       </File>
-      <File dnOrder="15">
+      <File dnOrder="18">
         <Name dnOrder="0">sys_clk_mapping.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/clk</Path>
       </File>
-      <File dnOrder="16">
-        <Name dnOrder="0">osal_definitions.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/framework/osal</Path>
-      </File>
-      <File dnOrder="17">
+      <File dnOrder="19">
         <Name dnOrder="0">sys_int_mapping.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/int</Path>
       </File>
-      <File dnOrder="18">
+      <File dnOrder="20">
+        <Name dnOrder="0">osal_definitions.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/osal</Path>
+      </File>
+      <File dnOrder="21">
         <Name dnOrder="0">sys_int_private.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/int/src</Path>
       </File>
-      <File dnOrder="19">
+      <File dnOrder="22">
         <Name dnOrder="0">drv_tmr_compatibility.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver/tmr</Path>
       </File>
-      <File dnOrder="20">
+      <File dnOrder="23">
         <Name dnOrder="0">system.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system</Path>
       </File>
-      <File dnOrder="21">
+      <File dnOrder="24">
+        <Name dnOrder="0">drv_usart.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/driver/usart</Path>
+      </File>
+      <File dnOrder="25">
         <Name dnOrder="0">sys_debug.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/debug</Path>
       </File>
-      <File dnOrder="22">
+      <File dnOrder="26">
+        <Name dnOrder="0">drv_usart_variant_mapping.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/driver/usart/src</Path>
+      </File>
+      <File dnOrder="27">
         <Name dnOrder="0">sys_module.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
       </File>
-      <File dnOrder="23">
+      <File dnOrder="28">
         <Name dnOrder="0">drv_oc.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver/oc</Path>
       </File>
-      <File dnOrder="24">
+      <File dnOrder="29">
         <Name dnOrder="0">sys_queue.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
       </File>
-      <File dnOrder="25">
+      <File dnOrder="30">
         <Name dnOrder="0">sys_int.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/int</Path>
       </File>
@@ -122,104 +142,177 @@
       <Template dnOrder="0">
         <Name dnOrder="0">system_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">D7C3213573A9EC8A48A56588D3E5810F</Checksum>
+        <Checksum dnOrder="2">EE379FED3BDEBDA8291BA4019DC1A194</Checksum>
       </Template>
       <Template dnOrder="1">
-        <Name dnOrder="0">main.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
-      </Template>
-      <Template dnOrder="2">
         <Name dnOrder="0">system_exceptions.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
         <Checksum dnOrder="2">9836A04F3E98D3971DB91DF539160F34</Checksum>
       </Template>
+      <Template dnOrder="2">
+        <Name dnOrder="0">drv_usart_static_byte_model.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/usart/src</Path>
+        <Checksum dnOrder="2">8E3F2E937DB9ACB09A79C8EE49A692CF</Checksum>
+      </Template>
       <Template dnOrder="3">
-        <Name dnOrder="0">system_interrupt.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">C2FCFF4E3582B5264462170214D6BAD7</Checksum>
-      </Template>
-      <Template dnOrder="4">
-        <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
-        <Checksum dnOrder="2">5141464248E33ABE9E7D144A2D4DC129</Checksum>
-      </Template>
-      <Template dnOrder="5">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">C2FDF6218CDD9CE0E51AFAC4ACBB5F79</Checksum>
+        <Checksum dnOrder="2">E4D46E6783FBE909B100AE4A1A90ECF8</Checksum>
       </Template>
-      <Template dnOrder="6">
-        <Name dnOrder="0">drv_oc_mapping.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">0468637850646959DB6DE6AE9C91B676</Checksum>
+      <Template dnOrder="4">
+        <Name dnOrder="0">drv_usart_mapping.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/usart/src</Path>
+        <Checksum dnOrder="2">B0E69A0C6C37415322EB63844A0922DF</Checksum>
       </Template>
-      <Template dnOrder="7">
-        <Name dnOrder="0">app.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
-      </Template>
-      <Template dnOrder="8">
-        <Name dnOrder="0">drv_tmr_mapping.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">84EC844A8E2C391E068EA80BD6DEF41F</Checksum>
-      </Template>
-      <Template dnOrder="9">
-        <Name dnOrder="0">drv_oc_static.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc</Path>
-        <Checksum dnOrder="2">DCE4A4BECBE01ED4197C86493880B28F</Checksum>
-      </Template>
-      <Template dnOrder="10">
-        <Name dnOrder="0">drv_tmr_static.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">55DECE0D593AAA44946273F1B767096D</Checksum>
-      </Template>
-      <Template dnOrder="11">
+      <Template dnOrder="5">
         <Name dnOrder="0">drv_oc_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">44EB9D329F9DEE82C22EFC458B495BE6</Checksum>
+        <Checksum dnOrder="2">99EC139D43A42E1F072F344011C2FF91</Checksum>
       </Template>
-      <Template dnOrder="12">
+      <Template dnOrder="6">
+        <Name dnOrder="0">leds.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="7">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/clk/src</Path>
         <Checksum dnOrder="2">FDF6C8068CFFAEEC5F8537A8D6514230</Checksum>
       </Template>
-      <Template dnOrder="13">
+      <Template dnOrder="8">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">75AF5AEDA9F3069DCBC3F01279CDDAC8</Checksum>
+        <Checksum dnOrder="2">49C776FBAB08A30406CBEDD3B130812D</Checksum>
       </Template>
-      <Template dnOrder="14">
-        <Name dnOrder="0">system_config.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">B3BC74C601A18AEE36B1D51B1188913B</Checksum>
-      </Template>
-      <Template dnOrder="15">
-        <Name dnOrder="0">app.h</Name>
+      <Template dnOrder="9">
+        <Name dnOrder="0">esp.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app</Path>
       </Template>
-      <Template dnOrder="16">
+      <Template dnOrder="10">
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr</Path>
         <Checksum dnOrder="2">E9C3112A6AE233C3096E30F2F81A273E</Checksum>
       </Template>
-      <Template dnOrder="17">
-        <Name dnOrder="0">sys_ports_static.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">BD149D7E9B670BA82014F302FACCE5CB</Checksum>
+      <Template dnOrder="11">
+        <Name dnOrder="0">drv_usart_static.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/usart/src</Path>
+        <Checksum dnOrder="2">33E795580336E238A503CF07BDCF33B4</Checksum>
       </Template>
-      <Template dnOrder="18">
-        <Name dnOrder="0">sys_devcon.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon</Path>
-        <Checksum dnOrder="2">07580DCDEF89D9C79B062544109C5367</Checksum>
+      <Template dnOrder="12">
+        <Name dnOrder="0">drv_usart_static.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/usart</Path>
+        <Checksum dnOrder="2">24CB7B19DCE6448F9DE0F5D0E5555D53</Checksum>
       </Template>
-      <Template dnOrder="19">
+      <Template dnOrder="13">
+        <Name dnOrder="0">rfid.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="14">
+        <Name dnOrder="0">mikroe.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="15">
+        <Name dnOrder="0">phy.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="16">
         <Name dnOrder="0">sys_devcon.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">54ADBD4A35BCA03C42C74182FCE41849</Checksum>
       </Template>
-      <Template dnOrder="20">
+      <Template dnOrder="17">
         <Name dnOrder="0">sys_devcon_local.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">B66F9B4DBD85DA7F9DE775E864E01395</Checksum>
+      </Template>
+      <Template dnOrder="18">
+        <Name dnOrder="0">main.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="19">
+        <Name dnOrder="0">rfid.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="20">
+        <Name dnOrder="0">system_interrupt.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
+        <Checksum dnOrder="2">611C30FFC2B13BEC59A6B60D54D01EBD</Checksum>
+      </Template>
+      <Template dnOrder="21">
+        <Name dnOrder="0">buzzer.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="22">
+        <Name dnOrder="0">phy.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="23">
+        <Name dnOrder="0">leds.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="24">
+        <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
+        <Checksum dnOrder="2">5141464248E33ABE9E7D144A2D4DC129</Checksum>
+      </Template>
+      <Template dnOrder="25">
+        <Name dnOrder="0">drv_oc_mapping.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
+        <Checksum dnOrder="2">5FF5CD3AD70FFFBABCA9FEE23345B070</Checksum>
+      </Template>
+      <Template dnOrder="26">
+        <Name dnOrder="0">app.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="27">
+        <Name dnOrder="0">buzzer.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="28">
+        <Name dnOrder="0">drv_tmr_mapping.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
+        <Checksum dnOrder="2">84EC844A8E2C391E068EA80BD6DEF41F</Checksum>
+      </Template>
+      <Template dnOrder="29">
+        <Name dnOrder="0">drv_oc_static.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc</Path>
+        <Checksum dnOrder="2">0496F2F0681A9421EFECF50A8979E68E</Checksum>
+      </Template>
+      <Template dnOrder="30">
+        <Name dnOrder="0">drv_tmr_static.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
+        <Checksum dnOrder="2">4D79A95E828E246D630628D2D4A92C15</Checksum>
+      </Template>
+      <Template dnOrder="31">
+        <Name dnOrder="0">esp.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="32">
+        <Name dnOrder="0">system_config.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
+        <Checksum dnOrder="2">9A93712983439B54CC7A2E977FB54C88</Checksum>
+      </Template>
+      <Template dnOrder="33">
+        <Name dnOrder="0">mikroe.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="34">
+        <Name dnOrder="0">app.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="35">
+        <Name dnOrder="0">drv_usart_static_local.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/usart/src</Path>
+        <Checksum dnOrder="2">9563F23392942CF4B5C01E1065907D06</Checksum>
+      </Template>
+      <Template dnOrder="36">
+        <Name dnOrder="0">sys_ports_static.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/ports/src</Path>
+        <Checksum dnOrder="2">BD149D7E9B670BA82014F302FACCE5CB</Checksum>
+      </Template>
+      <Template dnOrder="37">
+        <Name dnOrder="0">sys_devcon.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon</Path>
+        <Checksum dnOrder="2">07580DCDEF89D9C79B062544109C5367</Checksum>
       </Template>
     </Templates>
     <CompilerItems dnOrder="2">

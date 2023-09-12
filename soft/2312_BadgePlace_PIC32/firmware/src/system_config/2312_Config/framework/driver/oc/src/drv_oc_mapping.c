@@ -169,6 +169,11 @@ void DRV_OC_PulseWidthSet(DRV_HANDLE handle, uint32_t pulseWidth)
             DRV_OC0_PulseWidthSet(pulseWidth);
             break;
         }
+        case DRV_OC_INDEX_1:
+        {
+            DRV_OC1_PulseWidthSet(pulseWidth);
+            break;
+        }
         default:
         {
             SYS_ASSERT(false, "The selected instance of the OC driver is not configured for the PWM mode");

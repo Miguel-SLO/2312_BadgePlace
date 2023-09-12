@@ -116,8 +116,9 @@ void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
-
     
+    DRV_TMR0_Start();
+
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */
@@ -140,15 +141,19 @@ void APP_Tasks ( void )
     {
         /* Application's initial state. */
         case APP_STATE_INIT:
-        {
-            bool appInitialized = true;
-       
-            DEBUGOn();
-            if (appInitialized)
-            {
+        {            
+            DEBUGToggle();
             
-                appData.state = APP_STATE_SERVICE_TASKS;
-            }
+            DRV_TMR2_Start();
+            DRV_OC1_Start();            
+            
+
+            DRV_OC1_Stop();
+            
+            DRV_OC1_Start();
+            
+            appData.state = APP_STATE_SERVICE_TASKS;
+            
             break;
         }
 

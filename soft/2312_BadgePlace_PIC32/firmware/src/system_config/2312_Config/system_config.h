@@ -99,7 +99,7 @@ extern "C" {
 #define SYS_PORT_C_LAT          0x0000
 #define SYS_PORT_C_ODC          0x0000
 
-#define SYS_PORT_D_TRIS         0xFFFF
+#define SYS_PORT_D_TRIS         0xFFDF
 #define SYS_PORT_D_LAT          0x0000
 #define SYS_PORT_D_ODC          0x0000
 
@@ -141,9 +141,18 @@ extern "C" {
 /*** Application Defined Pins ***/
 
 /*** Functions for DEBUG pin ***/
-#define DEBUG_PORT PORT_CHANNEL_G
-#define DEBUG_PIN PORTS_BIT_POS_9
-#define DEBUG_PIN_MASK (0x1 << 9)
+#define DEBUGToggle() PLIB_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9)
+#define DEBUGOn() PLIB_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9)
+#define DEBUGOff() PLIB_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9)
+#define DEBUGStateGet() PLIB_PORTS_PinGetLatched(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9)
+#define DEBUGStateSet(Value) PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_G, PORTS_BIT_POS_9, Value)
+
+/*** Functions for ESP_EN pin ***/
+#define ESP_ENToggle() PLIB_PORTS_PinToggle(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5)
+#define ESP_ENOn() PLIB_PORTS_PinSet(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5)
+#define ESP_ENOff() PLIB_PORTS_PinClear(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5)
+#define ESP_ENStateGet() PLIB_PORTS_PinGetLatched(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5)
+#define ESP_ENStateSet(Value) PLIB_PORTS_PinWrite(PORTS_ID_0, PORT_CHANNEL_D, PORTS_BIT_POS_5, Value)
 
 /*** Functions for MIKROE_INT pin ***/
 #define MIKROE_INT_PORT PORT_CHANNEL_B
@@ -169,11 +178,6 @@ extern "C" {
 #define MIKROE_RST_PORT PORT_CHANNEL_B
 #define MIKROE_RST_PIN PORTS_BIT_POS_6
 #define MIKROE_RST_PIN_MASK (0x1 << 6)
-
-/*** Functions for ESP_EN pin ***/
-#define ESP_EN_PORT PORT_CHANNEL_D
-#define ESP_EN_PIN PORTS_BIT_POS_5
-#define ESP_EN_PIN_MASK (0x1 << 5)
 
 /*** Functions for AC_RST pin ***/
 #define AC_RST_PORT PORT_CHANNEL_F

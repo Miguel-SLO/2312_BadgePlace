@@ -143,7 +143,7 @@ void APP_Tasks ( void )
         {
             bool appInitialized = true;
        
-        
+            DEBUGOn();
             if (appInitialized)
             {
             
@@ -154,7 +154,7 @@ void APP_Tasks ( void )
 
         case APP_STATE_SERVICE_TASKS:
         {
-        
+            
             break;
         }
 

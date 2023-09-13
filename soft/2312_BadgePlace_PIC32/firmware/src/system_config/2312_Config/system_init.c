@@ -147,7 +147,17 @@ void SYS_Initialize ( void* data )
     SYS_DEVCON_JTAGDisable();
 
     /* Initialize Drivers */
-
+    /* Initialize the OC Driver */
+    DRV_OC0_Initialize();
+    DRV_OC1_Initialize();
+    /*Initialize TMR0 */
+    DRV_TMR0_Initialize();
+    /*Initialize TMR1 */
+    DRV_TMR1_Initialize();
+    /*Initialize TMR2 */
+    DRV_TMR2_Initialize();
+ 
+ 
     /* Initialize System Services */
     SYS_PORTS_Initialize();
 

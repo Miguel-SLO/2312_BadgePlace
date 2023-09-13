@@ -60,7 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 /*** DEVCFG0 ***/
 
 #pragma config DEBUG =      ON
-#pragma config ICESEL =     ICS_PGx2
+#pragma config ICESEL =     ICS_PGx1
 #pragma config PWP =        OFF
 #pragma config BWP =        OFF
 #pragma config CP =         OFF
@@ -171,6 +171,7 @@ void SYS_Initialize ( void* data )
 
     /* Initialize the Application */
     APP_Initialize();
+    LED_Initialize();
 }
 
 

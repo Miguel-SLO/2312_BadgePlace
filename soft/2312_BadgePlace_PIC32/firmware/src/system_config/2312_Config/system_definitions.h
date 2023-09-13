@@ -57,6 +57,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "peripheral/int/plib_int.h"
 #include "system/ports/sys_ports.h"
 #include "app.h"
+#include "led.h"
 
 
 // DOM-IGNORE-BEGIN

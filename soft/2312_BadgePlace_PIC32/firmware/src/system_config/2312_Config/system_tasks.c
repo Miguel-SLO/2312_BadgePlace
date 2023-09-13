@@ -79,6 +79,7 @@ void SYS_Tasks ( void )
 
     /* Maintain the application's state machine. */
     APP_Tasks();
+    LED_Tasks();
 }
 
 

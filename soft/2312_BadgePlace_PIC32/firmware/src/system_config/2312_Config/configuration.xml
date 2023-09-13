@@ -122,7 +122,7 @@
       <Template dnOrder="0">
         <Name dnOrder="0">system_definitions.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">D7C3213573A9EC8A48A56588D3E5810F</Checksum>
+        <Checksum dnOrder="2">82ED1F4B9AE8F58E184B34CE892EEC85</Checksum>
       </Template>
       <Template dnOrder="1">
         <Name dnOrder="0">main.c</Name>
@@ -136,7 +136,8 @@
       <Template dnOrder="3">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">078F2DEB180B56878823A54D3AFB71AC</Checksum>
+        <Checksum dnOrder="2">BE11816D74D3BD5E123C64DABB80DAC4</Checksum>
+        <ProjectFileChecksum dnOrder="3">9ABBEDB817D2498747A7A96FA815E618</ProjectFileChecksum>
       </Template>
       <Template dnOrder="4">
         <Name dnOrder="0">sys_devcon_pic32mx.c</Name>
@@ -146,77 +147,85 @@
       <Template dnOrder="5">
         <Name dnOrder="0">system_tasks.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">C2FDF6218CDD9CE0E51AFAC4ACBB5F79</Checksum>
+        <Checksum dnOrder="2">699F4A534E540999B773444BC9521B6B</Checksum>
       </Template>
       <Template dnOrder="6">
         <Name dnOrder="0">drv_oc_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">0468637850646959DB6DE6AE9C91B676</Checksum>
+        <Checksum dnOrder="2">5FF5CD3AD70FFFBABCA9FEE23345B070</Checksum>
       </Template>
       <Template dnOrder="7">
         <Name dnOrder="0">app.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app</Path>
       </Template>
       <Template dnOrder="8">
+        <Name dnOrder="0">led.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="9">
         <Name dnOrder="0">drv_tmr_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
         <Checksum dnOrder="2">84EC844A8E2C391E068EA80BD6DEF41F</Checksum>
       </Template>
-      <Template dnOrder="9">
+      <Template dnOrder="10">
         <Name dnOrder="0">drv_oc_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc</Path>
-        <Checksum dnOrder="2">DCE4A4BECBE01ED4197C86493880B28F</Checksum>
-      </Template>
-      <Template dnOrder="10">
-        <Name dnOrder="0">drv_tmr_static.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">14ADB536C771AC7A590549972295E8A2</Checksum>
+        <Checksum dnOrder="2">0496F2F0681A9421EFECF50A8979E68E</Checksum>
       </Template>
       <Template dnOrder="11">
-        <Name dnOrder="0">drv_oc_static.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
-        <Checksum dnOrder="2">21F05027B188B742C66ABB23267DBC48</Checksum>
+        <Name dnOrder="0">drv_tmr_static.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
+        <Checksum dnOrder="2">84FC46F6D16BBA2C749347723B1B1EAF</Checksum>
       </Template>
       <Template dnOrder="12">
+        <Name dnOrder="0">drv_oc_static.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/oc/src</Path>
+        <Checksum dnOrder="2">E6353BBD91B94F221B3C061B94547712</Checksum>
+      </Template>
+      <Template dnOrder="13">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/clk/src</Path>
         <Checksum dnOrder="2">FDF6C8068CFFAEEC5F8537A8D6514230</Checksum>
       </Template>
-      <Template dnOrder="13">
+      <Template dnOrder="14">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">75AF5AEDA9F3069DCBC3F01279CDDAC8</Checksum>
-      </Template>
-      <Template dnOrder="14">
-        <Name dnOrder="0">system_config.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">E4A9043060917C13B23F4111E9FEA29F</Checksum>
+        <Checksum dnOrder="2">DA2A1EA369D62E47C10DE2D66BAF0C60</Checksum>
       </Template>
       <Template dnOrder="15">
+        <Name dnOrder="0">system_config.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
+        <Checksum dnOrder="2">5AB568B2DCA3B824191DB9C041DC43EF</Checksum>
+      </Template>
+      <Template dnOrder="16">
         <Name dnOrder="0">app.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app</Path>
       </Template>
-      <Template dnOrder="16">
+      <Template dnOrder="17">
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr</Path>
         <Checksum dnOrder="2">E9C3112A6AE233C3096E30F2F81A273E</Checksum>
       </Template>
-      <Template dnOrder="17">
+      <Template dnOrder="18">
         <Name dnOrder="0">sys_ports_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/ports/src</Path>
-        <Checksum dnOrder="2">C1AC1C3FBE73E3BF760BF74611938AC7</Checksum>
+        <Checksum dnOrder="2">BD149D7E9B670BA82014F302FACCE5CB</Checksum>
       </Template>
-      <Template dnOrder="18">
+      <Template dnOrder="19">
         <Name dnOrder="0">sys_devcon.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon</Path>
         <Checksum dnOrder="2">07580DCDEF89D9C79B062544109C5367</Checksum>
       </Template>
-      <Template dnOrder="19">
+      <Template dnOrder="20">
+        <Name dnOrder="0">led.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/app</Path>
+      </Template>
+      <Template dnOrder="21">
         <Name dnOrder="0">sys_devcon.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">54ADBD4A35BCA03C42C74182FCE41849</Checksum>
       </Template>
-      <Template dnOrder="20">
+      <Template dnOrder="22">
         <Name dnOrder="0">sys_devcon_local.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/system/devcon/src</Path>
         <Checksum dnOrder="2">B66F9B4DBD85DA7F9DE775E864E01395</Checksum>

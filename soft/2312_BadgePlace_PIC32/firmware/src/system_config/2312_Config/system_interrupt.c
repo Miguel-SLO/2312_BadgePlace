@@ -61,6 +61,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system/common/sys_common.h"
 #include "app.h"
+#include "led.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -69,8 +70,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
- 
-
 void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
@@ -78,6 +77,7 @@ void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
 void __ISR(_TIMER_2_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance1(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+    LED_Callback();    
 }
 void __ISR(_TIMER_3_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance2(void)
 {

@@ -35,6 +35,7 @@
         <itemPath>../src/TLC5973.h</itemPath>
         <itemPath>../src/WERGB.h</itemPath>
         <itemPath>../src/FIFO.h</itemPath>
+        <itemPath>../src/Buzzer.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
@@ -145,6 +146,7 @@
         <itemPath>../src/TLC5973.c</itemPath>
         <itemPath>../src/WERGB.c</itemPath>
         <itemPath>../src/FIFO.c</itemPath>
+        <itemPath>../src/Buzzer.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="system" projectFiles="true">

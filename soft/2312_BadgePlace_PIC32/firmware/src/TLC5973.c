@@ -28,92 +28,191 @@
  *
  ******************************************************************************/
 
+/******************************************************************************/
+
+/******************************************************************************/
+
 #include "TLC5973.h"
 #include "SerialTimer.h"
 
-#define TLC_BUFFER_SIZE 0xFF
-#define CIRCUIT_IN_SERIE 3
-#define DWS_CYCLES 48
-#define EOS_CYCLES 4
-#define GSL_CYCLES 10
-#define DWS_OFFSET (DWS_CYCLES + EOS_CYCLES)
-#define COMMAND_WRITE 0x3AA
-#define CYCLE_HIGH 0x05
-#define CYCLE_LOW 0x01
-#define CYCLE_SKIP 0x00
+/******************************************************************************/
 
+/******************************************************************************/
 
+/* Number of drivers connected in series */
+#define DRIVER_COUNT 3
+
+/******************************************************************************/
+
+/* Data Write Sequence cycles count */
+#define DWS_CYCLE_COUNT 48
+#define DWS_TOTAL_COUNT (DWS_CYCLE_COUNT * DRIVER_COUNT)
+
+/* End Of Sequence cycles count */
+#define EOS_CYCLE_COUNT 4
+#define EOS_TOTAL_COUNT (EOS_CYCLE_COUNT * (DRIVER_COUNT - 1))
+
+/* GrayScale Latch cycles count */
+#define GSL_CYCLE_COUNT 10
+#define GSL_TOTAL_COUNT GSL_CYCLE_COUNT
+
+/* Size of the buffer to store cycles */
+#define TLC_BUFFER_SIZE (DWS_TOTAL_COUNT + EOS_TOTAL_COUNT + GSL_TOTAL_COUNT)
+
+/* Buffer offset for each driver */
+#define DWS_OFFSET (DWS_CYCLE_COUNT + EOS_CYCLE_COUNT)
+
+/* Each packet starts with a write command */
+#define WRITE_COMMAND 0x3AA
+
+/* High state cycle encoding */
+#define CYCLE_CODE_HIGH 0x05
+
+/* Low state cycle encoding */
+#define CYCLE_CODE_LOW  0x01
+
+/* Skip state cycle encoding */
+#define CYCLE_CODE_SKIP 0x00
+
+/* Number of fields per packet */
+#define FIELD_COUNT 4
+
+/* Number of cycles per field */
+#define FIELD_CYCLE 12
+
+/* Mask to single bit in field */
+#define FIELD_MASK 0x800
+
+/******************************************************************************/
+/******************************************************************************/
+
+/* Union for storing TLC5973 packet data */
 typedef union
 {
-    uint16_t dataBytes[4];
-    struct{
-        uint16_t COMMAND;
-        uint16_t OUT0;
-        uint16_t OUT1;
-        uint16_t OUT2;        
-    };    
-}TLC_PACKET;
+    /* Store packet data as an array of 16-bit words */
+    uint16_t words[FIELD_COUNT];
 
-TLC_PACKET Chips[CIRCUIT_IN_SERIE];
-uint8_t TLC_Buffer[TLC_BUFFER_SIZE];
-uint8_t TLC_Flag;
+    /* Structure to access individual fields of the packet */
+    struct
+    {
+        /* Command word within the packet */
+        uint16_t COMMAND:FIELD_CYCLE;
 
+        /* Output value for channel 0 */
+        uint16_t OUT0   :FIELD_CYCLE;
+
+        /* Output value for channel 1 */
+        uint16_t OUT1   :FIELD_CYCLE;
+
+        /* Output value for channel 2 */
+        uint16_t OUT2   :FIELD_CYCLE;
+    };
+} TLC_PACKET;
+
+typedef struct
+{
+    TLC_PACKET packet;
+    uint8_t flagNew;
+}TLC_DRIVER;
+
+typedef enum
+{
+    TLC_STATE_INIT,
+    TLC_STATE_WAIT,
+    TLC_STATE_CONVERT,
+    TLC_STATE_TRANSFER,
+} TLC_STATES;
+
+typedef struct
+{
+    /* TLC5973 state machine */
+    TLC_STATES state;
+    
+    /* Flag variable for TLC5973 operations */
+    uint8_t flagUpdate;
+    
+    /* TLC5973 cycles buffer */
+    uint8_t cycles[TLC_BUFFER_SIZE];
+    
+    /* TLC5973 drivers data array */
+    TLC_DRIVER drivers[DRIVER_COUNT];
+    
+}TLC_DATA;
+
+TLC_DATA TLC_Data;
+
+/******************************************************************************/
+/******************************************************************************/
+
+/******************************************************************************/
+/* Initialize TLC5940 */
+/******************************************************************************/
 void TLC_Init( void )
 {
-    uint8_t i_data = 0;
+    uint8_t I_Init = 0;
     
-    for(i_data = 0; i_data < TLC_BUFFER_SIZE; i_data++ )
+    /* Initialize TLC_Buffer with CYCLE_SKIP */
+    for(I_Init = 0; I_Init < TLC_BUFFER_SIZE; I_Init++ )
     {
-        TLC_Buffer[i_data] = CYCLE_SKIP;
+        TLC_Data.cycles[I_Init] = CYCLE_CODE_SKIP;
     }
     
-    for(i_data = 0; i_data < CIRCUIT_IN_SERIE; i_data++ )
+    /* Initialize TLC_Drivers with default values */
+    for(I_Init = 0; I_Init < DRIVER_COUNT; I_Init++ )
     {
-        Chips[i_data].COMMAND = COMMAND_WRITE;
-        Chips[i_data].OUT0 = 0x00;
-        Chips[i_data].OUT1 = 0x00;
-        Chips[i_data].OUT2 = 0x00;        
+        TLC_Data.drivers[I_Init].packet.COMMAND = WRITE_COMMAND;
+        TLC_Data.drivers[I_Init].packet.OUT0 = 0x00;
+        TLC_Data.drivers[I_Init].packet.OUT1 = 0x00;
+        TLC_Data.drivers[I_Init].packet.OUT2 = 0x00;        
     }
     
-    TLC_Flag = 1;
+    /* Set TLC_UpdateFlag to indicate data has been initialized */
+    TLC_Data.flagUpdate = 1;
 }
+/******************************************************************************/
 
-void TLC_Convert(uint8_t IC_ID)
+/******************************************************************************/
+void TLC_Convert(uint8_t DriverID)
 {
-    uint8_t i_data = 0;
-    uint8_t i_bits = 0;
-    uint8_t i_cycl = DWS_OFFSET * IC_ID;
+    uint16_t T_word;
     
-    for(i_data = 0; i_data < 4 ; i_data++)
+    uint8_t I_field;
+    uint8_t I_bits;
+    uint8_t I_cycle;
+    
+    I_cycle = DWS_OFFSET * DriverID;
+    
+    for(I_field = 0; I_field < FIELD_COUNT ; I_field++)
     {
-        for(i_bits = 0 ; i_bits < 12 ; i_bits++)
+        T_word = TLC_Data.drivers[I_field].packet.words[I_field];
+        for(I_bits = 0 ; I_bits < FIELD_CYCLE ; I_bits++)
         {
-            if(Chips[IC_ID].dataBytes[i_data] & (0x800 >> i_bits))
+            if( T_word & (FIELD_MASK >> I_bits))
             {
-                TLC_Buffer[i_cycl] = CYCLE_HIGH;
+                TLC_Data.cycles[I_cycle] = CYCLE_CODE_HIGH;
             }
             else
             {
-                TLC_Buffer[i_cycl] = CYCLE_LOW;
+                TLC_Data.cycles[I_cycle] = CYCLE_CODE_LOW;
             }
             
-            i_cycl++;
+            I_cycle++;
         }
     }
 }
 
 void TLC_Transfer( void )
 {
-    SERTIM_Add(TLC_Buffer, TLC_BUFFER_SIZE);
+    SERTIM_Add(TLC_Data.cycles, TLC_BUFFER_SIZE);
 }
 
-void TLC_Set(uint8_t IC_ID, uint16_t OUT0, uint16_t OUT1, uint16_t OUT2)
+void TLC_Set(uint8_t DriverID, uint16_t OUT0, uint16_t OUT1, uint16_t OUT2)
 {
-    Chips[IC_ID].OUT0 = OUT0;
-    Chips[IC_ID].OUT1 = OUT1;
-    Chips[IC_ID].OUT2 = OUT2;
+    TLC_Data.drivers[DriverID].packet.OUT0 = OUT0;
+    TLC_Data.drivers[DriverID].packet.OUT1 = OUT1;
+    TLC_Data.drivers[DriverID].packet.OUT2 = OUT2;
     
-    TLC_Convert(IC_ID);
+    TLC_Convert(DriverID);
     TLC_Transfer();
     
     SERTIM_Start();

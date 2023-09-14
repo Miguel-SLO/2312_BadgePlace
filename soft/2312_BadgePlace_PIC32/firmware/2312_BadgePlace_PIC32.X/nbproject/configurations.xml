@@ -31,6 +31,10 @@
         </logicalFolder>
         <itemPath>../src/app.h</itemPath>
         <itemPath>../src/led.h</itemPath>
+        <itemPath>../src/SerialTimer.h</itemPath>
+        <itemPath>../src/TLC5973.h</itemPath>
+        <itemPath>../src/WERGB.h</itemPath>
+        <itemPath>../src/FIFO.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
@@ -137,6 +141,10 @@
         <itemPath>../src/app.c</itemPath>
         <itemPath>../src/main.c</itemPath>
         <itemPath>../src/led.c</itemPath>
+        <itemPath>../src/SerialTimer.c</itemPath>
+        <itemPath>../src/TLC5973.c</itemPath>
+        <itemPath>../src/WERGB.c</itemPath>
+        <itemPath>../src/FIFO.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="system" projectFiles="true">

@@ -143,7 +143,7 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/app.h ../src/led.h
+ ../src/app.h ../src/led.h ../src/SerialTimer.h ../src/TLC5973.h
 
 ../src/led.h:
 
@@ -438,3 +438,7 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 ../src/app.h:
 
 ../src/led.h:
+
+../src/SerialTimer.h:
+
+../src/TLC5973.h:

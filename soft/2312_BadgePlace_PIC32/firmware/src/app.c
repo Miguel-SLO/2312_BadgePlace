@@ -54,6 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "SerialTimer.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -117,10 +118,11 @@ void APP_Initialize ( void )
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
     
-    
+    SERTIM_Init();
     //DRV_OC1_Start();
     
-    DRV_TMR0_Start();    
+    DRV_TMR0_Start();
+    //DRV_TMR1_Start();    
     DRV_TMR2_Start();
     
     /* TODO: Initialize your application's state machine and other
@@ -148,7 +150,9 @@ void APP_Tasks ( void )
         {
             appData.state = APP_STATE_SERVICE_TASKS;
             
-            LED_SetLed(0, 256, 450, 340);
+            
+            
+            //LED_SetLed(0, 256, 450, 340);
             
             break;
         }

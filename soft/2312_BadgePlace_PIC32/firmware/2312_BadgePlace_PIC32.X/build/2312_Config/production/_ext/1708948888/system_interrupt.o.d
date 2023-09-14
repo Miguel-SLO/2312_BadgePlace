@@ -144,7 +144,8 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/led.h ../src/system_config/2312_Config/system_definitions.h
+ ../src/led.h ../src/system_config/2312_Config/system_definitions.h \
+ ../src/SerialTimer.h
 
 ../../../../../../framework/system/common/sys_common.h:
 
@@ -439,3 +440,5 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
 ../src/led.h:
 
 ../src/system_config/2312_Config/system_definitions.h:
+
+../src/SerialTimer.h:

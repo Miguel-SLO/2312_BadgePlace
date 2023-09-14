@@ -61,10 +61,6 @@ extern "C" {
 typedef enum
 {
 	LED_STATE_INIT,
-    LED_STATE_START,
-    LED_STATE_STOP,
-    LED_STATE_CONVERT,
-    LED_STATE_OUTPUT,
     LED_STATE_TASKS,
     LED_STATE_WAIT,  
 } LED_STATES;
@@ -185,6 +181,8 @@ void LED_SetLed( uint8_t led_id, uint16_t red, uint16_t green, uint16_t blue );
 void LED_BinaryConvert( uint8_t led_id);
 
 void LED_Callback( void );
+
+void LED_UpdateState(LED_STATES NewState);
 
 #endif /* _LED_H */
 

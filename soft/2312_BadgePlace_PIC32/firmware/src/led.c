@@ -29,6 +29,8 @@
 // *****************************************************************************
 
 #include "led.h"
+#include "SerialTimer.h"
+#include "TLC5973.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -144,37 +146,13 @@ uint8_t LED_PULSE[LED_PULSES_TOTAL];
  */
 
 void LED_Initialize ( void )
-{
-    uint32_t i_init;
-    
+{    
     /* Place the App state machine in its initial state. */
     ledData.state    = LED_STATE_INIT;
     ledData.i_led = 0;
     
-    /* LEDS array initial state */
-    for( i_init = 0 ; i_init < LED_NUMBER ; i_init++ )
-    {
-        A_LED[i_init].data[COMMAND] = WRITE_COMMAND;
-        A_LED[i_init].data[BLUE]    = 0x0000;
-        A_LED[i_init].data[GREEN]   = 0x0000;
-        A_LED[i_init].data[RED]     = 0x0000;
-        A_LED[i_init].offset = i_init * (DWS_PULSES + EOS_PULSES);
-        A_LED[i_init].i_bit = 0;
-        A_LED[i_init].i_data = 0;
-        A_LED[i_init].i_pulse = 0;
-        A_LED[i_init].sequence = SEQ_STATE_START;
-    }
-    
-    /* LEDS pulse array initial state */
-    for( i_init = 0 ; i_init < LED_PULSES_TOTAL ; i_init++ )
-    {
-        LED_PULSE[i_init] = 0x00;
-    }
-
-    
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    SERTIM_Init();
+    TLC_Init();
 }
 
 
@@ -188,12 +166,34 @@ void LED_Initialize ( void )
 
 void LED_Tasks ( void )
 {    
+    static uint8_t i_led = 0;
+    static uint16_t i_color = 0;
+    
     /* Check the application's current state. */
     switch ( ledData.state )
     {
         /* Application's initial state. */
         case LED_STATE_INIT:
         {
+            
+            ledData.state = LED_STATE_WAIT;
+            TLC_Set(0,0x01, 0x10, 0xBB);
+            break;
+        }
+        
+        case LED_STATE_TASKS:
+        {
+            TLC_Set(i_led, i_color, 0, 0);
+            i_color++;
+            if(i_color >= 0xFFF)
+            {
+                i_color = 0;
+                i_led++;
+                if(i_led > 2)
+                {
+                    i_led = 0;
+                }
+            }
             ledData.state = LED_STATE_WAIT;
             break;
         }
@@ -203,36 +203,6 @@ void LED_Tasks ( void )
             break;
         }
         
-        case LED_STATE_START:
-        {
-            DRV_TMR1_Start();
-            DRV_OC0_Start();
-            ledData.state = LED_STATE_WAIT;
-            break;
-        }
-        
-        case LED_STATE_STOP:
-        {
-            DRV_TMR1_Stop();
-            DRV_OC0_Stop();
-            ledData.state = LED_STATE_WAIT;
-            break;
-        }
-            
-        case LED_STATE_CONVERT:
-        {
-            LED_BinaryConvert(ledData.i_led);
-            
-            if(A_LED[ledData.i_led].sequence == SEQ_STATE_WAIT)
-            {
-                ledData.i_led++;
-            }
-            
-            if(ledData.i_led >= LED_NUMBER)
-            {
-                ledData.state = LED_STATE_START;
-            }
-        }
 
         /* Handle error in application's state machine. */
         default:
@@ -242,95 +212,9 @@ void LED_Tasks ( void )
     }
 }
 
-void LED_SetLed( uint8_t led_id, uint16_t red, uint16_t green, uint16_t blue )
+void LED_UpdateState(LED_STATES NewState)
 {
-    A_LED[led_id].data[RED]   = red;
-    A_LED[led_id].data[GREEN] = green;
-    A_LED[led_id].data[BLUE]  = blue;
-    
-    A_LED[led_id].sequence = SEQ_STATE_START;    
-    ledData.i_led = 0;
-    ledData.state = LED_STATE_CONVERT;
-}
-
-void LED_BinaryConvert( uint8_t led_id )
-{    
-    switch(A_LED[led_id].sequence)
-    {
-        case SEQ_STATE_WAIT:
-            /* Waiting for a new data */
-            break;
-        
-        case SEQ_STATE_START:
-            A_LED[led_id].sequence = SEQ_STATE_FIRST;
-            break;
-            
-        case SEQ_STATE_FIRST:
-            LED_PULSE[A_LED[led_id].i_pulse + A_LED[led_id].offset] = PULSE_WIDTH_HIGH;
-            A_LED[led_id].i_pulse++;
-            A_LED[led_id].sequence = SEQ_STATE_DATA;
-            break;
-
-        case SEQ_STATE_DATA:            
-            if(A_LED[led_id].data[A_LED[led_id].i_data] & (MASK_BITS >> A_LED[led_id].i_bit))
-            {
-                LED_PULSE[A_LED[led_id].i_pulse + A_LED[led_id].offset] = PULSE_WIDTH_HIGH;
-            }
-            else
-            {
-                LED_PULSE[A_LED[led_id].i_pulse + A_LED[led_id].offset] = PULSE_WIDTH_LOW;
-            }
-            A_LED[led_id].i_pulse++;
-            A_LED[led_id].sequence = SEQ_STATE_LAST;
-            break;
-
-        case SEQ_STATE_LAST:
-            LED_PULSE[A_LED[led_id].i_pulse + A_LED[led_id].offset] = PULSE_WIDTH_LOW;
-            A_LED[led_id].i_pulse++;
-            A_LED[led_id].i_bit++;
-            
-            A_LED[led_id].sequence = SEQ_STATE_FIRST;
-            
-            if(A_LED[led_id].i_bit >= DATA_BITS)
-            {
-                A_LED[led_id].i_bit = 0;
-                A_LED[led_id].i_data++;
-
-                if(A_LED[led_id].i_data >= DATA_NUMBER)
-                {
-                    A_LED[led_id].i_data = 0;
-                    A_LED[led_id].i_pulse = 0;
-                    A_LED[led_id].sequence = SEQ_STATE_WAIT;
-                }
-            }
-            
-            break;
-            
-        default:
-            break;
-    }              
-}
-
-
-void LED_Callback( void )
-{
-    static uint32_t i_Pulse = 0;
-    
-    DEBUGOn();
-    
-    DRV_OC0_PulseWidthSet(LED_PULSE[i_Pulse]);    
-    
-    if(i_Pulse >= LED_PULSES_TOTAL)
-    {
-        i_Pulse = 0;
-        ledData.state = LED_STATE_STOP;
-    }
-    else
-    {
-        i_Pulse++;
-    }
-    
-    DEBUGOff();
+    ledData.state = NewState;
 }
 
 /*******************************************************************************

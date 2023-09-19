@@ -87,8 +87,6 @@ void STR_CallBack( void )
     static uint8_t bitPos = 0;
     static uint8_t dataRead = 0;
     
-    
-
     SERIAL_PIN = (SerialBuffer[dataRead] >> bitPos) & 0x01;
     
     bitPos++;

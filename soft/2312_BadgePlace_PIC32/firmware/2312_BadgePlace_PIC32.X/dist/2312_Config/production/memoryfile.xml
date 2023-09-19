@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project>                                  
+  <executable name="dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.elf">                 
+    <memory name="program">                 
+      <units>bytes</units>                 
+      <length>531968</length>                 
+      <used>234392</used>                     
+      <free>297576</free>                     
+    </memory>                              
+    <memory name="data">              
+      <units>bytes</units>                 
+      <length>131072</length>                 
+      <used>4252</used>                     
+      <free>126820</free>                     
+    </memory>                              
+  </executable>                            
+</project>                                 

@@ -1,0 +1,5 @@
+Faire tite vidéo pour prouver fonctionnement
+
+Tests du 230VAC avec le variac (20vac, 100vac, etc...)
+
+Attention aller-retours schématiques

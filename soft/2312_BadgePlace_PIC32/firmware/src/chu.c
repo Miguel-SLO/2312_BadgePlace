@@ -100,6 +100,7 @@ void CHU_Initialize ( void )
 
     GetRFIDB1Interface(&chuRfid_interface);
     chuRfid_interface.Initialise(&chuRfid_object, &chuRfid_config);
+    chuRfid_interface.SetPacketHeaderType(&chuRfid_object, HeaderTypeA);
 }
 
 
@@ -121,20 +122,20 @@ void CHU_Tasks ( void )
         case CHU_STATE_INIT:
         {
             bool appInitialized = true;
-            
-            
-            
 
             if (appInitialized)
             {            
                 chuData.state = CHU_STATE_IDLE;
             }
+            
+            //chuRfid_interface.SendSoftwareResetCommand(&chuRfid_object);
+            
+            DRV_TMR0_Start();
             break;
         }
         
         case CHU_STATE_IDLE:
         {
-            //CHU_RFID_EnablePolling();
             if(counter > 100)
             {
                 counter = 0;
@@ -145,15 +146,15 @@ void CHU_Tasks ( void )
             
         case CHU_STATE_SERVICE_TASKS:
         {               
-            //chuRfid_interface.SendDummyCommand(&chuRfid_object);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x02);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x03);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xAF);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xF7);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
+            chuRfid_interface.SendDummyCommand(&chuRfid_object);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x02);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x03);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xAF);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xF7);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
+//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
 
             chuData.state = CHU_STATE_IDLE;
             break;
@@ -185,6 +186,8 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
 {
     uint8_t i_data = 0;
     uint8_t freeSize;
+    uint8_t tempData = 0;
+    volatile uint16_t sizeTemp = size; 
     
     freeSize = FIFO_GetWriteSpace(&fifoDescr_tx);
     
@@ -192,7 +195,8 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
     {
         for(i_data = 0; i_data < size; i_data++)
         {
-            FIFO_Add(&fifoDescr_tx, *(data + i_data)); 
+            tempData = *(data + i_data);
+            FIFO_Add(&fifoDescr_tx, tempData); 
         }
         PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_2_TRANSMIT);
     }
@@ -248,7 +252,7 @@ void CHU_RFID_EnablePolling( void )
             
 }
 
-void __ISR(_UART_2_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance1(void)
+void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
 {
      uint8_t TXsize;
      uint8_t charFifo;

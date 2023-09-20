@@ -49,25 +49,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
-#include "driver/i2c/drv_i2c.h"
-         
-     
-#include "framework/driver/i2c/drv_i2c_static_buffer_model.h"
-     
- 
- #include "system/devcon/sys_devcon.h"
+#include "system/devcon/sys_devcon.h"
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
-#include "system/random/sys_random.h"
-#include "system/tmr/sys_tmr.h"
 #include "driver/tmr/drv_tmr_static.h"
 #include "peripheral/int/plib_int.h"
 #include "driver/usart/drv_usart_static.h"
 #include "system/ports/sys_ports.h"
-#include "driver/spi/static/drv_spi_static.h"
-#include "tcpip/tcpip.h"
-#include "driver/ethmac/drv_ethmac.h"
-#include "driver/miim/drv_miim.h"
 #include "app.h"
 #include "chu.h"
 #include "esp.h"
@@ -106,19 +94,12 @@ extern "C" {
 
 typedef struct
 {
-    SYS_MODULE_OBJ  sysTmr;
     SYS_MODULE_OBJ  drvTmr0;
     SYS_MODULE_OBJ  drvTmr1;
     SYS_MODULE_OBJ  drvTmr2;
 
     SYS_MODULE_OBJ  drvUsart0;
     SYS_MODULE_OBJ  drvUsart1;
-    SYS_MODULE_OBJ  drvUsart2;
-
-    /*** SPI Object for Index 0 ***/
-    SYS_MODULE_OBJ				spiObjectIdx0;
-    SYS_MODULE_OBJ  tcpip;
-    SYS_MODULE_OBJ  drvMiim;
 
 } SYSTEM_OBJECTS;
 

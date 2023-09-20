@@ -72,34 +72,19 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
-
-
-void __ISR(_I2C_1_VECTOR, ipl1AUTO) _IntHandlerDrvI2CInstance0(void)
-{
-	DRV_I2C0_Tasks();
- 
-}
-
- void __ISR(_UART_1_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance0(void)
-{
-    DRV_USART_TasksTransmit(sysObj.drvUsart0);
-    DRV_USART_TasksError(sysObj.drvUsart0);
-    DRV_USART_TasksReceive(sysObj.drvUsart0);
-}
-
-/*void __ISR(_UART_2_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance1(void)
-{
-    DRV_USART_TasksTransmit(sysObj.drvUsart1);
-    DRV_USART_TasksError(sysObj.drvUsart1);
-    DRV_USART_TasksReceive(sysObj.drvUsart1);
-}*/
-
-void __ISR(_UART_5_VECTOR, ipl1AUTO) _IntHandlerDrvUsartInstance2(void)
-{
-    DRV_USART_TasksTransmit(sysObj.drvUsart2);
-    DRV_USART_TasksError(sysObj.drvUsart2);
-    DRV_USART_TasksReceive(sysObj.drvUsart2);
-}
+//void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
+//{
+//    DRV_USART_TasksTransmit(sysObj.drvUsart0);
+//    DRV_USART_TasksError(sysObj.drvUsart0);
+//    DRV_USART_TasksReceive(sysObj.drvUsart0);
+//}
+//
+//void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
+//{
+//    DRV_USART_TasksTransmit(sysObj.drvUsart1);
+//    DRV_USART_TasksError(sysObj.drvUsart1);
+//    DRV_USART_TasksReceive(sysObj.drvUsart1);
+//}
 
 void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
 {
@@ -115,27 +100,6 @@ void __ISR(_TIMER_3_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance2(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
 }
- 
-void __ISR(_SPI_2_VECTOR, ipl1AUTO) _IntHandlerSPIInstance0(void)
-{
-    DRV_SPI_Tasks(sysObj.spiObjectIdx0);
-}
-void __ISR(_ETH_VECTOR, ipl5AUTO) _IntHandler_ETHMAC(void)
-{
-    DRV_ETHMAC_Tasks_ISR((SYS_MODULE_OBJ)0);
-}
-
-/* This function is used by ETHMAC driver */
-bool SYS_INT_SourceRestore(INT_SOURCE src, int level)
-{
-    if(level)
-    {
-        SYS_INT_SourceEnable(src);
-    }
-
-    return level;
-}
-
-/*******************************************************************************
+ /*******************************************************************************
  End of File
 */

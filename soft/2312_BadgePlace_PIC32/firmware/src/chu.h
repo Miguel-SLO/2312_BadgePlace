@@ -75,7 +75,7 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-#define CHU_FIFO_SIZE 0xFF
+#define CHU_FIFO_SIZE 16
     
 /* Polling period must be a 100 multiple */
 #define CHU_POLLING_PERIOD_MS 500

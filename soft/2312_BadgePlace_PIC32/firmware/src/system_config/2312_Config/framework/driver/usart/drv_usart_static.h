@@ -158,52 +158,6 @@ bool DRV_USART1_TransmitBufferIsFull(void);
 DRV_USART_BAUD_SET_RESULT DRV_USART1_BaudSet(uint32_t baud);
 DRV_USART_LINE_CONTROL_SET_RESULT DRV_USART1_LineControlSet(DRV_USART_LINE_CONTROL lineControlMode);
 
-// *********************************************************************************************
-// *********************************************************************************************
-// Section: System Interface Headers for the Instance 2 of USART static driver
-// *********************************************************************************************
-// *********************************************************************************************
-
-SYS_MODULE_OBJ DRV_USART2_Initialize(void);
-void  DRV_USART2_Deinitialize(void);
-SYS_STATUS DRV_USART2_Status(void);
-void DRV_USART2_TasksTransmit(void);
-void DRV_USART2_TasksReceive(void);
-void DRV_USART2_TasksError(void);
-
-// *********************************************************************************************
-// *********************************************************************************************
-// Section: General Client Interface Headers for the Instance 2 of USART static driver
-// *********************************************************************************************
-// *********************************************************************************************
-
-DRV_HANDLE DRV_USART2_Open(const SYS_MODULE_INDEX index, const DRV_IO_INTENT ioIntent);
-void DRV_USART2_Close(void);
-DRV_USART_CLIENT_STATUS DRV_USART2_ClientStatus(void);
-DRV_USART_TRANSFER_STATUS DRV_USART2_TransferStatus(void);
-DRV_USART_ERROR DRV_USART2_ErrorGet(void);
-
-// *********************************************************************************************
-// *********************************************************************************************
-// Section: Byte Model Client Interface Headers for the Instance 2 of USART static driver
-// *********************************************************************************************
-// *********************************************************************************************
-
-uint8_t DRV_USART2_ReadByte( void);
-void DRV_USART2_WriteByte( const uint8_t byte);
-unsigned int DRV_USART2_ReceiverBufferSizeGet(void);
-unsigned int DRV_USART2_TransmitBufferSizeGet(void);
-bool DRV_USART2_ReceiverBufferIsEmpty( void );
-bool DRV_USART2_TransmitBufferIsFull(void);
-
-// *********************************************************************************************
-// *********************************************************************************************
-// Section: Set up Client Interface Headers for the Instance 2 of USART static driver
-// *********************************************************************************************
-// *********************************************************************************************
-DRV_USART_BAUD_SET_RESULT DRV_USART2_BaudSet(uint32_t baud);
-DRV_USART_LINE_CONTROL_SET_RESULT DRV_USART2_LineControlSet(DRV_USART_LINE_CONTROL lineControlMode);
-
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }

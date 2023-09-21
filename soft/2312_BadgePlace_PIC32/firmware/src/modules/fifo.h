@@ -33,16 +33,18 @@
 #define FIFO_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /******************************************************************************/
 
 /* FIFO descriptor structure */
 typedef struct fifo {
-   uint8_t size;   	
+   uint16_t size;
+   uint8_t *write;  
+   uint8_t *read;   
    uint8_t *start;  	
    uint8_t *end;  	
-   uint8_t *write;  
-   uint8_t *read;
+   
 } S_Fifo;
 
 /******************************************************************************/
@@ -59,7 +61,7 @@ typedef struct fifo {
  * @param fifoStart     Pointer to the beginning of the FIFO memory.
  * @param initialValue  The initial value to set for all elements in the FIFO.
  */
-void FIFO_Initialize( S_Fifo *fifoDescriptor, uint8_t fifoSize,
+void FIFO_Initialize( S_Fifo *fifoDescriptor, uint16_t fifoSize,
 				uint8_t *fifoStart, uint8_t initialValue );
 
 /******************************************************************************/
@@ -104,7 +106,7 @@ uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor );
  * @param value         The value to add to the FIFO.
  * @return 1 if (OK), 0 if (FIFO FULL).
  */
-uint8_t FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
+bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
 
 /******************************************************************************/
 
@@ -119,7 +121,7 @@ uint8_t FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
  * @param value         Pointer to store the retrieved value.
  * @return 1 if (OK), 0 if (FIFO EMPTY).
  */
-uint8_t FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value );
+bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value );
 
 /******************************************************************************/
 

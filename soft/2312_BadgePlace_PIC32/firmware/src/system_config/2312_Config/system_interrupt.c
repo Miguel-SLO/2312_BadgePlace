@@ -65,6 +65,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "esp.h"
 #include "led.h"
 #include "bzr.h"
+#include "modules/counter.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -72,23 +73,27 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: System Interrupt Vector Functions
 // *****************************************************************************
 // *****************************************************************************
-//void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
-//{
-//    DRV_USART_TasksTransmit(sysObj.drvUsart0);
-//    DRV_USART_TasksError(sysObj.drvUsart0);
-//    DRV_USART_TasksReceive(sysObj.drvUsart0);
-//}
-//
-//void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
-//{
-//    DRV_USART_TasksTransmit(sysObj.drvUsart1);
-//    DRV_USART_TasksError(sysObj.drvUsart1);
-//    DRV_USART_TasksReceive(sysObj.drvUsart1);
-//}
 
-void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
+/* USART interrupts have been added to their corresponding library */
+/*
+void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
 {
-    CHU_CallBack();
+    DRV_USART_TasksTransmit(sysObj.drvUsart0);
+    DRV_USART_TasksError(sysObj.drvUsart0);
+    DRV_USART_TasksReceive(sysObj.drvUsart0);
+}
+
+void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
+{
+    DRV_USART_TasksTransmit(sysObj.drvUsart1);
+    DRV_USART_TasksError(sysObj.drvUsart1);
+    DRV_USART_TasksReceive(sysObj.drvUsart1);
+}
+*/
+
+void __ISR(_TIMER_1_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance0(void)
+{
+    CNT_CallBack();
     
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
 }

@@ -243,8 +243,10 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
  ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
- ../src/bzr.h ../src/system_config/2312_Config/system_definitions.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
+ ../src/modules/counter.h ../src/led.h ../src/bzr.h \
+ ../src/modules/counter.h \
+ ../src/system_config/2312_Config/system_definitions.h
 
 ../../../../../../framework/system/common/sys_common.h:
 
@@ -740,8 +742,12 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
 
 ../src/esp.h:
 
+../src/modules/counter.h:
+
 ../src/led.h:
 
 ../src/bzr.h:
+
+../src/modules/counter.h:
 
 ../src/system_config/2312_Config/system_definitions.h:

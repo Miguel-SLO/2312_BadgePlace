@@ -1,33 +1,47 @@
 #include "esp.h"
 
+
+#define DEBUG_LED PORTGbits.RG9
+//#define DEBUG_ESP_UART
+//#define DEBUG_ESP_GET
+//#define DEBUG_ESP_SEND
+
+#define COUNT_RECEIVE_MS 20
+
 #define ESP_USART_ID USART_ID_1
 #define ESP_INT_SOURCE_USART_ERROR INT_SOURCE_USART_1_ERROR
 #define ESP_INT_SOURCE_USART_RECEIVE INT_SOURCE_USART_1_RECEIVE
 #define ESP_INT_SOURCE_USART_TRANSMIT INT_SOURCE_USART_1_TRANSMIT
 
+char AT_RES_NOP[]   = "";
+char AT_RES_OK[]    = "\r\nOK\r\n";
+char AT_RES_ERROR[] = "\r\nERROR\r\n";
+
+char AT_CMD_AT[]        = "AT";
+char AT_CMD_RST[]       = "AT+RST";
+char AT_CMD_CWMODEIS[]  = "AT+CWMODE=1";
+char AT_CMD_CWMODE[]    = "AT+CWMODE?";
+char AT_CMD_CWJAP[]     = "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\"";
+
+/* Global application's data */
 ESP_DATA espData;
 
+/* Initialize */
 void ESP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    espData.state       = ESP_STATE_INIT;
+    espData.state = ESP_STATE_INIT;
     
     /* Initial flags values */
-    espData.transmit    = false;
-    espData.receive     = false;
+    espData.transmit = false;
+    espData.receive  = false;
+    
+    CNT_Initialize(&espData.cntReceive, COUNT_RECEIVE_MS);
     
     /* Initialize FIFO descriptors */
-    FIFO_Initialize(&espData.fifoDescr_tx, ESP_FIFO_SIZE, espData.fifo_tx, 0x00);
-    FIFO_Initialize(&espData.fifoDescr_rx, ESP_FIFO_SIZE, espData.fifo_rx, 0x00);
+    FIFO_Initialize(&espData.fifoDesc_tx, ESP_FIFO_SIZE, espData.fifoBuff_tx, 0x00);
+    FIFO_Initialize(&espData.fifoDesc_rx, ESP_FIFO_SIZE, espData.fifoBuff_rx, 0x00);
 }
-
-/******************************************************************************
-  Function:
-    void ESP_Tasks ( void )
-
-  Remarks:
-    See prototype in esp.h.
- */
 
 void ESP_Tasks ( void )
 {
@@ -37,8 +51,7 @@ void ESP_Tasks ( void )
         /* Application's initial state. */
         case ESP_STATE_INIT:
         {
-            //ESP_SendCommand("AT");
-            
+            espData.transmit = ESP_SendCommand(AT_CMD_AT);            
             espData.state = ESP_STATE_IDLE;
             break;
         }
@@ -54,36 +67,56 @@ void ESP_Tasks ( void )
             /* Something to receive in FIFO */
             else if(espData.receive)
             {
+                CNT_Reset(&espData.cntReceive);
                 espData.state = ESP_STATE_RECEIVE;
             }
             break;
         }
         
+        /* Application's transmitting a message */
         case ESP_STATE_TRANSMIT:
         {
-            /* Check if data available in FIFO */
-            if(FIFO_GetReadSpace(&espData.fifoDescr_tx))
+            /* Check if data still available in FIFO */
+            if(FIFO_GetReadSpace(&espData.fifoDesc_tx))
             {
                 /* Enable the interrupt if needed */
-                if(PLIB_INT_SourceIsEnabled(INT_ID_0 , ESP_INT_SOURCE_USART_TRANSMIT) == false)
+                if(!SYS_INT_SourceIsEnabled(ESP_INT_SOURCE_USART_TRANSMIT))
                 {                
                     SYS_INT_SourceEnable(ESP_INT_SOURCE_USART_TRANSMIT);
                 }
             }
             else
             {
-                /* Leave when fifo is empty */
+                /* Leave state when fifo is empty */
                 espData.transmit = false;
                 espData.state = ESP_STATE_IDLE;
             }
             break;
         }
         
+        /* Application's received a message */
         case ESP_STATE_RECEIVE:
         {
-            espData.state = ESP_STATE_IDLE;
+            /* Waiting to reach reception counter */
+            if(CNT_Check(&espData.cntReceive))
+            {
+                CNT_Reset(&espData.cntReceive);
+                espData.state = ESP_STATE_TRANSLATE;
+                espData.translate = true;
+                espData.receive = false;
+            }                       
             break;
-        }   
+        }
+        
+        case ESP_STATE_TRANSLATE:
+        {
+            break;
+        }
+        
+        case ESP_STATE_WAIT:
+        {
+            break;
+        }
 
         /* The default state should never be executed. */
         default:
@@ -94,28 +127,117 @@ void ESP_Tasks ( void )
     }
 }
 
-void ESP_SendCommand(const char* command)
+bool ESP_SendCommand( char *p_command )
 {
-    S_Fifo *fifoDescr;
+    /* Local variables */
+    S_Fifo *p_fifoDesc;
     uint8_t commandSize;
-    uint8_t iStr;
+    uint8_t i_string;
+    bool commandStatus;
     
-    fifoDescr = &espData.fifoDescr_tx;
+    /* DEBUG */
+    #ifdef DEBUG_ESP_SEND
+        DEBUG_LED = true;
+    #endif
     
-    commandSize = strlen(command);
-    
-    if(FIFO_GetWriteSpace(fifoDescr) >= commandSize)
+    /* Dont send a command if still transmitting another or waiting */
+    if(!espData.transmit && !espData.wait)
     {
-        for(iStr = 0; iStr < commandSize; iStr++)
-        {
-            FIFO_Add(fifoDescr,(uint8_t)(command[iStr]));
+        /* Default command status */
+        commandStatus = false;
+
+        /* Point to the desired FIFO */
+        p_fifoDesc = &espData.fifoDesc_tx;
+
+        /* Get number of characters to send */
+        commandSize = strlen(p_command);
+
+        /* Check if enough space in FIFO */
+        if(FIFO_GetWriteSpace(p_fifoDesc) >= (commandSize + 2))
+        {   
+            /* Loop to add command */
+            for(i_string = 0; i_string < commandSize; i_string++)
+            {
+                FIFO_Add(p_fifoDesc,(uint8_t)(p_command[i_string]));
+            }
+
+            /* Add CR and LF suffix to FIFO */
+            FIFO_Add(p_fifoDesc,(uint8_t)('\r'));
+            FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
+
+            /* Command added to FIFO */
+            commandStatus = true;
         }
-        
-        espData.transmit = true;
     }
+    /* DEBUG */
+    #ifdef DEBUG_ESP_SEND
+        DEBUG_LED = false;
+    #endif
+    
+    /* Feedback */
+    return commandStatus;
 }
 
-void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
+bool ESP_GetResponse( void )
+{
+    S_Fifo *p_fifoDesc;
+    uint8_t *p_buffer;
+    uint8_t i_string;
+    uint8_t sizeRead;
+    bool responseStatus;
+    
+    /* DEBUG */
+    #ifdef DEBUG_ESP_GET
+        DEBUG_LED = true;
+    #endif
+
+    /* Default response status */
+    responseStatus = false; 
+    
+    /* Point to the desired FIFO */
+    p_fifoDesc = &espData.fifoDesc_rx;
+    
+    /* Point to storage buffer */
+    p_buffer = (uint8_t*)espData.resBuffer;
+    
+    sizeRead = FIFO_GetReadSpace(p_fifoDesc);
+    
+    if( sizeRead )
+    {
+        for(i_string = 0; i_string < sizeRead; i_string++)
+        {
+            FIFO_Get(&espData.fifoDesc_rx, p_buffer + i_string);
+        }
+
+        /* Set flag */
+        responseStatus = true;
+    }
+    
+    /* DEBUG */
+    #ifdef DEBUG_ESP_RESPONSE
+        DEBUG_LED = false;
+    #endif
+    
+    /* Feedback */
+    return responseStatus;
+}
+
+bool ESP_Translate( S_AT_PACKET *atPacket, char *buffer)
+{
+    char *p_command;
+    char *p_data;
+    char *p_ack;
+    
+    p_ack = strstr(buffer, AT_RES_OK);
+    
+    if(p_ack != NULL)
+    {
+        
+    }
+    
+}
+
+void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
 {
     S_Fifo *RX_fifoDescriptor;
     S_Fifo *TX_fifoDescriptor;
@@ -125,12 +247,14 @@ void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
     USART_ERROR usartStatus;
 
     /* Pointers to fifo descriptors */
-    RX_fifoDescriptor = &espData.fifoDescr_rx;
-    TX_fifoDescriptor = &espData.fifoDescr_tx;
+    RX_fifoDescriptor = &espData.fifoDesc_rx;
+    TX_fifoDescriptor = &espData.fifoDesc_tx;
 
 
     /* DEBUG */
-    PORTGbits.RG9 = 1;
+    #ifdef DEBUG_ESP_UART
+        DEBUG_LED = true;
+    #endif
 
     /* Reading the error interrupt flag */
     if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_ERROR))
@@ -142,7 +266,7 @@ void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
     }
 
     /* Reading the receive interrupt flag */
-    if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_RECEIVE) && PLIB_INT_SourceIsEnabled(INT_ID_0, INT_SOURCE_USART_1_RECEIVE) )
+    if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_RECEIVE))
     {
         /* Checks overrun or parity error */
         usartStatus = PLIB_USART_ErrorsGet(ESP_USART_ID);
@@ -157,6 +281,8 @@ void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
         }
         else
         {
+            espData.receive = true;
+            
             while(PLIB_USART_ReceiverDataIsAvailable(ESP_USART_ID))
             {
                 dataFifo = PLIB_USART_ReceiverByteReceive(ESP_USART_ID);
@@ -169,10 +295,9 @@ void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
     }
 
     /* Reading the transmit interrupt flag */
-    if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_TRANSMIT) && PLIB_INT_SourceIsEnabled(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT))
+    if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_TRANSMIT))
     {
         TX_size = FIFO_GetReadSpace(TX_fifoDescriptor);
-
         TX_BufferFull = PLIB_USART_TransmitterBufferIsFull(ESP_USART_ID);
 
         while(TX_size && !TX_BufferFull)
@@ -184,15 +309,16 @@ void __ISR(_UART_1_VECTOR, ipl6AUTO) _IntHandlerDrvUsartInstance0(void)
         }
 
         /* Disable the interrupt, to avoid calling ISR continuously*/
-        PLIB_INT_SourceDisable (INT_ID_0 , INT_SOURCE_USART_1_TRANSMIT);
-        //SYS_INT_SourceDisable(ESP_INT_SOURCE_USART_TRANSMIT);
+        SYS_INT_SourceDisable(ESP_INT_SOURCE_USART_TRANSMIT);
 
         /* Clear up the interrupt flag */
         SYS_INT_SourceStatusClear(ESP_INT_SOURCE_USART_TRANSMIT);
     }
 
     /* DEBUG */
-    PORTGbits.RG9 = 0;
+    #ifdef DEBUG_ESP_UART
+        DEBUG_LED = false;
+    #endif
  }
 
 /*******************************************************************************

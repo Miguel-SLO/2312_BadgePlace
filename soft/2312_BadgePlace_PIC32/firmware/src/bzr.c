@@ -151,8 +151,6 @@ void BZR_Tasks ( void )
             }
             break;
         }
-        
-        
 
         case BZR_STATE_SERVICE_TASKS:
         {

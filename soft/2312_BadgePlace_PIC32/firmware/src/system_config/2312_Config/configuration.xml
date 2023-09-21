@@ -54,16 +54,16 @@
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver</Path>
       </File>
       <File dnOrder="10">
-        <Name dnOrder="0">sys_int_pic32.c</Name>
-        <Path dnOrder="1">Source&amp;#160;Files/framework/system/int/src</Path>
-      </File>
-      <File dnOrder="11">
         <Name dnOrder="0">sys_common.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
       </File>
-      <File dnOrder="12">
+      <File dnOrder="11">
         <Name dnOrder="0">sys_buffer.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/common</Path>
+      </File>
+      <File dnOrder="12">
+        <Name dnOrder="0">sys_int_pic32.c</Name>
+        <Path dnOrder="1">Source&amp;#160;Files/framework/system/int/src</Path>
       </File>
       <File dnOrder="13">
         <Name dnOrder="0">drv_usart_definitions.h</Name>
@@ -102,12 +102,12 @@
         <Path dnOrder="1">Header&amp;#160;Files/framework/system/int/src</Path>
       </File>
       <File dnOrder="22">
-        <Name dnOrder="0">system.h</Name>
-        <Path dnOrder="1">Header&amp;#160;Files/framework/system</Path>
-      </File>
-      <File dnOrder="23">
         <Name dnOrder="0">drv_tmr_compatibility.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/framework/driver/tmr</Path>
+      </File>
+      <File dnOrder="23">
+        <Name dnOrder="0">system.h</Name>
+        <Path dnOrder="1">Header&amp;#160;Files/framework/system</Path>
       </File>
       <File dnOrder="24">
         <Name dnOrder="0">drv_usart.h</Name>
@@ -176,7 +176,7 @@
       <Template dnOrder="8">
         <Name dnOrder="0">system_init.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">7A7DC6D138AFB30F645E4F98764389CA</Checksum>
+        <Checksum dnOrder="2">83D8B4A42652805D4BAA5984E79C2846</Checksum>
       </Template>
       <Template dnOrder="9">
         <Name dnOrder="0">esp.h</Name>
@@ -186,7 +186,6 @@
         <Name dnOrder="0">drv_tmr_static.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr</Path>
         <Checksum dnOrder="2">E9C3112A6AE233C3096E30F2F81A273E</Checksum>
-        <ProjectFileChecksum dnOrder="3">F12402D9A94AA1BCD6EEE05D39B44F67</ProjectFileChecksum>
       </Template>
       <Template dnOrder="11">
         <Name dnOrder="0">drv_usart_static.c</Name>
@@ -219,7 +218,7 @@
       <Template dnOrder="17">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">658CAAF148D2DAE2D5333FCE0CB41896</Checksum>
+        <Checksum dnOrder="2">5B71783235EDA88B70478F10841CBBF7</Checksum>
         <ProjectFileChecksum dnOrder="3">9ABBEDB817D2498747A7A96FA815E618</ProjectFileChecksum>
       </Template>
       <Template dnOrder="18">
@@ -235,13 +234,11 @@
         <Name dnOrder="0">drv_tmr_mapping.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
         <Checksum dnOrder="2">84EC844A8E2C391E068EA80BD6DEF41F</Checksum>
-        <ProjectFileChecksum dnOrder="3">4E38915378E0DB25AA5D931346D10492</ProjectFileChecksum>
       </Template>
       <Template dnOrder="21">
         <Name dnOrder="0">drv_tmr_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/2312_Config/framework/driver/tmr/src</Path>
-        <Checksum dnOrder="2">035E4D91FC631136625120889E6F6551</Checksum>
-        <ProjectFileChecksum dnOrder="3">E7F702FC6112C47DA1343E60C39DD851</ProjectFileChecksum>
+        <Checksum dnOrder="2">14A1BD0823753C3AD24C6D4C672C4789</Checksum>
       </Template>
       <Template dnOrder="22">
         <Name dnOrder="0">esp.c</Name>
@@ -250,7 +247,7 @@
       <Template dnOrder="23">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">94C858DC34AB253675424E577EB9C841</Checksum>
+        <Checksum dnOrder="2">D52BC82B2C9A5493958396D585449248</Checksum>
       </Template>
       <Template dnOrder="24">
         <Name dnOrder="0">bzr.h</Name>

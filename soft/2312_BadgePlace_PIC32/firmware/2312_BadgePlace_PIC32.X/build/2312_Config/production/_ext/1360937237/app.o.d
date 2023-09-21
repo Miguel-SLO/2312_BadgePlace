@@ -242,8 +242,8 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
  ../src/app.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
- ../src/bzr.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
+ ../src/modules/counter.h ../src/led.h ../src/bzr.h
 
 ../src/app.h:
 
@@ -740,6 +740,8 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
 ../src/modules/RFIDB1ClientProtocol.h:
 
 ../src/esp.h:
+
+../src/modules/counter.h:
 
 ../src/led.h:
 

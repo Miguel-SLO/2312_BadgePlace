@@ -45,27 +45,26 @@
  * @param fifoStart     Pointer to the beginning of the FIFO memory.
  * @param initialValue  The initial value to set for all elements in the FIFO.
  */
-void FIFO_Initialize( S_Fifo *fifoDescriptor, uint8_t fifoSize,
+void FIFO_Initialize( S_Fifo *fifoDescriptor, uint16_t fifoSize,
 				uint8_t *fifoStart, uint8_t initialValue )
 {
 	/* Local variables declaration */
-	uint8_t i;
 	uint8_t *fifoPosition;
+    uint16_t i;
+    
+    fifoPosition = fifoStart;
 	
 	/* Fifo descriptor values initialisation */
 	fifoDescriptor->size 	= fifoSize;
 	fifoDescriptor->start 	= fifoStart;
-	fifoDescriptor->end 	= fifoStart + (fifoSize - 1);
+	fifoDescriptor->end 	= fifoStart + fifoSize - 1;
 	fifoDescriptor->write 	= fifoStart;
 	fifoDescriptor->read 	= fifoStart;
-	
-	fifoPosition = fifoStart;
 	
 	/* Loop through entire fifo to set initial value */
 	for( i = 0 ; i < fifoSize ; i++)
 	{
-		*fifoPosition = initialValue;
-		fifoPosition++;
+		fifoPosition[i] = initialValue;
 	}
 }
 
@@ -84,7 +83,7 @@ void FIFO_Initialize( S_Fifo *fifoDescriptor, uint8_t fifoSize,
 uint8_t FIFO_GetWriteSpace( S_Fifo *fifoDescriptor )
 {
 	/* Local variables declaration */
-	int8_t writeSpace;
+	int32_t writeSpace;
 
 	/* Calculate space available */
 	writeSpace = fifoDescriptor->read - fifoDescriptor->write - 1;
@@ -96,7 +95,7 @@ uint8_t FIFO_GetWriteSpace( S_Fifo *fifoDescriptor )
     }
 	
 	/* Return value */
-	return (uint8_t)writeSpace;
+	return (uint16_t)writeSpace;
 }
 
 /******************************************************************************/
@@ -115,7 +114,7 @@ uint8_t FIFO_GetWriteSpace( S_Fifo *fifoDescriptor )
 uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor )
 {
 	/* Local variables declaration */
-	int8_t readSpace;
+	int32_t readSpace;
 	
 	/* Calculate space available */
 	readSpace = fifoDescriptor->write - fifoDescriptor->read;
@@ -127,7 +126,7 @@ uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor )
 	}
 	
 	/* Return value */
-	return (uint8_t)readSpace;
+	return (uint16_t)readSpace;
 }
 
 /******************************************************************************/
@@ -143,10 +142,10 @@ uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor )
  * @param value         The value to add to the FIFO.
  * @return 1 if (OK), 0 if (FIFO FULL).
  */
-uint8_t FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
+bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
 {
     /* Local variables declaration */
-    uint8_t writeStatus;
+    bool writeStatus;
 
     /* True = space available ; False = FIFO full */
     writeStatus = FIFO_GetWriteSpace(fifoDescriptor);
@@ -183,10 +182,10 @@ uint8_t FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
  * @param value         Pointer to store the retrieved value.
  * @return 1 if (OK), 0 if (FIFO EMPTY).
  */
-uint8_t FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value )
+bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value )
 {
     /* Local variables declaration */
-    uint8_t readStatus;
+    bool readStatus;
     
     /* True = values in FIFO ; False = FIFO empty */
     readStatus = FIFO_GetReadSpace(fifoDescriptor);

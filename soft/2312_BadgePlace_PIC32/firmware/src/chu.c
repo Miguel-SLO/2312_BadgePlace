@@ -120,43 +120,21 @@ void CHU_Tasks ( void )
     {
         /* Application's initial state. */
         case CHU_STATE_INIT:
-        {
-            bool appInitialized = true;
-
-            if (appInitialized)
-            {            
-                chuData.state = CHU_STATE_IDLE;
-            }
-            
-            //chuRfid_interface.SendSoftwareResetCommand(&chuRfid_object);
-            
-            DRV_TMR0_Start();
+        {       
+            chuData.state = CHU_STATE_IDLE;
             break;
         }
         
         case CHU_STATE_IDLE:
         {
-            if(counter > 100)
-            {
-                counter = 0;
-                chuData.state = CHU_STATE_SERVICE_TASKS;
-            }
             break;
         }
             
         case CHU_STATE_SERVICE_TASKS:
         {               
             chuRfid_interface.SendDummyCommand(&chuRfid_object);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x02);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x03);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xAF);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0xF7);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-//            PLIB_USART_TransmitterByteSend(USART_ID_2, 0x00);
-
             chuData.state = CHU_STATE_IDLE;
+            
             break;
         }
 
@@ -170,11 +148,6 @@ void CHU_Tasks ( void )
             break;
         }
     }
-}
-
-void CHU_CallBack( void )
-{
-    counter++;
 }
 
 void CHU_RFID_Response( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size )

@@ -118,9 +118,10 @@ void APP_Initialize ( void )
     appData.state = APP_STATE_INIT;
 
     
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    /* Start timers */
+    DRV_TMR0_Start();
+    //DRV_TMR1_Start();
+    //DRV_TMR2_Start();
 }
 
 

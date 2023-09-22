@@ -6,12 +6,16 @@
 //#define DEBUG_ESP_GET
 //#define DEBUG_ESP_SEND
 
-#define COUNT_RECEIVE_MS 20
+#define ESP_COUNT_RECEIVE_MS 20
+#define ESP_COUNT_WAIT_MS 2000
 
 #define ESP_USART_ID USART_ID_1
 #define ESP_INT_SOURCE_USART_ERROR INT_SOURCE_USART_1_ERROR
 #define ESP_INT_SOURCE_USART_RECEIVE INT_SOURCE_USART_1_RECEIVE
 #define ESP_INT_SOURCE_USART_TRANSMIT INT_SOURCE_USART_1_TRANSMIT
+
+#define AT_ACK_OK "OK"
+#define AT_ACK_ERROR "ERROR"
 
 char AT_RES_NOP[]   = "";
 char AT_RES_OK[]    = "\r\nOK\r\n";
@@ -26,17 +30,22 @@ char AT_CMD_CWJAP[]     = "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\"";
 /* Global application's data */
 ESP_DATA espData;
 
+//static bool ESP_GetResponse( void );
+//
+//static bool ESP_Translate( void );
+
 /* Initialize */
 void ESP_Initialize ( void )
 {
-    /* Place the App state machine in its initial state. */
+    /* Place the App state machine in its default state. */
     espData.state = ESP_STATE_INIT;
     
     /* Initial flags values */
     espData.transmit = false;
     espData.receive  = false;
     
-    CNT_Initialize(&espData.cntReceive, COUNT_RECEIVE_MS);
+    CNT_Initialize(&espData.cntReceive, ESP_COUNT_RECEIVE_MS);
+    CNT_Initialize(&espData.cntWait, ESP_COUNT_WAIT_MS)
     
     /* Initialize FIFO descriptors */
     FIFO_Initialize(&espData.fifoDesc_tx, ESP_FIFO_SIZE, espData.fifoBuff_tx, 0x00);
@@ -51,7 +60,7 @@ void ESP_Tasks ( void )
         /* Application's initial state. */
         case ESP_STATE_INIT:
         {
-            espData.transmit = ESP_SendCommand(AT_CMD_AT);            
+            //espData.transmit = ESP_SendCommand(AT_CMD_AT);            
             espData.state = ESP_STATE_IDLE;
             break;
         }
@@ -96,13 +105,28 @@ void ESP_Tasks ( void )
         
         /* Application's received a message */
         case ESP_STATE_RECEIVE:
-        {
+        {            
             /* Waiting to reach reception counter */
             if(CNT_Check(&espData.cntReceive))
             {
-                CNT_Reset(&espData.cntReceive);
-                espData.state = ESP_STATE_TRANSLATE;
-                espData.translate = true;
+                if(FIFO_GetBuffer(&espData.fifoDesc_rx, (uint8_t*)&espData.resBuffer))
+                {
+                    /* Get first line of message */
+                    espData.p_resBuffer = strtok(espData.resBuffer, "\r\n");
+                    
+                    /* Flag state */
+                    espData.translate = true;
+                    
+                    /* Change directly to translate state */
+                    espData.state = ESP_STATE_TRANSLATE;
+                }
+                else
+                {
+                    /* An error occured, going back to IDLE */
+                    espData.state = ESP_STATE_IDLE;
+                }
+                
+                /* Flag state */
                 espData.receive = false;
             }                       
             break;
@@ -110,11 +134,49 @@ void ESP_Tasks ( void )
         
         case ESP_STATE_TRANSLATE:
         {
+            /* A command is detected */
+            if(espData.p_resBuffer[0] == 'A' && espData.p_resBuffer[1] == 'T')
+            {
+                strcpy(espData.atResponse.command, espData.p_resBuffer);
+            }
+            /* Acknowledge detected */
+            else if(strcmp(espData.p_resBuffer, AT_ACK_OK) ||
+                    strcmp(espData.p_resBuffer, AT_ACK_ERROR))
+            {
+                strcpy(espData.atResponse.ack, espData.p_resBuffer);
+            }
+            /* Data is detected */
+            else if(!strcmp(espData.p_resBuffer, ""))
+            {
+                strcpy(espData.atResponse.data, espData.p_resBuffer);
+            }
+            
+            /* Get next line in string */
+            espData.p_resBuffer = strtok(NULL, "\r\n");           
+            
+            /* Leave state when no more lines */
+            if(espData.p_resBuffer == NULL)
+            {
+                /* Reset buffer */
+                memset(espData.resBuffer, 0x00, sizeof(espData.resBuffer));
+                
+                /* Machine states and flags */
+                espData.translate = false;
+                espData.wait = true;
+                espData.state = ESP_STATE_WAIT;
+                
+                CNT_Reset(&espData.cntWait);
+            }
             break;
         }
         
         case ESP_STATE_WAIT:
         {
+            /* Waiting for APP to answer */
+            if(CNT_Check(&espData.cntWait))
+            {
+                
+            }
             break;
         }
 
@@ -140,12 +202,12 @@ bool ESP_SendCommand( char *p_command )
         DEBUG_LED = true;
     #endif
     
-    /* Dont send a command if still transmitting another or waiting */
-    if(!espData.transmit && !espData.wait)
+    /* Default command status */
+    commandStatus = false;
+        
+    /* Dont send a command if not IDLE */
+    if(espData.state == ESP_STATE_IDLE)
     {
-        /* Default command status */
-        commandStatus = false;
-
         /* Point to the desired FIFO */
         p_fifoDesc = &espData.fifoDesc_tx;
 
@@ -166,6 +228,7 @@ bool ESP_SendCommand( char *p_command )
             FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
 
             /* Command added to FIFO */
+            espData.transmit = true;
             commandStatus = true;
         }
     }
@@ -178,64 +241,40 @@ bool ESP_SendCommand( char *p_command )
     return commandStatus;
 }
 
-bool ESP_GetResponse( void )
-{
-    S_Fifo *p_fifoDesc;
-    uint8_t *p_buffer;
-    uint8_t i_string;
-    uint8_t sizeRead;
-    bool responseStatus;
-    
-    /* DEBUG */
-    #ifdef DEBUG_ESP_GET
-        DEBUG_LED = true;
-    #endif
-
-    /* Default response status */
-    responseStatus = false; 
-    
-    /* Point to the desired FIFO */
-    p_fifoDesc = &espData.fifoDesc_rx;
-    
-    /* Point to storage buffer */
-    p_buffer = (uint8_t*)espData.resBuffer;
-    
-    sizeRead = FIFO_GetReadSpace(p_fifoDesc);
-    
-    if( sizeRead )
-    {
-        for(i_string = 0; i_string < sizeRead; i_string++)
-        {
-            FIFO_Get(&espData.fifoDesc_rx, p_buffer + i_string);
-        }
-
-        /* Set flag */
-        responseStatus = true;
-    }
-    
-    /* DEBUG */
-    #ifdef DEBUG_ESP_RESPONSE
-        DEBUG_LED = false;
-    #endif
-    
-    /* Feedback */
-    return responseStatus;
-}
-
-bool ESP_Translate( S_AT_PACKET *atPacket, char *buffer)
-{
-    char *p_command;
-    char *p_data;
-    char *p_ack;
-    
-    p_ack = strstr(buffer, AT_RES_OK);
-    
-    if(p_ack != NULL)
-    {
-        
-    }
-    
-}
+//static bool ESP_GetResponse( void )
+//{
+//    S_Fifo *p_fifoDesc;
+//    uint8_t *p_char;
+//    uint8_t value;
+//    bool responseStatus;
+//    
+//    /* DEBUG */
+//    #ifdef DEBUG_ESP_GET
+//        DEBUG_LED = true;
+//    #endif
+//
+//    /* Default response status */
+//    responseStatus = false; 
+//    /* Point to the desired FIFO */
+//    p_fifoDesc = &espData.fifoDesc_rx; 
+//    /* Point to current char */
+//    p_char = (uint8_t*)espData.p_resBuffer;
+//
+//    responseStatus = FIFO_Get(p_fifoDesc, &value);
+//    
+//    if(responseStatus)
+//    {
+//        *p_char = value;
+//    }
+//    
+//    /* DEBUG */
+//    #ifdef DEBUG_ESP_RESPONSE
+//        DEBUG_LED = false;
+//    #endif
+//    
+//    /* Feedback */
+//    return responseStatus;
+//}
 
 void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
 {

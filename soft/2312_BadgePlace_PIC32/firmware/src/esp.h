@@ -31,12 +31,6 @@ typedef struct{
     char ack[AT_ACK_SIZE];
 } S_AT_PACKET;
 
-typedef struct{
-    char *p_command;
-    char *p_data;
-    char *p_ack;
-} S_AT_TRANSLATE;
-
 /* Application's state machine */
 typedef enum{
 	ESP_STATE_INIT = 0x00,
@@ -47,24 +41,18 @@ typedef enum{
     ESP_STATE_WAIT,
 } E_ESP_STATES;
 
-typedef enum{
-    TRANSLATE_STATE_COMMAND,
-    TRANSLATE_STATE_DATA,
-    TRANSLATE_STATE_ACK,
-} E_TRANSLATE_STATES;
-
-typedef enum{
-	ESP_STATUS_IDLE = 0x00,
-} E_ESP_STATUS;
-
 /* Application's data */
 typedef struct{
     /* Application's current states */
     E_ESP_STATES state;
-    E_ESP_STATUS status;
-    E_TRANSLATE_STATES translateState;
     
-    S_AT_PACKET atPacket;
+    S_AT_PACKET atResponse;
+    
+    /* Buffer to store response commands */
+    char resBuffer[ESP_FIFO_SIZE];
+    
+    /* Pointer to last char received */
+    char *p_resBuffer;
     
     /* Applications's flags */
     bool transmit;
@@ -74,6 +62,7 @@ typedef struct{
     
     /* Applications COUNTERS */
     S_Counter cntReceive;
+    S_Counter cntWait;
 
     /* Application's FIFOS descriptors */
     S_Fifo fifoDesc_tx;
@@ -82,10 +71,6 @@ typedef struct{
     /* Application's FIFOS buffers */
     uint8_t fifoBuff_tx[ESP_FIFO_SIZE];
     uint8_t fifoBuff_rx[ESP_FIFO_SIZE];
-    
-    /* Buffer to store response commands */
-    char resBuffer[ESP_FIFO_SIZE];
-    
 } ESP_DATA;
 
 
@@ -96,7 +81,9 @@ void ESP_Tasks( void );
 
 bool ESP_SendCommand( char *command );
 
-bool ESP_GetResponse( void );
+//static bool ESP_GetResponse( void );
+
+//static bool ESP_Translate( void )
 
 #endif /* _ESP_H */
 

@@ -8,7 +8,7 @@
  *                                                                      
  *******************************************************************************
  * 
- * File    		: FIFO.c
+ * File    		: fifo.c
  * Version		: 1.0
  * 
  *******************************************************************************
@@ -140,7 +140,7 @@ uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor )
  *
  * @param fifoDescriptor Pointer to the FIFO descriptor structure.
  * @param value         The value to add to the FIFO.
- * @return 1 if (OK), 0 if (FIFO FULL).
+ * @return true if (OK), false if (FIFO FULL).
  */
 bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
 {
@@ -180,7 +180,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
  *
  * @param fifoDescriptor Pointer to the FIFO descriptor structure.
  * @param value         Pointer to store the retrieved value.
- * @return 1 if (OK), 0 if (FIFO EMPTY).
+ * @return true if (OK), false if (FIFO EMPTY).
  */
 bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value )
 {
@@ -210,6 +210,42 @@ bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value )
         *value = 0;
     }
 
+    /* Return status */
+    return readStatus;
+}
+
+/******************************************************************************/
+
+/**
+ * @brief FIFO_GetBuffer
+ *
+ * This function attempts to get all the FIFO in a buffer.
+ * If the FIFO is empty, returns 0 (FIFO EMPTY),
+ * otherwise, it gets the value and returns 1 (OK).
+ *
+ * @param fifoDescriptor Pointer to the FIFO descriptor structure.
+ * @param buffer         Pointer to the buffer to sore the FIFO.
+ * @return true if (OK), false if (FIFO EMPTY).
+ */
+bool FIFO_GetBuffer( S_Fifo *fifoDescriptor , uint8_t *buffer )
+{
+    /* Local variables declaration */
+    bool readStatus;
+    uint8_t value;
+    uint8_t *p_buffer;
+    
+    readStatus = false;
+    value = 0x00;
+    p_buffer = buffer;
+    
+    /* True = values in FIFO ; False = FIFO empty */
+    while(FIFO_Get(fifoDescriptor, &value))
+    {
+        *p_buffer = value;
+        p_buffer++;
+        readStatus = true;
+    }
+    
     /* Return status */
     return readStatus;
 }

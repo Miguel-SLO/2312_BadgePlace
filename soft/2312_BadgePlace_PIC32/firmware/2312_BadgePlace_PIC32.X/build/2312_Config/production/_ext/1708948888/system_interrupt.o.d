@@ -4,6 +4,9 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
  ../src/system_config/2312_Config/system_config.h \
  ../src/system_config/2312_Config/system_definitions.h \
  ../../../../../../framework/system/common/sys_module.h \
+ ../../../../../../framework/driver/oc/drv_oc.h \
+ ../../../../../../framework/driver/driver_common.h \
+ ../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h \
  ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
@@ -88,7 +91,6 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
  ../../../../../../framework/system/int/sys_int_mapping.h \
  ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
- ../../../../../../framework/driver/driver_common.h \
  ../../../../../../framework/peripheral/tmr/plib_tmr.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_processor.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_p32xxxx.h \
@@ -246,7 +248,8 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
  ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
  ../src/modules/counter.h ../src/led.h ../src/bzr.h \
  ../src/modules/counter.h \
- ../src/system_config/2312_Config/system_definitions.h
+ ../src/system_config/2312_Config/system_definitions.h \
+ ../src/modules/SerialTimer.h
 
 ../../../../../../framework/system/common/sys_common.h:
 
@@ -257,6 +260,12 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
 ../src/system_config/2312_Config/system_definitions.h:
 
 ../../../../../../framework/system/common/sys_module.h:
+
+../../../../../../framework/driver/oc/drv_oc.h:
+
+../../../../../../framework/driver/driver_common.h:
+
+../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h:
 
 ../../../../../../framework/system/devcon/sys_devcon.h:
 
@@ -425,8 +434,6 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
 ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr.h:
-
-../../../../../../framework/driver/driver_common.h:
 
 ../../../../../../framework/peripheral/tmr/plib_tmr.h:
 
@@ -751,3 +758,5 @@ build/2312_Config/production/_ext/1708948888/system_interrupt.o: \
 ../src/modules/counter.h:
 
 ../src/system_config/2312_Config/system_definitions.h:
+
+../src/modules/SerialTimer.h:

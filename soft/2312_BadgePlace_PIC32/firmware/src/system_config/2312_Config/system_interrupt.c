@@ -67,6 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "bzr.h"
 #include "modules/counter.h"
 #include "system_definitions.h"
+#include "modules/SerialTimer.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -91,14 +92,16 @@ void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
 }
 */
 
-void __ISR(_TIMER_1_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance0(void)
+void __ISR(_TIMER_1_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance0(void)
 {
     CNT_CallBack();
     
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
 }
-void __ISR(_TIMER_2_VECTOR, ipl1AUTO) IntHandlerDrvTmrInstance1(void)
+void __ISR(_TIMER_2_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance1(void)
 {
+    STR_CallBack();
+    
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
 void __ISR(_TIMER_3_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance2(void)

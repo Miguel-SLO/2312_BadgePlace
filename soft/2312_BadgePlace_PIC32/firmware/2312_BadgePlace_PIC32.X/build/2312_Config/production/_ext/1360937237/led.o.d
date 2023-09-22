@@ -3,6 +3,9 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
  ../src/system_config/2312_Config/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
+ ../../../../../../framework/driver/oc/drv_oc.h \
+ ../../../../../../framework/driver/driver_common.h \
+ ../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h \
  ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
@@ -87,7 +90,6 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
  ../../../../../../framework/system/int/sys_int_mapping.h \
  ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
- ../../../../../../framework/driver/driver_common.h \
  ../../../../../../framework/peripheral/tmr/plib_tmr.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_processor.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_p32xxxx.h \
@@ -243,7 +245,8 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
  ../src/app.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
  ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
- ../src/modules/counter.h ../src/led.h ../src/bzr.h
+ ../src/modules/counter.h ../src/led.h ../src/bzr.h \
+ ../src/modules/TLC5973.h
 
 ../src/led.h:
 
@@ -254,6 +257,12 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 ../../../../../../framework/system/common/sys_common.h:
 
 ../../../../../../framework/system/common/sys_module.h:
+
+../../../../../../framework/driver/oc/drv_oc.h:
+
+../../../../../../framework/driver/driver_common.h:
+
+../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h:
 
 ../../../../../../framework/system/devcon/sys_devcon.h:
 
@@ -422,8 +431,6 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr.h:
-
-../../../../../../framework/driver/driver_common.h:
 
 ../../../../../../framework/peripheral/tmr/plib_tmr.h:
 
@@ -746,3 +753,5 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 ../src/led.h:
 
 ../src/bzr.h:
+
+../src/modules/TLC5973.h:

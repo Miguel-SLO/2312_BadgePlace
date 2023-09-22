@@ -11,6 +11,8 @@
           <itemPath>../src/modules/RFIDB1ClientInterface.h</itemPath>
           <itemPath>../src/modules/RFIDB1ClientProtocol.h</itemPath>
           <itemPath>../src/modules/counter.h</itemPath>
+          <itemPath>../src/modules/SerialTimer.h</itemPath>
+          <itemPath>../src/modules/TLC5973.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="2312_Config" projectFiles="true">
@@ -124,6 +126,8 @@
           <itemPath>../src/modules/RFIDB1ClientInterface.c</itemPath>
           <itemPath>../src/modules/RFIDB1ClientProtocol.c</itemPath>
           <itemPath>../src/modules/counter.c</itemPath>
+          <itemPath>../src/modules/SerialTimer.c</itemPath>
+          <itemPath>../src/modules/TLC5973.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="2312_Config" projectFiles="true">

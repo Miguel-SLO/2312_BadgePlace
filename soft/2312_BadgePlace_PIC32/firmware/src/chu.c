@@ -160,7 +160,6 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
     uint8_t i_data = 0;
     uint8_t freeSize;
     uint8_t tempData = 0;
-    volatile uint16_t sizeTemp = size; 
     
     freeSize = FIFO_GetWriteSpace(&fifoDescr_tx);
     

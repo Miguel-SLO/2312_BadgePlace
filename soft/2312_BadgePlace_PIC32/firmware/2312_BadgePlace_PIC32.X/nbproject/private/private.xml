@@ -4,12 +4,23 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/esp.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/fifo.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/counter.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/system_config/2312_Config/system_init.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/TLC5973.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/main.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/bzr.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/SerialTimer.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/system_config/2312_Config/system_config.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/SerialTimer.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/counter.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/chu.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/system_config/2312_Config/framework/driver/oc/src/drv_oc_static.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/led.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/system_config/2312_Config/system_tasks.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/system_config/2312_Config/system_interrupt.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/esp.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/fifo.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/app.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/modules/TLC5973.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/src/app.h</file>
         </group>
     </open-files>
 </project-private>

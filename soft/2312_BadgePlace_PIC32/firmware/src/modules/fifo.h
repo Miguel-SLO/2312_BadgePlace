@@ -46,7 +46,6 @@ typedef struct fifo {
    uint8_t *read;   
    uint8_t *start;  	
    uint8_t *end;  	
-   
 } S_Fifo;
 
 /******************************************************************************/

@@ -16,6 +16,7 @@
 
 #define ESP_FIFO_SIZE 50
 
+#define AT_CMD_AT "AT"
 #define AT_CMD_SIZE 20
 #define AT_DATA_SIZE 50
 #define AT_ACK_SIZE 10

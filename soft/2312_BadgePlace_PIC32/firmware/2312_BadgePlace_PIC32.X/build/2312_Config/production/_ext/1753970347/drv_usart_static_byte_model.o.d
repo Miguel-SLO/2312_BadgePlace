@@ -4,6 +4,9 @@ build/2312_Config/production/_ext/1753970347/drv_usart_static_byte_model.o: \
  ../src/system_config/2312_Config/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
+ ../../../../../../framework/driver/oc/drv_oc.h \
+ ../../../../../../framework/driver/driver_common.h \
+ ../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h \
  ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
@@ -88,7 +91,6 @@ build/2312_Config/production/_ext/1753970347/drv_usart_static_byte_model.o: \
  ../../../../../../framework/system/int/sys_int_mapping.h \
  ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
- ../../../../../../framework/driver/driver_common.h \
  ../../../../../../framework/peripheral/tmr/plib_tmr.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_processor.h \
  ../../../../../../framework/peripheral/tmr/processor/tmr_p32xxxx.h \
@@ -253,6 +255,12 @@ build/2312_Config/production/_ext/1753970347/drv_usart_static_byte_model.o: \
 ../../../../../../framework/system/common/sys_common.h:
 
 ../../../../../../framework/system/common/sys_module.h:
+
+../../../../../../framework/driver/oc/drv_oc.h:
+
+../../../../../../framework/driver/driver_common.h:
+
+../src/system_config/2312_Config/framework/driver/oc/drv_oc_static.h:
 
 ../../../../../../framework/system/devcon/sys_devcon.h:
 
@@ -421,8 +429,6 @@ build/2312_Config/production/_ext/1753970347/drv_usart_static_byte_model.o: \
 ../src/system_config/2312_Config/framework/driver/tmr/drv_tmr_static.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr.h:
-
-../../../../../../framework/driver/driver_common.h:
 
 ../../../../../../framework/peripheral/tmr/plib_tmr.h:
 

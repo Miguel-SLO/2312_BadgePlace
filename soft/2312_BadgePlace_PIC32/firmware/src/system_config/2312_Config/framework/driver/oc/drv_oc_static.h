@@ -66,6 +66,7 @@ void DRV_OC0_Disable(void);
 void DRV_OC0_Start(void);
 void DRV_OC0_Stop(void);
 bool DRV_OC0_FaultHasOccurred(void);
+void DRV_OC0_PulseWidthSet(uint32_t pulseWidth);
 #endif // #ifndef _DRV_OC_STATIC_H
 
 /*******************************************************************************

@@ -57,7 +57,7 @@ void CNT_Initialize(S_Counter *counter, uint32_t target);
 bool CNT_Check( S_Counter *counter );
 
 /******************************************************************************/
-
+void CNT_Set( S_Counter *counter, uint32_t target );
 void CNT_Reset( S_Counter *counter );
 
 /******************************************************************************/

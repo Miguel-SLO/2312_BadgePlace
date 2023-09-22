@@ -21,7 +21,7 @@ char AT_RES_NOP[]   = "";
 char AT_RES_OK[]    = "\r\nOK\r\n";
 char AT_RES_ERROR[] = "\r\nERROR\r\n";
 
-char AT_CMD_AT[]        = "AT";
+//char AT_CMD_AT[]        = "AT";
 char AT_CMD_RST[]       = "AT+RST";
 char AT_CMD_CWMODEIS[]  = "AT+CWMODE=1";
 char AT_CMD_CWMODE[]    = "AT+CWMODE?";
@@ -45,7 +45,7 @@ void ESP_Initialize ( void )
     espData.receive  = false;
     
     CNT_Initialize(&espData.cntReceive, ESP_COUNT_RECEIVE_MS);
-    CNT_Initialize(&espData.cntWait, ESP_COUNT_WAIT_MS)
+    CNT_Initialize(&espData.cntWait, ESP_COUNT_WAIT_MS);
     
     /* Initialize FIFO descriptors */
     FIFO_Initialize(&espData.fifoDesc_tx, ESP_FIFO_SIZE, espData.fifoBuff_tx, 0x00);
@@ -60,7 +60,7 @@ void ESP_Tasks ( void )
         /* Application's initial state. */
         case ESP_STATE_INIT:
         {
-            //espData.transmit = ESP_SendCommand(AT_CMD_AT);            
+            espData.transmit = ESP_SendCommand(AT_CMD_AT);            
             espData.state = ESP_STATE_IDLE;
             break;
         }

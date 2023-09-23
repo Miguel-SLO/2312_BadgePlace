@@ -14,6 +14,8 @@
  *******************************************************************************
  *
  * Description 	: Interface and data conversion for TLC5973
+ *				  Number of drivers in serie has to be defined by user
+ *				  A cycle represent a bit encoded as defined by datasheet
  *  
  *******************************************************************************
  *
@@ -28,35 +30,27 @@
  *
  ******************************************************************************/
 
-/******************************************************************************/
-
-/******************************************************************************/
-
 #include "TLC5973.h"
 #include "SerialTimer.h"
-
-/******************************************************************************/
 
 /******************************************************************************/
 
 /* Number of drivers connected in series */
 #define DRIVER_COUNT 3
 
-/******************************************************************************/
+/*----------------------------------------------------------------------------*/
 
+/* Number of channels per driver */
 #define CHANNEL_COUNT 3
 
 /* Single field cycles count */
 #define FLD_CYCLE_COUNT 12
 
+/* Sequences cycles count */
 #define DWS_CYCLE_COUNT 48
 #define DWS_TOTAL_COUNT (DWS_CYCLE_COUNT * DRIVER_COUNT)
-
-/* End Of Sequence cycles count */
 #define EOS_CYCLE_COUNT 4
 #define EOS_TOTAL_COUNT (EOS_CYCLE_COUNT * (DRIVER_COUNT - 1))
-
-/* GrayScale Latch cycles count */
 #define GSL_CYCLE_COUNT 10
 
 /* Size of the buffer to store cycles */
@@ -65,47 +59,51 @@
 /* Buffer offset for each driver */
 #define DWS_OFFSET (DWS_CYCLE_COUNT + EOS_CYCLE_COUNT)
 
-/* Each packet starts with a write command */
+/* Each driver starts with a write command */
 #define WRITE_COMMAND 0x3AA
 
-/* High state cycle encoding */
+/* Cycles values encoding */
 #define CYCLE_CODE_HIGH 0x05
-
-/* Low state cycle encoding */
 #define CYCLE_CODE_LOW  0x01
-
-/* Skip state cycle encoding */
 #define CYCLE_CODE_SKIP 0x00
 
-/* Number of fields per packet */
-#define FIELD_COUNT 4
-
-/* Mask to single bit in field */
+/* Mask to MSB bit in field */
 #define FIELD_MASK 0x800
 
 /******************************************************************************/
-/******************************************************************************/
 
-typedef struct{
-    /* Output value for channel */
+typedef struct
+{
+    /* Output value of the channel */
     uint16_t out;
+	
     /* Pointers where values will be stored in CYCLE buffer */
     uint8_t *p_out;
-    /* New value in channel */
+	
+    /* Flag new value set on channel */
     bool newValue;
+	
 }S_TLC_CHANNEL;
 
-typedef struct{
+/* Struct of a single driver */
+typedef struct
+{
+	/* Each driver has 3 output channel */
     S_TLC_CHANNEL channel[CHANNEL_COUNT];
+	
+	/* Flag new value set on driver */
     bool newValue;
+	
 }S_TLC_DRIVER;
 
+/******************************************************************************/
+
 S_TLC_CHANNEL tlcCommands[DRIVER_COUNT];
+
 S_TLC_DRIVER tlcDrivers[DRIVER_COUNT];
 
 uint8_t cyclesBuffer[TLC_BUFFER_SIZE];
 
-/******************************************************************************/
 /******************************************************************************/
 
 static bool TLC_SetChannel(S_TLC_CHANNEL *channel, uint16_t value);
@@ -207,18 +205,18 @@ bool TLC_SetDriver(E_TLC_DRV_ID driver, uint16_t out0, uint16_t out1, uint16_t o
     return status;
 }
 
+/* Ya pas besoin de créer le statut, suffit d'utiliser "newValue" comme statut */
 static bool TLC_SetChannel(S_TLC_CHANNEL *channel, uint16_t value)
 {
     bool status;
     
-    status = false;
+	/* Detect if there's a new value */
+    status = (channel->out != value);
     
-    if(channel->out != value)
+    if(status)
     {
         channel->out = value;
         channel->newValue = true;
-        
-        status = true;
     }
     
     return status;

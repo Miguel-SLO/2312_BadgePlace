@@ -19,7 +19,7 @@
  *******************************************************************************
  *
  * Author 		: Miguel Santos
- * Date 		: 14.09.2023
+ * Date 		: 25.09.2023
  *
  *******************************************************************************
  *
@@ -44,6 +44,7 @@
  * @param fifoSize      The size of the FIFO.
  * @param fifoStart     Pointer to the beginning of the FIFO memory.
  * @param initialValue  The initial value to set for all elements in the FIFO.
+ * @return void
  */
 void FIFO_Initialize( S_Fifo *fifoDescriptor, uint16_t fifoSize,
 				uint8_t *fifoStart, uint8_t initialValue )
@@ -172,7 +173,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
 /******************************************************************************/
 
 /**
- * @brief FIFO_Get
+ * @brief FIFO_GetData
  *
  * This function attempts to get a value from the FIFO.
  * If the FIFO is empty, returns 0 (FIFO EMPTY),
@@ -182,7 +183,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value )
  * @param value         Pointer to store the retrieved value.
  * @return true if (OK), false if (FIFO EMPTY).
  */
-bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value )
+bool FIFO_GetData( S_Fifo *fifoDescriptor , uint8_t *value )
 {
     /* Local variables declaration */
     bool readStatus;
@@ -239,7 +240,7 @@ bool FIFO_GetBuffer( S_Fifo *fifoDescriptor , uint8_t *buffer )
     p_buffer = buffer;
     
     /* True = values in FIFO ; False = FIFO empty */
-    while(FIFO_Get(fifoDescriptor, &value))
+    while(FIFO_GetData(fifoDescriptor, &value))
     {
         *p_buffer = value;
         p_buffer++;

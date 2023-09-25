@@ -1,71 +1,112 @@
+/*******************************************************************************
+ *    ________  _________  ____    ____  _____          ________   ______   
+ *   |_   __  ||  _   _  ||_   \  /   _||_   _|        |_   __  |.' ____ \  
+ *     | |_ \_||_/ | | \_|  |   \/   |    | |     ______ | |_ \_|| (___ \_| 
+ *     |  _| _     | |      | |\  /| |    | |   _|______||  _| _  _.____`.  
+ *    _| |__/ |   _| |_    _| |_\/_| |_  _| |__/ |      _| |__/ || \____) | 
+ *   |________|  |_____|  |_____||_____||________|     |________| \______.' 
+ *                                                                      
+ *******************************************************************************
+ * 
+ * File    		: esp.c
+ * Version		: 1.0
+ * 
+ *******************************************************************************
+ *
+ * Description 	: Managing ESP32 state machine and commands
+ *  
+ *******************************************************************************
+ *
+ * Author 		: Miguel Santos
+ * Date 		: 25.09.2023
+ *
+ *******************************************************************************
+ *
+ * MPLAB X 		: 5.45
+ * XC32 		: 2.50
+ * Harmony 		: 2.06
+ *
+ ******************************************************************************/
+
 #include "esp.h"
 
+/******************************************************************************/
 
-#define DEBUG_LED PORTGbits.RG9
+/* Enable or disable debug of specific parts by (un)comment */
+#ifndef DEBUG_LED
+    #define DEBUG_LED PORTGbits.RG9
+#endif
 //#define DEBUG_ESP_UART
 //#define DEBUG_ESP_GET
 //#define DEBUG_ESP_SEND
 
-#define ESP_COUNT_RECEIVE_MS 20
-#define ESP_COUNT_WAIT_MS 2000
+/******************************************************************************/
 
-#define ESP_USART_ID USART_ID_1
-#define ESP_INT_SOURCE_USART_ERROR INT_SOURCE_USART_1_ERROR
-#define ESP_INT_SOURCE_USART_RECEIVE INT_SOURCE_USART_1_RECEIVE
+/* Define UART and interupts used by ESP32 */
+#define ESP_USART_ID                  USART_ID_1
+#define ESP_INT_SOURCE_USART_ERROR    INT_SOURCE_USART_1_ERROR
+#define ESP_INT_SOURCE_USART_RECEIVE  INT_SOURCE_USART_1_RECEIVE
 #define ESP_INT_SOURCE_USART_TRANSMIT INT_SOURCE_USART_1_TRANSMIT
 
-#define AT_ACK_OK "OK"
-#define AT_ACK_ERROR "ERROR"
+/******************************************************************************/
 
-char AT_RES_NOP[]   = "";
-char AT_RES_OK[]    = "\r\nOK\r\n";
-char AT_RES_ERROR[] = "\r\nERROR\r\n";
+/* Time to wait for fifo to be filled */
+#define ESP_COUNT_RECEIVE_MS 20
 
-//char AT_CMD_AT[]        = "AT";
-char AT_CMD_RST[]       = "AT+RST";
-char AT_CMD_CWMODEIS[]  = "AT+CWMODE=1";
-char AT_CMD_CWMODE[]    = "AT+CWMODE?";
-char AT_CMD_CWJAP[]     = "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\"";
+/* Time waiting for a response of main app */
+#define ESP_COUNT_WAIT_MS 2000
 
-/* Global application's data */
+/******************************************************************************/
+
+/* Declaration of global application data */
 ESP_DATA espData;
 
-//static bool ESP_GetResponse( void );
-//
-//static bool ESP_Translate( void );
+/******************************************************************************/
 
-/* Initialize */
+/**
+ * @brief ESP_Initialize
+ *
+ * Initialize ESP32 state machine, counters and FIFOs
+ *
+ * @param  void
+ * @return void
+ */
 void ESP_Initialize ( void )
 {
     /* Place the App state machine in its default state. */
-    espData.state = ESP_STATE_INIT;
+    espData.state = ESP_STATE_IDLE;
     
     /* Initial flags values */
     espData.transmit = false;
     espData.receive  = false;
     
+    /* Initialize timing counters */
     CNT_Initialize(&espData.cntReceive, ESP_COUNT_RECEIVE_MS);
     CNT_Initialize(&espData.cntWait, ESP_COUNT_WAIT_MS);
     
     /* Initialize FIFO descriptors */
-    FIFO_Initialize(&espData.fifoDesc_tx, ESP_FIFO_SIZE, espData.fifoBuff_tx, 0x00);
-    FIFO_Initialize(&espData.fifoDesc_rx, ESP_FIFO_SIZE, espData.fifoBuff_rx, 0x00);
+    FIFO_Initialize(&espData.fifoDesc_tx, ESP_FIFO_SIZE,
+                        espData.fifoBuff_tx, 0x00);
+    FIFO_Initialize(&espData.fifoDesc_rx, ESP_FIFO_SIZE,
+                        espData.fifoBuff_rx, 0x00);
 }
 
+/******************************************************************************/
+
+/**
+ * @brief ESP_Tasks
+ *
+ * Execute ESP32 state machine, should be called cyclically
+ *
+ * @param  void
+ * @return void
+ */
 void ESP_Tasks ( void )
 {
-    /* Check the application's current state. */
+    /* Check current state. */
     switch ( espData.state )
-    {
-        /* Application's initial state. */
-        case ESP_STATE_INIT:
-        {
-            espData.transmit = ESP_SendCommand(AT_CMD_AT);            
-            espData.state = ESP_STATE_IDLE;
-            break;
-        }
-        
-        /* Application's waiting for next state */
+    {        
+        /* Waiting for next state */
         case ESP_STATE_IDLE:
         {
             /* Something to transmit in FIFO */
@@ -82,7 +123,7 @@ void ESP_Tasks ( void )
             break;
         }
         
-        /* Application's transmitting a message */
+        /* A new message has to be transmitted */
         case ESP_STATE_TRANSMIT:
         {
             /* Check if data still available in FIFO */
@@ -103,10 +144,10 @@ void ESP_Tasks ( void )
             break;
         }
         
-        /* Application's received a message */
+        /* Receiving a message by UART */
         case ESP_STATE_RECEIVE:
         {            
-            /* Waiting to reach reception counter */
+            /* Waiting for fifo to be filled */
             if(CNT_Check(&espData.cntReceive))
             {
                 if(FIFO_GetBuffer(&espData.fifoDesc_rx, (uint8_t*)&espData.resBuffer))
@@ -132,6 +173,7 @@ void ESP_Tasks ( void )
             break;
         }
         
+        /* Translating different parts of the message received */
         case ESP_STATE_TRANSLATE:
         {
             /* A command is detected */
@@ -170,12 +212,12 @@ void ESP_Tasks ( void )
             break;
         }
         
+        /* Waiting for main application to answer */
         case ESP_STATE_WAIT:
         {
-            /* Waiting for APP to answer */
             if(CNT_Check(&espData.cntWait))
             {
-                
+                espData.state = ESP_STATE_IDLE;
             }
             break;
         }
@@ -189,6 +231,16 @@ void ESP_Tasks ( void )
     }
 }
 
+/******************************************************************************/
+
+/**
+ * @brief ESP_SendCommand
+ *
+ * Send a command to the ESP32, managed by state machine
+ *
+ * @param  char Command to send ; Use constant definitions 
+ * @return bool True = command send ; False = Not allowed to send a command
+ */
 bool ESP_SendCommand( char *p_command )
 {
     /* Local variables */
@@ -241,41 +293,14 @@ bool ESP_SendCommand( char *p_command )
     return commandStatus;
 }
 
-//static bool ESP_GetResponse( void )
-//{
-//    S_Fifo *p_fifoDesc;
-//    uint8_t *p_char;
-//    uint8_t value;
-//    bool responseStatus;
-//    
-//    /* DEBUG */
-//    #ifdef DEBUG_ESP_GET
-//        DEBUG_LED = true;
-//    #endif
-//
-//    /* Default response status */
-//    responseStatus = false; 
-//    /* Point to the desired FIFO */
-//    p_fifoDesc = &espData.fifoDesc_rx; 
-//    /* Point to current char */
-//    p_char = (uint8_t*)espData.p_resBuffer;
-//
-//    responseStatus = FIFO_Get(p_fifoDesc, &value);
-//    
-//    if(responseStatus)
-//    {
-//        *p_char = value;
-//    }
-//    
-//    /* DEBUG */
-//    #ifdef DEBUG_ESP_RESPONSE
-//        DEBUG_LED = false;
-//    #endif
-//    
-//    /* Feedback */
-//    return responseStatus;
-//}
+/******************************************************************************/
 
+/**
+ * @brief _IntHandlerDrvUsartInstance0
+ *
+ * Interrupt instance to manage UART communication to ESP32
+ *
+ */
 void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
 {
     S_Fifo *RX_fifoDescriptor;
@@ -298,8 +323,6 @@ void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
     /* Reading the error interrupt flag */
     if(SYS_INT_SourceStatusGet(ESP_INT_SOURCE_USART_ERROR))
     {
-        /* This means an error has occurred */
-
         /* Clear up the error interrupt flag */
         SYS_INT_SourceStatusClear(ESP_INT_SOURCE_USART_ERROR);
     }
@@ -341,7 +364,7 @@ void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
 
         while(TX_size && !TX_BufferFull)
         {
-            FIFO_Get(TX_fifoDescriptor, &dataFifo);
+            FIFO_GetData(TX_fifoDescriptor, &dataFifo);
             PLIB_USART_TransmitterByteSend(ESP_USART_ID, dataFifo);
             TX_size = FIFO_GetReadSpace(TX_fifoDescriptor);
             TX_BufferFull = PLIB_USART_TransmitterBufferIsFull(ESP_USART_ID);
@@ -360,6 +383,6 @@ void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
     #endif
  }
 
-/*******************************************************************************
- End of File
- */
+/******************************************************************************/
+
+/* End of File ****************************************************************/

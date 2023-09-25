@@ -20,8 +20,6 @@ typedef struct
     /* The application's current state */
     LED_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-
 } LED_DATA;
 
 void LED_Initialize ( void );

@@ -112,7 +112,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
 /******************************************************************************/
 
 /**
- * @brief FIFO_Get
+ * @brief FIFO_GetData
  *
  * This function attempts to get a value from the FIFO.
  * If the FIFO is empty, returns 0 (FIFO EMPTY),
@@ -122,7 +122,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
  * @param value         Pointer to store the retrieved value.
  * @return 1 if (OK), 0 if (FIFO EMPTY).
  */
-bool FIFO_Get( S_Fifo *fifoDescriptor , uint8_t *value );
+bool FIFO_GetData( S_Fifo *fifoDescriptor , uint8_t *value );
 
 /******************************************************************************/
 

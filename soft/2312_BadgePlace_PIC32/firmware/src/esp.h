@@ -1,11 +1,37 @@
+/*******************************************************************************
+ *    ________  _________  ____    ____  _____          ________   ______   
+ *   |_   __  ||  _   _  ||_   \  /   _||_   _|        |_   __  |.' ____ \  
+ *     | |_ \_||_/ | | \_|  |   \/   |    | |     ______ | |_ \_|| (___ \_| 
+ *     |  _| _     | |      | |\  /| |    | |   _|______||  _| _  _.____`.  
+ *    _| |__/ |   _| |_    _| |_\/_| |_  _| |__/ |      _| |__/ || \____) | 
+ *   |________|  |_____|  |_____||_____||________|     |________| \______.' 
+ *                                                                      
+ *******************************************************************************
+ * 
+ * File    		: esp.h
+ * Version		: 1.0
+ * 
+ *******************************************************************************
+ *
+ * Description 	: Managing ESP32 state machine and commands
+ *  
+ *******************************************************************************
+ *
+ * Author 		: Miguel Santos
+ * Date 		: 25.09.2023
+ *
+ *******************************************************************************
+ *
+ * MPLAB X 		: 5.45
+ * XC32 		: 2.50
+ * Harmony 		: 2.06
+ *
+ ******************************************************************************/
+
 #ifndef _ESP_H
 #define _ESP_H
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
+/******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -14,46 +40,70 @@
 #include "modules/fifo.h"
 #include "modules/counter.h"
 
-#define ESP_FIFO_SIZE 50
+/******************************************************************************/
 
-#define AT_CMD_AT "AT"
+/* Buffers sizes */
+
+#define ESP_FIFO_SIZE 50
 #define AT_CMD_SIZE 20
 #define AT_DATA_SIZE 50
 #define AT_ACK_SIZE 10
 
-#ifndef TIMER_PERIOD_MS
-    #define TIMER_PERIOD_MS 1
-#endif
+/******************************************************************************/
 
+/* AT commands to send */
 
-typedef struct{
-    char command[AT_CMD_SIZE];
-    char data[AT_DATA_SIZE];
+#define AT_CMD_AT       "AT"
+#define AT_CMD_RST      "AT+RST"
+#define AT_CMD_CWMODEIS "AT+CWMODE=1"
+#define AT_CMD_CWMODE   "AT+CWMODE?"
+#define AT_CMD_CWJAP    "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\""
+
+/* AT acknowledge responses */
+
+#define AT_ACK_OK       "OK"
+#define AT_ACK_ERROR    "ERROR"
+
+/******************************************************************************/
+
+/* Structure of packets communication as defined by ESP32 datasheet */
+typedef struct
+{
+    char command[AT_CMD_SIZE];    
+    char data[AT_DATA_SIZE];    
     char ack[AT_ACK_SIZE];
+    
 } S_AT_PACKET;
 
-/* Application's state machine */
-typedef enum{
-	ESP_STATE_INIT = 0x00,
+/******************************************************************************/
+
+/* ESP state machine */
+typedef enum
+{            
+    /* Waiting for a command */
     ESP_STATE_IDLE,
+            
+    /* Transmitting a command */
     ESP_STATE_TRANSMIT,
+            
+    /* Receiving a command */
     ESP_STATE_RECEIVE,
+            
+    /* Translating the UART message */
     ESP_STATE_TRANSLATE,
+            
+    /* Waiting for main application */
     ESP_STATE_WAIT,
+            
 } E_ESP_STATES;
 
-/* Application's data */
-typedef struct{
+/******************************************************************************/
+
+/* ESP32 structure of global data */
+typedef struct
+{
     /* Application's current states */
     E_ESP_STATES state;
-    
-    S_AT_PACKET atResponse;
-    
-    /* Buffer to store response commands */
-    char resBuffer[ESP_FIFO_SIZE];
-    
-    /* Pointer to last char received */
-    char *p_resBuffer;
     
     /* Applications's flags */
     bool transmit;
@@ -72,22 +122,56 @@ typedef struct{
     /* Application's FIFOS buffers */
     uint8_t fifoBuff_tx[ESP_FIFO_SIZE];
     uint8_t fifoBuff_rx[ESP_FIFO_SIZE];
+    
+    /* Buffer to store response commands */
+    char resBuffer[ESP_FIFO_SIZE];
+    
+    /* Pointer to last char received */
+    char *p_resBuffer;
+    
+    /* Store response as different fields */
+    S_AT_PACKET atResponse;
+    
 } ESP_DATA;
 
+/******************************************************************************/
 
-
+/**
+ * @brief ESP_Initialize
+ *
+ * Initialize ESP32 state machine, counters and FIFOs
+ *
+ * @param  void
+ * @return void
+ */
 void ESP_Initialize ( void );
 
+/******************************************************************************/
+
+/**
+ * @brief ESP_Tasks
+ *
+ * Execute ESP32 state machine, should be called cyclically
+ *
+ * @param  void
+ * @return void
+ */
 void ESP_Tasks( void );
 
+/******************************************************************************/
+
+/**
+ * @brief ESP_SendCommand
+ *
+ * Send a command to the ESP32, managed by state machine
+ *
+ * @param  char Command to send ; Use constant definitions 
+ * @return bool True = command send ; False = Not allowed to send a command
+ */
 bool ESP_SendCommand( char *command );
 
-//static bool ESP_GetResponse( void );
-
-//static bool ESP_Translate( void )
+/******************************************************************************/
 
 #endif /* _ESP_H */
 
-/*******************************************************************************
- End of File
- */
+/* End of File ****************************************************************/

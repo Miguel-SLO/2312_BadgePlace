@@ -1,11 +1,39 @@
+/*******************************************************************************
+ *    ________  _________  ____    ____  _____          ________   ______   
+ *   |_   __  ||  _   _  ||_   \  /   _||_   _|        |_   __  |.' ____ \  
+ *     | |_ \_||_/ | | \_|  |   \/   |    | |     ______ | |_ \_|| (___ \_| 
+ *     |  _| _     | |      | |\  /| |    | |   _|______||  _| _  _.____`.  
+ *    _| |__/ |   _| |_    _| |_\/_| |_  _| |__/ |      _| |__/ || \____) | 
+ *   |________|  |_____|  |_____||_____||________|     |________| \______.' 
+ *                                                                      
+ *******************************************************************************
+ * 
+ * File    		: chu.h
+ * Version		: 1.0
+ * 
+ *******************************************************************************
+ *
+ * Description 	: Managing Chilli UART b1 state machine and commands
+ *                Manufacturer library is needed to interface it
+ *                https://eccel.co.uk/wp-content/downloads/C-library-for-B1.zip
+ *  
+ *******************************************************************************
+ *
+ * Author 		: Miguel Santos
+ * Date 		: 25.09.2023
+ *
+ *******************************************************************************
+ *
+ * MPLAB X 		: 5.45
+ * XC32 		: 2.50
+ * Harmony 		: 2.06
+ *
+ ******************************************************************************/
+
 #ifndef _CHU_H
 #define _CHU_H
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
+/******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -16,166 +44,126 @@
 #include "modules/fifo.h"
 #include "modules/RFIDB1ClientInterface.h"
 
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
+/******************************************************************************/
 
-extern "C" {
-
-#endif
-// DOM-IGNORE-END 
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Type Definitions
-// *****************************************************************************
-// *****************************************************************************
-
+/* Fifo buffer size */
 #define CHU_FIFO_SIZE 16
     
-/* Polling period must be a 100 multiple */
+/* Polling period must be a 100ms multiple */
 #define CHU_POLLING_PERIOD_MS 500
-    
-// *****************************************************************************
-/* Application states
 
-  Summary:
-    Application states enumeration
+/******************************************************************************/
 
-  Description:
-    This enumeration defines the valid application states.  These states
-    determine the behavior of the application at various times.
-*/
-
+/* Chilli UART State machine*/
 typedef enum
-{
-	/* Application's state machine's initial state. */
-	CHU_STATE_INIT=0,
+{            
+    /* Waiting for a command */
     CHU_STATE_IDLE,
-	CHU_STATE_SERVICE_TASKS,
-
-	/* TODO: Define states used by the application state machine. */
+            
+    /* Transmitting a command */
+    CHU_STATE_TRANSMIT,
+            
+    /* Receiving a command */
+    CHU_STATE_RECEIVE,
+            
+    /* Translating the UART message */
+    CHU_STATE_TRANSLATE,
+            
+    /* Waiting for main application */
+    CHU_STATE_WAIT,
 
 } CHU_STATES;
 
+/******************************************************************************/
 
-// *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    Application strings and buffers are be defined outside this structure.
- */
-
+/* Chilli UART structure of global data */
 typedef struct
 {
     /* The application's current state */
     CHU_STATES state;
-
-    /* TODO: Define any additional data used by the application. */
     
+    /* Applications's flags */
+    bool transmit;
+    bool receive;
+    
+    /* Application's FIFOS descriptors */
+    S_Fifo fifoDesc_tx;
+    S_Fifo fifoDesc_rx; 
+
+    /* Application's FIFOS buffers */
+    uint8_t fifoBuff_tx[CHU_FIFO_SIZE];
+    uint8_t fifoBuff_rx[CHU_FIFO_SIZE];  
 
 } CHU_DATA;
 
+/******************************************************************************/
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Routines
-// *****************************************************************************
-// *****************************************************************************
-/* These routines are called by drivers when certain events occur.
-*/
-	
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Initialization and State Machine Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/*******************************************************************************
-  Function:
-    void CHU_Initialize ( void )
-
-  Summary:
-     MPLAB Harmony application initialization routine.
-
-  Description:
-    This function initializes the Harmony application.  It places the 
-    application in its initial state and prepares it to run so that its 
-    APP_Tasks function can be called.
-
-  Precondition:
-    All other system initialization routines should be called before calling
-    this routine (in "SYS_Initialize").
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    CHU_Initialize();
-    </code>
-
-  Remarks:
-    This routine must be called from the SYS_Initialize function.
-*/
-
+/**
+ * @brief CHU_Initialize
+ *
+ * Initialize Chilli state machine, counters and FIFOs
+ * Setup objects needed for RFIDB1 interface
+ *
+ * @param  void
+ * @return void
+ */
 void CHU_Initialize ( void );
 
+/******************************************************************************/
 
-/*******************************************************************************
-  Function:
-    void CHU_Tasks ( void )
-
-  Summary:
-    MPLAB Harmony Demo application tasks function
-
-  Description:
-    This routine is the Harmony Demo application's tasks function.  It
-    defines the application's state machine and core logic.
-
-  Precondition:
-    The system and application initialization ("SYS_Initialize") should be
-    called before calling this.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    CHU_Tasks();
-    </code>
-
-  Remarks:
-    This routine must be called from SYS_Tasks() routine.
+/**
+ * @brief CHU_Tasks
+ *
+ * Execute Chilli state machine, should be called cyclically
+ *
+ * @param  void
+ * @return void
  */
-
 void CHU_Tasks( void );
 
+/******************************************************************************/
+
+/**
+ * @brief CHU_RFID_Response
+ *
+ * Function used by interface library to get a command received by UART
+ * Should not be called by user !
+ * 
+ * @param RFIDB1_ObjectT* rfid_object Pointer to RFIDB1 object used by Chilli
+ * @param uint8_t *data Output buffer of data to be receive by UART
+ * @param uint16_t size Size of the buffer
+ */
 void CHU_RFID_Response( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size );
+
+/******************************************************************************/
+
+/**
+ * @brief CHU_RFID_Request
+ *
+ * Function used by interface library to send a command by UART
+ * Should not be called by user !
+ * 
+ * @param RFIDB1_ObjectT* rfid_object Pointer to RFIDB1 object used by Chilli
+ * @param uint8_t *data Input buffer of data to be send by UART
+ * @param uint16_t size Size of the buffer
+ */
 void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size );
 
-void CHU_RFID_EnablePolling( void );
+/******************************************************************************/
+
+/**
+ * @brief CHU_RFID_EnablePolling
+ *
+ * Send a raw command to enable polling
+ * Modifiy function as needed, based on datasheet
+ *
+ * @param  void
+ * @return void
+ */
+void CHU_RFID_Polling( void );
+
+/******************************************************************************/
 
 #endif /* _CHU_H */
 
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
-}
-#endif
-//DOM-IGNORE-END
-
-/*******************************************************************************
- End of File
- */
-
+/* End of File ****************************************************************/

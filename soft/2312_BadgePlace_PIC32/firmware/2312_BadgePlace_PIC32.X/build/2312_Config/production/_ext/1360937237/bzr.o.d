@@ -242,11 +242,10 @@ build/2312_Config/production/_ext/1360937237/bzr.o: ../src/bzr.c \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/app.h ../src/chu.h ../src/modules/fifo.h \
+ ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
- ../src/modules/counter.h ../src/led.h ../src/bzr.h \
- ../../../../../../framework/peripheral/oc/plib_oc.h \
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
+ ../src/bzr.h ../../../../../../framework/peripheral/oc/plib_oc.h \
  ../../../../../../framework/peripheral/oc/processor/oc_processor.h \
  ../../../../../../framework/peripheral/oc/processor/oc_p32xxxx.h \
  ../../../../../../framework/peripheral/oc/processor/oc_p32mx795f512h.h \
@@ -753,6 +752,8 @@ build/2312_Config/production/_ext/1360937237/bzr.o: ../src/bzr.c \
 
 ../src/app.h:
 
+../src/modules/counter.h:
+
 ../src/chu.h:
 
 ../src/modules/fifo.h:
@@ -762,8 +763,6 @@ build/2312_Config/production/_ext/1360937237/bzr.o: ../src/bzr.c \
 ../src/modules/RFIDB1ClientProtocol.h:
 
 ../src/esp.h:
-
-../src/modules/counter.h:
 
 ../src/led.h:
 

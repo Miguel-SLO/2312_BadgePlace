@@ -1,50 +1,120 @@
+/*******************************************************************************
+ *    ________  _________  ____    ____  _____          ________   ______   
+ *   |_   __  ||  _   _  ||_   \  /   _||_   _|        |_   __  |.' ____ \  
+ *     | |_ \_||_/ | | \_|  |   \/   |    | |     ______ | |_ \_|| (___ \_| 
+ *     |  _| _     | |      | |\  /| |    | |   _|______||  _| _  _.____`.  
+ *    _| |__/ |   _| |_    _| |_\/_| |_  _| |__/ |      _| |__/ || \____) | 
+ *   |________|  |_____|  |_____||_____||________|     |________| \______.' 
+ *                                                                      
+ *******************************************************************************
+ * 
+ * File    		: app.c
+ * Version		: 1.0
+ * 
+ *******************************************************************************
+ *
+ * Description 	: Managing global state machine
+ *  
+ *******************************************************************************
+ *
+ * Author 		: Miguel Santos
+ * Date 		: 25.09.2023
+ *
+ *******************************************************************************
+ *
+ * MPLAB X 		: 5.45
+ * XC32 		: 2.50
+ * Harmony 		: 2.06
+ *
+ ******************************************************************************/
+
 #include "app.h"
 #include "modules/TLC5973.h"
 
+/******************************************************************************/
+
+/* Timeout for turning off output (in milliseconds) */
+#define APP_TIME_OUT_MS 7200000
+
+/* Wait time to allow user to react (in milliseconds) */
+#define APP_TIME_WAIT_MS 60000
+
+/******************************************************************************/
+
+/* Declaration of global application data */
+
 APP_DATA appData;
 
-S_Counter APP_WAIT_5S;
+/******************************************************************************/
 
+/**
+ * @brief APP_Initialize
+ *
+ * Initialize APP state machine
+ *
+ * @param void
+ * @return void
+ */
 void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
 
-    CNT_Initialize(&APP_WAIT_5S, 5000);
-    
-    /* Start timers */
-    DRV_TMR0_Start();
+    /* Initialize timeout counter */
+    CNT_Initialize(&appData.timeOut, 5000);
 }
 
+/******************************************************************************/
+
+/**
+ * @brief APP_Tasks
+ *
+ * Execute APP state machine, should be called cyclically
+ *
+ * @param void
+ * @return void
+ */
 void APP_Tasks ( void )
 {
-
     /* Check the application's current state. */
     switch ( appData.state )
     {
         /* Application's initial state. */
         case APP_STATE_INIT:
         {
-       
-            if(CNT_Check(&APP_WAIT_5S))
-            {
-                
-                BZR_PlaySequence(BZR_SEQ_TEST);
-                appData.state = APP_STATE_SERVICE_TASKS;
-            }
-
+            appData.state = APP_STATE_IDLE;
             break;
         }
 
-        case APP_STATE_SERVICE_TASKS:
+        case APP_STATE_IDLE:
         {
-            
-        
             break;
         }
-
-        /* TODO: implement your application state machine.*/
         
+        case APP_STATE_SETUP_WIFI:
+        {
+            break;
+        }
+        
+        case APP_STATE_SETUP_RFID:
+        {
+            break;
+        }
+        
+        case APP_STATE_ASKING:
+        {
+            break;
+        }
+        
+        case APP_STATE_OFF:
+        {
+            break;
+        }
+        
+        case APP_STATE_ON:
+        {
+            break;
+        } 
 
         /* The default state should never be executed. */
         default:
@@ -55,6 +125,6 @@ void APP_Tasks ( void )
     }
 }
 
-/*******************************************************************************
- End of File
- */
+/******************************************************************************/
+
+/* End of File ****************************************************************/

@@ -56,6 +56,14 @@ typedef enum
             
 } APP_STATES;
 
+typedef enum
+{
+    APP_WIFI_SEND,
+    APP_WIFI_CONNECT,
+    APP_WIFI_IP,
+    APP_WIFI_ERROR,
+}APP_WIFI_STATES;
+
 /******************************************************************************/
 
 /* Structure to hold application data */
@@ -63,6 +71,9 @@ typedef struct
 {
     /* The application's current state */
     APP_STATES state;
+    
+    APP_WIFI_STATES wifiState;
+    char *wifiMessage;
     
     /* Timeout counter used to turn off output */
     S_Counter timeOut;

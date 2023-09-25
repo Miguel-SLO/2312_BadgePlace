@@ -205,7 +205,6 @@ bool TLC_SetDriver(E_TLC_DRV_ID driver, uint16_t out0, uint16_t out1, uint16_t o
     return status;
 }
 
-/* Ya pas besoin de créer le statut, suffit d'utiliser "newValue" comme statut */
 static bool TLC_SetChannel(S_TLC_CHANNEL *channel, uint16_t value)
 {
     bool status;

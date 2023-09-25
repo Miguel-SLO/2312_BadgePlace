@@ -8,8 +8,7 @@ void LED_Initialize ( void )
     /* Place the App state machine in its initial state. */
     ledData.state = LED_STATE_INIT;
     
-    /* Initialize TLC5973 interface */
-    TLC_Initialize();
+    
 }
 
 void LED_Tasks ( void )

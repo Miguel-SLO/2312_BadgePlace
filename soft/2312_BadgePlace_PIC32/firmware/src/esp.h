@@ -45,14 +45,13 @@
 /* Buffers sizes */
 
 #define ESP_FIFO_SIZE 50
-#define AT_CMD_SIZE 20
+#define AT_CMD_SIZE 50
 #define AT_DATA_SIZE 50
 #define AT_ACK_SIZE 10
 
 /******************************************************************************/
 
 /* AT commands to send */
-
 #define AT_CMD_AT       "AT"
 #define AT_CMD_RST      "AT+RST"
 #define AT_CMD_CWMODEIS "AT+CWMODE=1"
@@ -60,7 +59,6 @@
 #define AT_CMD_CWJAP    "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\""
 
 /* AT acknowledge responses */
-
 #define AT_ACK_OK       "OK"
 #define AT_ACK_ERROR    "ERROR"
 
@@ -110,6 +108,7 @@ typedef struct
     bool receive;
     bool translate;
     bool wait;
+    bool newMessage;
     
     /* Applications COUNTERS */
     S_Counter cntReceive;
@@ -171,6 +170,8 @@ void ESP_Tasks( void );
 bool ESP_SendCommand( char *command );
 
 /******************************************************************************/
+
+char* ESP_GetData( void );
 
 #endif /* _ESP_H */
 

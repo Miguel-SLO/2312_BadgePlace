@@ -30,6 +30,9 @@
 
 #include "app.h"
 #include "modules/TLC5973.h"
+#include "driver/tmr/drv_tmr_mapping.h"
+
+#define LED_WIFI TLC_DRV_ID_0
 
 /******************************************************************************/
 
@@ -58,8 +61,16 @@ APP_DATA appData;
 void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    appData.state = APP_STATE_INIT;
+    appData.state = APP_STATE_SETUP_WIFI;
+    
+    appData.wifiState = APP_WIFI_SEND;
 
+    /* Initialize TLC5973 interface */
+    TLC_Initialize();
+    
+    DRV_TMR0_Start();
+    
+    
     /* Initialize timeout counter */
     CNT_Initialize(&appData.timeOut, 5000);
 }
@@ -88,11 +99,48 @@ void APP_Tasks ( void )
 
         case APP_STATE_IDLE:
         {
+            
             break;
         }
         
         case APP_STATE_SETUP_WIFI:
         {
+            switch(appData.wifiState)
+            {
+                case APP_WIFI_SEND:
+                {
+                    ESP_SendCommand(AT_CMD_CWJAP);
+                    TLC_SetDriver(LED_WIFI, 250, 250, 0);
+                    appData.wifiState = APP_WIFI_CONNECT;
+                    break;
+                }
+
+                case APP_WIFI_CONNECT:
+                {
+                    if(strcmp(ESP_GetData(), "WIFI CONNECTED"))
+                    {
+                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
+                        appData.wifiState = APP_WIFI_IP;                        
+                    }
+                    break;
+                }
+
+                case APP_WIFI_IP:
+                {
+                    if(strcmp(ESP_GetData(), "WIFI GOT IP"))
+                    {
+                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
+                        appData.wifiState = APP_WIFI_SEND;
+                        appData.state = APP_STATE_SETUP_RFID;
+                    }
+                    break;
+                }
+                
+                case APP_WIFI_ERROR:
+                {
+                    break;
+                }
+            }
             break;
         }
         

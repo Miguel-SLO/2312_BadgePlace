@@ -1,5 +1,5 @@
-build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
- ../src/led.h ../src/system_config/2312_Config/system_config.h \
+build/2312_Config/debug/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
+ ../src/system_config/2312_Config/system_config.h \
  ../src/system_config/2312_Config/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
@@ -242,12 +242,13 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/modules/fifo.h \
+ ../src/app.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
- ../src/bzr.h ../src/modules/TLC5973.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
+ ../src/modules/counter.h ../src/bzr.h ../src/modules/TLC5973.h \
+ ../../../../../../framework/driver/tmr/drv_tmr_mapping.h
 
-../src/led.h:
+../src/app.h:
 
 ../src/system_config/2312_Config/system_config.h:
 
@@ -737,8 +738,6 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 
 ../src/app.h:
 
-../src/modules/counter.h:
-
 ../src/chu.h:
 
 ../src/modules/fifo.h:
@@ -749,8 +748,10 @@ build/2312_Config/production/_ext/1360937237/led.o: ../src/led.c \
 
 ../src/esp.h:
 
-../src/led.h:
+../src/modules/counter.h:
 
 ../src/bzr.h:
 
 ../src/modules/TLC5973.h:
+
+../../../../../../framework/driver/tmr/drv_tmr_mapping.h:

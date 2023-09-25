@@ -245,8 +245,7 @@ build/2312_Config/production/_ext/1753970347/drv_usart_mapping.o: \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
  ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
- ../src/bzr.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/bzr.h
 
 ../src/system_config/2312_Config/system_config.h:
 
@@ -747,7 +746,5 @@ build/2312_Config/production/_ext/1753970347/drv_usart_mapping.o: \
 ../src/modules/RFIDB1ClientProtocol.h:
 
 ../src/esp.h:
-
-../src/led.h:
 
 ../src/bzr.h:

@@ -81,7 +81,6 @@ void SYS_Tasks ( void )
     APP_Tasks();
     CHU_Tasks();
     ESP_Tasks();
-    LED_Tasks();
     BZR_Tasks();
 }
 

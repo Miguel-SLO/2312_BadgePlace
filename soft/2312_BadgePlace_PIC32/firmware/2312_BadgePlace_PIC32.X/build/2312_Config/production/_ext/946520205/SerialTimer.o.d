@@ -245,8 +245,8 @@ build/2312_Config/production/_ext/946520205/SerialTimer.o: \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
  ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/led.h \
- ../src/bzr.h ../src/modules/SerialTimer.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/bzr.h \
+ ../src/modules/SerialTimer.h
 
 ../src/system_config/2312_Config/system_definitions.h:
 
@@ -747,8 +747,6 @@ build/2312_Config/production/_ext/946520205/SerialTimer.o: \
 ../src/modules/RFIDB1ClientProtocol.h:
 
 ../src/esp.h:
-
-../src/led.h:
 
 ../src/bzr.h:
 

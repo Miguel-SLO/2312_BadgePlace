@@ -49,7 +49,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <stdbool.h>
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
-#include "driver/oc/drv_oc.h"
+#include "driver/oc/drv_oc.h" 
 #include "system/devcon/sys_devcon.h"
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
@@ -60,7 +60,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "chu.h"
 #include "esp.h"
-#include "led.h"
 #include "bzr.h"
 
 

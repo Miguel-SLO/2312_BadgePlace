@@ -180,7 +180,6 @@ void SYS_Initialize ( void* data )
     APP_Initialize();
     CHU_Initialize();
     ESP_Initialize();
-    LED_Initialize();
     BZR_Initialize();
 }
 

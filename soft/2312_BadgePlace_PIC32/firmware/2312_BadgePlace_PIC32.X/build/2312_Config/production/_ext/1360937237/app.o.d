@@ -245,8 +245,8 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
  ../src/app.h ../src/chu.h ../src/modules/fifo.h \
  ../src/modules/RFIDB1ClientInterface.h \
  ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
- ../src/modules/counter.h ../src/led.h ../src/bzr.h \
- ../src/modules/TLC5973.h
+ ../src/modules/counter.h ../src/bzr.h ../src/modules/TLC5973.h \
+ ../../../../../../framework/driver/tmr/drv_tmr_mapping.h
 
 ../src/app.h:
 
@@ -750,8 +750,8 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
 
 ../src/modules/counter.h:
 
-../src/led.h:
-
 ../src/bzr.h:
 
 ../src/modules/TLC5973.h:
+
+../../../../../../framework/driver/tmr/drv_tmr_mapping.h:

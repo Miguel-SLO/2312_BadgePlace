@@ -182,13 +182,13 @@ void ESP_Tasks ( void )
                 strcpy(espData.atResponse.command, espData.p_resBuffer);
             }
             /* Acknowledge detected */
-            else if(strcmp(espData.p_resBuffer, AT_ACK_OK) ||
+            if(strcmp(espData.p_resBuffer, AT_ACK_OK) ||
                     strcmp(espData.p_resBuffer, AT_ACK_ERROR))
             {
                 strcpy(espData.atResponse.ack, espData.p_resBuffer);
             }
             /* Data is detected */
-            else if(!strcmp(espData.p_resBuffer, ""))
+            else
             {
                 strcpy(espData.atResponse.data, espData.p_resBuffer);
             }
@@ -203,6 +203,7 @@ void ESP_Tasks ( void )
                 memset(espData.resBuffer, 0x00, sizeof(espData.resBuffer));
                 
                 /* Machine states and flags */
+                espData.newMessage = true;
                 espData.translate = false;
                 espData.wait = true;
                 espData.state = ESP_STATE_WAIT;
@@ -217,6 +218,7 @@ void ESP_Tasks ( void )
         {
             if(CNT_Check(&espData.cntWait))
             {
+                espData.newMessage = false;
                 espData.state = ESP_STATE_IDLE;
             }
             break;
@@ -291,6 +293,11 @@ bool ESP_SendCommand( char *p_command )
     
     /* Feedback */
     return commandStatus;
+}
+
+char* ESP_GetData( void )
+{    
+    return espData.atResponse.data;
 }
 
 /******************************************************************************/

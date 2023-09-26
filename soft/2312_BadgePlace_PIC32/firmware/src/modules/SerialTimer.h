@@ -32,8 +32,12 @@
 #ifndef SERIAL_TIMER_H    
 #define SERIAL_TIMER_H
 
+/******************************************************************************/
+
 #include <stdint.h>
 #include <stdbool.h>
+
+/******************************************************************************/
 
 /* Size of the buffer */
 #define STR_BUFFER_SIZE 0xFF
@@ -41,23 +45,19 @@
 /* Default value of the buffer */
 #define STR_BUFFER_DEFAULT 0x00
 
-typedef struct{
-    /* Flags */
-    bool transmit;
-    
-    /* Buffer to store datas */
-    uint8_t buffer[STR_BUFFER_SIZE];
-    uint8_t *data;
-    uint8_t *last;
-    uint8_t bitPos;
-
-}STR_DATA;
+/******************************************************************************/
 
 void STR_Init( void );
 
+/******************************************************************************/
+
 void STR_AddBuffer(uint8_t *data, uint8_t size);
 
+/******************************************************************************/
+
 void STR_Start( void );
+
+/******************************************************************************/
 
 void STR_CallBack( void );
 

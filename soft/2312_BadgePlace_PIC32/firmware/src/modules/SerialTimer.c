@@ -40,11 +40,14 @@
 /* Number of bits to transmit per data */
 #define SERIAL_BITS 5
 
+/******************************************************************************/
+
 uint8_t strBuffer[STR_BUFFER_SIZE];
 uint8_t *strPointer;
+uint8_t *strLast;
 uint8_t bitPosition;
 
-STR_DATA strData;
+/******************************************************************************/
 
 void STR_Init( void )
 {
@@ -58,6 +61,8 @@ void STR_Init( void )
     bitPosition= 0;
 }
 
+/******************************************************************************/
+
 void STR_AddBuffer(uint8_t *data, uint8_t size)
 {
     uint8_t i_data;
@@ -67,13 +72,17 @@ void STR_AddBuffer(uint8_t *data, uint8_t size)
         strBuffer[i_data] = *(data + i_data);
     }
     
-    strData.last = strBuffer + size - 1;
+    strLast = strBuffer + size - 1;
 }
+
+/******************************************************************************/
 
 void STR_Start( void )
 {
     DRV_TMR_Start(STR_TMR_ID);
 }
+
+/******************************************************************************/
 
 void STR_CallBack( void )
 {    
@@ -89,7 +98,7 @@ void STR_CallBack( void )
     }
     
     /* Disable timer when reached end of buffer */
-    if(strPointer > strData.last)
+    if(strPointer > strLast)
     {
         DRV_TMR_Stop(STR_TMR_ID);
         strPointer = strBuffer;

@@ -113,8 +113,7 @@ static bool TLC_TranslateDriver(S_TLC_DRIVER *driver);
 static bool TLC_TranslateAll( void );
 
 /******************************************************************************/
-/* Initialize TLC5940 */
-/******************************************************************************/
+
 void TLC_Initialize( void )
 {
     uint8_t i_buff;
@@ -170,6 +169,8 @@ bool TLC_Transmit( void )
     return status;
 }
 
+/******************************************************************************/
+
 bool TLC_SetAll(uint16_t out0, uint16_t out1, uint16_t out2)
 {
     bool status;
@@ -184,6 +185,8 @@ bool TLC_SetAll(uint16_t out0, uint16_t out1, uint16_t out2)
     
     return status;
 }
+
+/******************************************************************************/
 
 bool TLC_SetDriver(E_TLC_DRV_ID driver, uint16_t out0, uint16_t out1, uint16_t out2)
 {
@@ -206,6 +209,8 @@ bool TLC_SetDriver(E_TLC_DRV_ID driver, uint16_t out0, uint16_t out1, uint16_t o
     return status;
 }
 
+/******************************************************************************/
+
 static bool TLC_SetChannel(S_TLC_CHANNEL *channel, uint16_t value)
 {
     bool status;
@@ -221,6 +226,8 @@ static bool TLC_SetChannel(S_TLC_CHANNEL *channel, uint16_t value)
     
     return status;
 }
+
+/******************************************************************************/
 
 static bool TLC_TranslateAll( void )
 {
@@ -241,6 +248,8 @@ static bool TLC_TranslateAll( void )
     return status;
 }
 
+/******************************************************************************/
+
 static bool TLC_TranslateDriver(S_TLC_DRIVER *driver)
 {
     bool status;
@@ -260,6 +269,8 @@ static bool TLC_TranslateDriver(S_TLC_DRIVER *driver)
     
     return status;
 }
+
+/******************************************************************************/
 
 static bool TLC_TranslateChannel(S_TLC_CHANNEL *channel)
 {

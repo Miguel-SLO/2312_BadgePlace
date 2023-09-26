@@ -61,7 +61,7 @@ APP_DATA appData;
 void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    appData.state = APP_STATE_SETUP_WIFI;
+    appData.state = APP_STATE_INIT;
     
     appData.wifiState = APP_WIFI_SEND;
 
@@ -72,7 +72,7 @@ void APP_Initialize ( void )
     
     
     /* Initialize timeout counter */
-    CNT_Initialize(&appData.timeOut, 5000);
+    CNT_Initialize(&appData.timeOut, 10);
 }
 
 /******************************************************************************/
@@ -93,54 +93,59 @@ void APP_Tasks ( void )
         /* Application's initial state. */
         case APP_STATE_INIT:
         {
+            AC_SETOn();
             appData.state = APP_STATE_IDLE;
             break;
         }
 
         case APP_STATE_IDLE:
         {
-            
+            if(CNT_Check(&appData.timeOut))
+            {
+                AC_SETOff();
+                appData.state = APP_STATE_SETUP_WIFI;
+            }
             break;
         }
         
         case APP_STATE_SETUP_WIFI:
         {
-            switch(appData.wifiState)
-            {
-                case APP_WIFI_SEND:
-                {
-                    ESP_SendCommand(AT_CMD_CWJAP);
-                    TLC_SetDriver(LED_WIFI, 250, 250, 0);
-                    appData.wifiState = APP_WIFI_CONNECT;
-                    break;
-                }
-
-                case APP_WIFI_CONNECT:
-                {
-                    if(strcmp(ESP_GetData(), "WIFI CONNECTED"))
-                    {
-                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
-                        appData.wifiState = APP_WIFI_IP;                        
-                    }
-                    break;
-                }
-
-                case APP_WIFI_IP:
-                {
-                    if(strcmp(ESP_GetData(), "WIFI GOT IP"))
-                    {
-                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
-                        appData.wifiState = APP_WIFI_SEND;
-                        appData.state = APP_STATE_SETUP_RFID;
-                    }
-                    break;
-                }
-                
-                case APP_WIFI_ERROR:
-                {
-                    break;
-                }
-            }
+//            switch(appData.wifiState)
+//            {
+//                case APP_WIFI_SEND:
+//                {
+//                    ESP_SendCommand(AT_CMD_CWJAP);
+//                    TLC_SetDriver(LED_WIFI, 250, 250, 0);
+//                    appData.wifiState = APP_WIFI_CONNECT;
+//                    break;
+//                }
+//
+//                case APP_WIFI_CONNECT:
+//                {
+//                    if(strcmp(ESP_GetData(), "WIFI CONNECTED"))
+//                    {
+//                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
+//                        appData.wifiState = APP_WIFI_IP;                        
+//                    }
+//                    break;
+//                }
+//
+//                case APP_WIFI_IP:
+//                {
+//                    if(strcmp(ESP_GetData(), "WIFI GOT IP"))
+//                    {
+//                        TLC_SetDriver(LED_WIFI, 250, 0, 250);
+//                        appData.wifiState = APP_WIFI_SEND;
+//                        appData.state = APP_STATE_SETUP_RFID;
+//                    }
+//                    break;
+//                }
+//                
+//                case APP_WIFI_ERROR:
+//                {
+//                    break;
+//                }
+//            }
             break;
         }
         

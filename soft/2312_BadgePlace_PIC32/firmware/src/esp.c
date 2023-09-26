@@ -295,11 +295,6 @@ bool ESP_SendCommand( char *p_command )
     return commandStatus;
 }
 
-char* ESP_GetData( void )
-{    
-    return espData.atResponse.data;
-}
-
 /******************************************************************************/
 
 /**

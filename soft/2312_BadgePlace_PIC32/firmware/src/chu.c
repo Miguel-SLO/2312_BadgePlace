@@ -117,7 +117,8 @@ void CHU_Tasks ( void )
         /* Application's initial state. */
         case CHU_STATE_IDLE:
         {       
-            
+            chuRfid_interface.SendDummyCommand(&chuRfid_object);
+            chuData.state = CHU_STATE_TRANSMIT;
             break;
         }
         
@@ -128,9 +129,6 @@ void CHU_Tasks ( void )
             
         case CHU_STATE_RECEIVE:
         {               
-            chuRfid_interface.SendDummyCommand(&chuRfid_object);
-            chuData.state = CHU_STATE_IDLE;
-            
             break;
         }
         

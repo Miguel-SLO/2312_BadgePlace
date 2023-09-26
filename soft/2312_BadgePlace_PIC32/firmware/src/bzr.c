@@ -43,7 +43,7 @@
 #define BZR_OC_ID OC_ID_5
 
 /* Set the volume of the buzzer by changing duty cycle */
-#define BZR_VOLUME 0.02
+#define BZR_VOLUME 0.1
 
 /******************************************************************************/
 
@@ -145,7 +145,7 @@
 
 /* Test sequence */
 int16_t BZR_SEQUENCE_TEST[] = {
-    NOTE_A4,-4, NOTE_A4,-4, NOTE_A4,16, NOTE_A4,16, NOTE_A4,16,
+    NOTE_A4,4, REST,4, NOTE_A4, 4, 
 };
 
 /* Super Mario Bros theme - by Koji Kondo*/
@@ -255,7 +255,7 @@ int16_t BZR_SEQUENCE_IMPERIAL[] = {
 S_BZR_SEQ BZR_SEQUENCES[] = {
     /* TESTING */
     {
-        .tempo = 300,
+        .tempo = 200,
         .size = sizeof(BZR_SEQUENCE_TEST),
         .notes = BZR_SEQUENCE_TEST,
     },

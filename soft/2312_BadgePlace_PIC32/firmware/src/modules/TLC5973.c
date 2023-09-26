@@ -72,6 +72,7 @@
 
 /******************************************************************************/
 
+/* Struct of a single channel */
 typedef struct
 {
     /* Output value of the channel */

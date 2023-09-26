@@ -40,6 +40,10 @@
 /* Number of bits to transmit per data */
 #define SERIAL_BITS 5
 
+uint8_t strBuffer[STR_BUFFER_SIZE];
+uint8_t *strPointer;
+uint8_t bitPosition;
+
 STR_DATA strData;
 
 void STR_Init( void )
@@ -48,10 +52,10 @@ void STR_Init( void )
 
     for(i_buffer = 0 ; i_buffer < STR_BUFFER_SIZE ; i_buffer++)
     {
-        strData.buffer[i_buffer] = STR_BUFFER_DEFAULT;
+        strBuffer[i_buffer] = STR_BUFFER_DEFAULT;
     }
-    strData.data = strData.buffer;
-    strData.bitPos = 0;
+    strPointer = strBuffer;
+    bitPosition= 0;
 }
 
 void STR_AddBuffer(uint8_t *data, uint8_t size)
@@ -60,10 +64,10 @@ void STR_AddBuffer(uint8_t *data, uint8_t size)
     
     for(i_data = 0; i_data < size ; i_data++)
     {
-        strData.buffer[i_data] = *(data + i_data);
+        strBuffer[i_data] = *(data + i_data);
     }
     
-    strData.last = strData.buffer + size - 1;
+    strData.last = strBuffer + size - 1;
 }
 
 void STR_Start( void )
@@ -73,22 +77,22 @@ void STR_Start( void )
 
 void STR_CallBack( void )
 {    
-    SERIAL_PIN = (*strData.data >> strData.bitPos) & 0x01;
+    SERIAL_PIN = (*strPointer >> bitPosition) & 0x01;
     
-    strData.bitPos++;
+    bitPosition++;
     
     /* Go back to lsb when reached limit */
-    if(strData.bitPos >= SERIAL_BITS)
+    if(bitPosition>= SERIAL_BITS)
     {
-        strData.bitPos = 0;
-        strData.data++;
+        bitPosition= 0;
+        strPointer++;
     }
     
     /* Disable timer when reached end of buffer */
-    if(strData.data > strData.last)
+    if(strPointer > strData.last)
     {
         DRV_TMR_Stop(STR_TMR_ID);
-        strData.data = strData.buffer;
+        strPointer = strBuffer;
     }
 }
 

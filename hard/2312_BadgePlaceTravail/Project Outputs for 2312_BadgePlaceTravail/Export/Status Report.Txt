@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 09:29:06 On 27/09/2023
+
+Output: Export STEP
+Type  : ExportSTEP
+From  : Variant [[No Variations]] of PCB Document [2312_BadgePlaceTravail.PcbDoc]
+   Generated File[2312_BadgePlaceTravail.step]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 09:29:24 On 27/09/2023

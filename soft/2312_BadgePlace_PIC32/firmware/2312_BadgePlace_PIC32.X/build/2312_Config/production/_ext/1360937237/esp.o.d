@@ -242,9 +242,10 @@ build/2312_Config/production/_ext/1360937237/esp.o: ../src/esp.c \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/modules/fifo.h \
+ ../src/app.h ../src/modules/counter.h ../src/chu.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h ../src/bzr.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/modules/fifo.h ../src/esp.h \
+ ../src/bzr.h
 
 ../src/esp.h:
 
@@ -740,11 +741,11 @@ build/2312_Config/production/_ext/1360937237/esp.o: ../src/esp.c \
 
 ../src/chu.h:
 
-../src/modules/fifo.h:
-
 ../src/modules/RFIDB1ClientInterface.h:
 
 ../src/modules/RFIDB1ClientProtocol.h:
+
+../src/modules/fifo.h:
 
 ../src/esp.h:
 

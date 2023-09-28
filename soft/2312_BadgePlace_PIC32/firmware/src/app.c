@@ -62,6 +62,8 @@ void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
+    
+    appData.setup_rfid = APP_RFID_STATE_START;
 
     /* Initialize TLC5973 interface */
     TLC_Initialize();
@@ -70,7 +72,10 @@ void APP_Initialize ( void )
     DRV_TMR0_Start();
     
     /* Initialize timeout counter */
-    CNT_Initialize(&appData.timeOut, 50);
+    CNT_Initialize(&appData.timeOut, 100);
+    
+    /* Initialize timeout counter */
+    CNT_Initialize(&appData.cntSetup, 1200);
 }
 
 /******************************************************************************/
@@ -91,28 +96,93 @@ void APP_Tasks ( void )
         /* Application's initial state. */
         case APP_STATE_INIT:
         {
-            AC_SETOn();
-            appData.state = APP_STATE_IDLE;
-            break;
-        }
-
-        case APP_STATE_IDLE:
-        {
-            if(CNT_Check(&appData.timeOut))
+            if(CNT_Check(&appData.cntSetup))
             {
-                AC_SETOff();
+                TLC_SetAll(0xFF, 0xFF, 0xFF);
+                TLC_SetAll(0, 0, 0);
+                TLC_Transmit();
+                
                 appData.state = APP_STATE_SETUP_WIFI;
             }
             break;
         }
-        
+
         case APP_STATE_SETUP_WIFI:
         {
+            appData.state = APP_STATE_SETUP_RFID;
             break;
         }
         
         case APP_STATE_SETUP_RFID:
         {
+            switch(appData.setup_rfid)
+            {
+                case APP_RFID_STATE_START:
+                {
+                    TLC_SetDriver(RFID_LED, 0x00, 0x066, 0xFFF);
+                    TLC_Transmit();
+                    appData.setup_rfid = APP_RFID_STATE_SETUP;
+                    CNT_Reset(&appData.cntSetup);
+                    break;
+                }
+                case APP_RFID_STATE_SETUP:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        CHU_RFID_EnablePolling();
+                        appData.setup_rfid = APP_RFID_STATE_CHECK;
+                        CNT_Reset(&appData.cntSetup);
+                    }
+                    break;
+                }
+                case APP_RFID_STATE_CHECK:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        if(!CHU_IsWaiting())
+                        {
+                            if(CHU_RFID_IsOk())
+                            {
+                                TLC_SetDriver(RFID_LED, 0x000, 0xFFF, 0x000);
+                                appData.setup_rfid = APP_RFID_STATE_STOP;
+                            }
+                            else
+                            {
+                                TLC_SetDriver(RFID_LED, 0x000, 0x000, 0xFFF);
+                                appData.setup_rfid = APP_RFID_STATE_START;
+                                appData.state = APP_STATE_INIT;
+                            }
+                            TLC_Transmit();
+                        }
+                    }
+                    break;
+                }
+                case APP_RFID_STATE_STOP:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        TLC_SetDriver(RFID_LED, 0x000, 0x000, 0x000);
+                        TLC_Transmit();
+                        appData.state = APP_STATE_IDLE;
+                    }
+                    break;
+                }
+            }
+            break;
+        }
+        
+        case APP_STATE_IDLE:
+        {
+            if(CHU_RFID_NewMessage())
+            {
+                CHU_RFID_GetMessage(appData.uuid);
+                if(strcmp(appData.uuid, "321B4A90"))
+                {
+                    BZR_PlaySequence(BZR_SEQ_IMPERIAL);
+                }
+                break;
+            }
+            
             break;
         }
         

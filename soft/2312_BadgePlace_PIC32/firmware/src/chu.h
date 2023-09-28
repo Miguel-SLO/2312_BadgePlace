@@ -41,13 +41,14 @@
 #include <stdlib.h>
 #include "system_config.h"
 #include "system_definitions.h"
-#include "modules/fifo.h"
 #include "modules/RFIDB1ClientInterface.h"
+#include "modules/fifo.h"
+#include "modules/counter.h"
 
 /******************************************************************************/
 
 /* Fifo buffer size */
-#define CHU_FIFO_SIZE 16
+#define CHU_FIFO_SIZE 0xFF
     
 /* Polling period must be a 100ms multiple */
 #define CHU_POLLING_PERIOD_MS 500
@@ -85,6 +86,10 @@ typedef struct
     /* Applications's flags */
     bool transmit;
     bool receive;
+    bool waiting;
+    
+    /* Application's counters */
+    S_Counter cntReceive;
     
     /* Application's FIFOS descriptors */
     S_Fifo fifoDesc_tx;
@@ -92,7 +97,19 @@ typedef struct
 
     /* Application's FIFOS buffers */
     uint8_t fifoBuff_tx[CHU_FIFO_SIZE];
-    uint8_t fifoBuff_rx[CHU_FIFO_SIZE];  
+    uint8_t fifoBuff_rx[CHU_FIFO_SIZE];
+    
+    uint8_t rfidBuff_in[CHU_FIFO_SIZE];
+    uint8_t rfidBuff_out[CHU_FIFO_SIZE];
+    
+    uint8_t rfidBuffer[CHU_FIFO_SIZE];
+    uint8_t rfidSize;
+    RFIDB1_StatusT rfidStatus;
+    bool rfidWaiting;
+    bool rfidOk;
+    bool rfidNewMessage;
+
+    char rfid_uuid[12];
 
 } CHU_DATA;
 
@@ -160,7 +177,15 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
  * @param  void
  * @return void
  */
-void CHU_RFID_Polling( void );
+void CHU_RFID_EnablePolling( void );
+
+bool CHU_IsWaiting( void );
+
+bool CHU_RFID_IsOk( void );
+
+bool CHU_RFID_NewMessage( void );
+void CHU_RFID_GetMessage( char* outMessage );
+
 
 /******************************************************************************/
 

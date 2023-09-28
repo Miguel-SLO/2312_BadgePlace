@@ -180,7 +180,7 @@ bool TLC_SetAll(uint16_t out0, uint16_t out1, uint16_t out2)
     
     for(i_drv = 0; i_drv < DRIVER_COUNT; i_drv++)
     {
-        status &= TLC_SetDriver(i_drv, out0, out1, out2);
+        status |= TLC_SetDriver(i_drv, out0, out1, out2);
     }
     
     return status;

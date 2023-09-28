@@ -63,7 +63,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "app.h"
 #include "chu.h"
 #include "esp.h"
-#include "led.h"
 #include "bzr.h"
 #include "modules/counter.h"
 #include "system_definitions.h"

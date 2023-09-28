@@ -43,6 +43,8 @@
 
 /******************************************************************************/
 
+#define RFID_LED TLC_DRV_ID_1
+
 /* Application states */
 typedef enum
 {
@@ -56,6 +58,14 @@ typedef enum
             
 } APP_STATES;
 
+typedef enum
+{
+    APP_RFID_STATE_START,
+    APP_RFID_STATE_SETUP,
+    APP_RFID_STATE_CHECK,
+    APP_RFID_STATE_STOP,
+}APP_RFID_STATES;
+
 /******************************************************************************/
 
 /* Structure to hold application data */
@@ -63,6 +73,12 @@ typedef struct
 {
     /* The application's current state */
     APP_STATES state;
+    
+    APP_RFID_STATES setup_rfid;
+    
+    char uuid[8];
+    
+    S_Counter cntSetup;
     
     /* Timeout counter used to turn off output */
     S_Counter timeOut;

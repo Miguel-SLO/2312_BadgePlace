@@ -84,7 +84,7 @@ extern "C" {
 #define SYS_CLK_FREQ                        80000000ul
 #define SYS_CLK_BUS_PERIPHERAL_1            80000000ul
 #define SYS_CLK_UPLL_BEFORE_DIV2_FREQ       48000000ul
-#define SYS_CLK_CONFIG_PRIMARY_XTAL         0ul
+#define SYS_CLK_CONFIG_PRIMARY_XTAL         8000000ul
 #define SYS_CLK_CONFIG_SECONDARY_XTAL       32768ul
    
 /*** Ports System Service Configuration ***/

@@ -242,10 +242,10 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../../../../../../framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../../../../../../framework/peripheral/ports/plib_ports_compatibility.h \
- ../src/app.h ../src/chu.h ../src/modules/fifo.h \
- ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/esp.h \
- ../src/modules/counter.h ../src/bzr.h ../src/modules/TLC5973.h \
+ ../src/app.h ../src/chu.h ../src/modules/RFIDB1ClientInterface.h \
+ ../src/modules/RFIDB1ClientProtocol.h ../src/modules/fifo.h \
+ ../src/modules/counter.h ../src/esp.h ../src/bzr.h \
+ ../src/modules/TLC5973.h \
  ../../../../../../framework/driver/tmr/drv_tmr_mapping.h
 
 ../src/app.h:
@@ -740,15 +740,15 @@ build/2312_Config/production/_ext/1360937237/app.o: ../src/app.c \
 
 ../src/chu.h:
 
-../src/modules/fifo.h:
-
 ../src/modules/RFIDB1ClientInterface.h:
 
 ../src/modules/RFIDB1ClientProtocol.h:
 
-../src/esp.h:
+../src/modules/fifo.h:
 
 ../src/modules/counter.h:
+
+../src/esp.h:
 
 ../src/bzr.h:
 

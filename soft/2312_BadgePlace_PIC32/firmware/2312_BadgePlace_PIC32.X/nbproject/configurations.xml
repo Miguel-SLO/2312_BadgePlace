@@ -535,6 +535,8 @@
         <property key="memories.programmemory.ranges" value="1d000000-1d07ffff"/>
         <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/microchip/harmony/v2_06/apps/2312_BadgePlace/soft/2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/debug/2312_Config/2312_BadgePlace_PIC32_ptg"/>
         <property key="programmerToGoImageName" value="2312_BadgePlace_PIC32_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

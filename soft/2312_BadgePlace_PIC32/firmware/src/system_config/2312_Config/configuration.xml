@@ -262,7 +262,7 @@
       <Template dnOrder="25">
         <Name dnOrder="0">system_config.h</Name>
         <Path dnOrder="1">Header&amp;#160;Files/app/system_config/2312_Config</Path>
-        <Checksum dnOrder="2">72B9908780FE09C194E2A95EB1B49D7A</Checksum>
+        <Checksum dnOrder="2">2FB3D8F1D09880D441AD374922BF7354</Checksum>
       </Template>
       <Template dnOrder="26">
         <Name dnOrder="0">bzr.h</Name>

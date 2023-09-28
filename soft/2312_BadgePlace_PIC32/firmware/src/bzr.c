@@ -43,7 +43,7 @@
 #define BZR_OC_ID OC_ID_5
 
 /* Set the volume of the buzzer by changing duty cycle */
-#define BZR_VOLUME 0.1
+#define BZR_VOLUME 0.05
 
 /******************************************************************************/
 
@@ -255,7 +255,7 @@ int16_t BZR_SEQUENCE_IMPERIAL[] = {
 S_BZR_SEQ BZR_SEQUENCES[] = {
     /* TESTING */
     {
-        .tempo = 200,
+        .tempo = 50,
         .size = sizeof(BZR_SEQUENCE_TEST),
         .notes = BZR_SEQUENCE_TEST,
     },

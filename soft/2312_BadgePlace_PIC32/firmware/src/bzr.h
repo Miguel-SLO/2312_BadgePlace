@@ -49,8 +49,15 @@
 typedef enum
 {
     BZR_SEQ_TEST,
+    BZR_SEQ_ZELDA,
+    BZR_SEQ_ZELDA_LULLABY,
     BZR_SEQ_MARIO,
+    BZR_SEQ_MARIO_OVER,
     BZR_SEQ_IMPERIAL,
+    BZR_SEQ_PACMAN,
+    BZR_SEQ_ERROR,
+    BZR_SEQ_TIMEOUT,
+    BZR_SEQ_TURNOFF,
 }E_BZR_SEQ;
 
 /******************************************************************************/

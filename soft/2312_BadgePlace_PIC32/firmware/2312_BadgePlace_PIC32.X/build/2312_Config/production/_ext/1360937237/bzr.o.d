@@ -260,7 +260,8 @@ build/2312_Config/production/_ext/1360937237/bzr.o: ../src/bzr.c \
  ../../../../../../framework/peripheral/oc/processor/../templates/oc_BufferValue_32Bit_Variant.h \
  ../../../../../../framework/peripheral/oc/processor/../templates/oc_PulseWidth_32Bit_Variant.h \
  ../../../../../../framework/peripheral/oc/processor/../templates/oc_BufferSize_Default.h \
- ../../../../../../framework/peripheral/oc/processor/../templates/oc_CompareModeSelect_Default.h
+ ../../../../../../framework/peripheral/oc/processor/../templates/oc_CompareModeSelect_Default.h \
+ ../src/modules/TLC5973.h
 
 ../src/bzr.h:
 
@@ -797,3 +798,5 @@ build/2312_Config/production/_ext/1360937237/bzr.o: ../src/bzr.c \
 ../../../../../../framework/peripheral/oc/processor/../templates/oc_BufferSize_Default.h:
 
 ../../../../../../framework/peripheral/oc/processor/../templates/oc_CompareModeSelect_Default.h:
+
+../src/modules/TLC5973.h:

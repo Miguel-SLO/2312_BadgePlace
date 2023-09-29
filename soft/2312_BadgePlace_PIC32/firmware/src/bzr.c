@@ -33,6 +33,7 @@
 
 #include "bzr.h"
 #include "peripheral/oc/plib_oc.h"
+#include "modules/TLC5973.h"
 
 /******************************************************************************/
 
@@ -43,8 +44,11 @@
 #define BZR_OC_ID OC_ID_5
 
 /* Set the volume of the buzzer by changing duty cycle */
-#define BZR_VOLUME 0.05
+#define BZR_VOLUME 0.02
 
+#ifndef LED_RFID
+    #define LED_RFID TLC_DRV_ID_1
+#endif
 /******************************************************************************/
 
 /* Define frequencies of notes in Hz */
@@ -148,10 +152,76 @@ int16_t BZR_SEQUENCE_TEST[] = {
     NOTE_A4,4, REST,4, NOTE_A4, 4, 
 };
 
+int16_t BZR_SEQUENCE_ZELDA[] = {
+
+  //Based on the arrangement at https://www.flutetunes.com/tunes.php?id=169
+  /*
+  NOTE_AS4,-2,  NOTE_F4,8,  NOTE_F4,8,  NOTE_AS4,8,//1
+  NOTE_GS4,16,  NOTE_FS4,16,  NOTE_GS4,-2,
+  NOTE_AS4,-2,  NOTE_FS4,8,  NOTE_FS4,8,  NOTE_AS4,8,
+  NOTE_A4,16,  NOTE_G4,16,  NOTE_A4,-2,
+  REST,1, */
+
+  NOTE_AS4,4,  NOTE_F4,-4,  NOTE_AS4,8,  NOTE_AS4,16,  NOTE_C5,16, NOTE_D5,16, NOTE_DS5,16,//7
+  NOTE_F5,2,  /*NOTE_F5,8,  NOTE_F5,8,  NOTE_F5,8,  NOTE_FS5,16, NOTE_GS5,16,
+  NOTE_AS5,-2,  NOTE_AS5,8,  NOTE_AS5,8,  NOTE_GS5,8,  NOTE_FS5,16,
+  NOTE_GS5,-8,  NOTE_FS5,16,  NOTE_F5,2,  NOTE_F5,4, 
+  
+  NOTE_DS5,-8, NOTE_F5,16, NOTE_FS5,2, NOTE_F5,8, NOTE_DS5,8, //11
+  NOTE_CS5,-8, NOTE_DS5,16, NOTE_F5,2, NOTE_DS5,8, NOTE_CS5,8,
+  NOTE_C5,-8, NOTE_D5,16, NOTE_E5,2, NOTE_G5,8, 
+  NOTE_F5,16, NOTE_F4,16, NOTE_F4,16, NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,8, NOTE_F4,16,NOTE_F4,8,
+
+  NOTE_AS4,4,  NOTE_F4,-4,  NOTE_AS4,8,  NOTE_AS4,16,  NOTE_C5,16, NOTE_D5,16, NOTE_DS5,16,//15
+  NOTE_F5,2,  NOTE_F5,8,  NOTE_F5,8,  NOTE_F5,8,  NOTE_FS5,16, NOTE_GS5,16,
+  NOTE_AS5,-2, NOTE_CS6,4,
+  NOTE_C6,4, NOTE_A5,2, NOTE_F5,4,
+  NOTE_FS5,-2, NOTE_AS5,4,
+  NOTE_A5,4, NOTE_F5,2, NOTE_F5,4,
+
+  NOTE_FS5,-2, NOTE_AS5,4,
+  NOTE_A5,4, NOTE_F5,2, NOTE_D5,4,
+  NOTE_DS5,-2, NOTE_FS5,4,
+  NOTE_F5,4, NOTE_CS5,2, NOTE_AS4,4,
+  NOTE_C5,-8, NOTE_D5,16, NOTE_E5,2, NOTE_G5,8, 
+  NOTE_F5,16, NOTE_F4,16, NOTE_F4,16, NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,16,NOTE_F4,8, NOTE_F4,16,NOTE_F4,8
+  */
+};
+
+int16_t BZR_SEQUENCE_ZELDA_LULLABY[] = {
+  
+  // Zelda's Lullaby - The Legend of Zelda Ocarina of Time. 
+  // Score available at https://musescore.com/user/12754451/scores/2762776
+  
+  NOTE_E4,2, NOTE_G4,4,
+  NOTE_D4,2, NOTE_C4,8, NOTE_D4,8, 
+  NOTE_E4,2, NOTE_G4,4,
+  NOTE_D4,-2,
+  NOTE_E4,2, NOTE_G4,4,
+  NOTE_D5,2, NOTE_C5,4,
+  NOTE_G4,2, NOTE_F4,8, NOTE_E4,8, 
+  NOTE_D4,-2,
+  NOTE_E4,2, NOTE_G4,4,
+  NOTE_D4,2, NOTE_C4,8, NOTE_D4,8, 
+  NOTE_E4,2, NOTE_G4,4,
+  NOTE_D4,-2,
+  NOTE_E4,2, NOTE_G4,4,
+
+  NOTE_D5,2, NOTE_C5,4,
+  NOTE_G4,2, NOTE_F4,8, NOTE_E4,8, 
+  NOTE_F4,8, NOTE_E4,8, NOTE_C4,2,
+  NOTE_F4,2, NOTE_E4,8, NOTE_D4,8, 
+  NOTE_E4,8, NOTE_D4,8, NOTE_A3,2,
+  NOTE_G4,2, NOTE_F4,8, NOTE_E4,8, 
+  NOTE_F4,8, NOTE_E4,8, NOTE_C4,4, NOTE_F4,4,
+  NOTE_C5,-2, 
+  
+};
+
 /* Super Mario Bros theme - by Koji Kondo*/
 int16_t BZR_SEQUENCE_MARIO[] = {
-  NOTE_E5,  8,  NOTE_E5,8,  REST,8, NOTE_E5,8,  REST,8, NOTE_C5,8, NOTE_E5,8, //1
-  NOTE_G5,4, REST,4, NOTE_G4,8, REST,4, 
+  NOTE_E5,  8,  NOTE_E5,8,  REST,8, NOTE_E5,8,  REST,8, NOTE_C5,8, NOTE_E5,8,REST,8, //1
+  NOTE_G5,4, REST,4, NOTE_G4,8/*, REST,4, 
   NOTE_C5,-4, NOTE_G4,8, REST,4, NOTE_E4,-4, // 3
   NOTE_A4,4, NOTE_B4,4, NOTE_AS4,8, NOTE_A4,4,
   NOTE_G4,-8, NOTE_E5,-8, NOTE_G5,-8, NOTE_A5,4, NOTE_F5,8, NOTE_G5,8,
@@ -217,19 +287,26 @@ int16_t BZR_SEQUENCE_MARIO[] = {
   //game over sound
   NOTE_C5,-4, NOTE_G4,-4, NOTE_E4,4, //45
   NOTE_A4,-8, NOTE_B4,-8, NOTE_A4,-8, NOTE_GS4,-8, NOTE_AS4,-8, NOTE_GS4,-8,
-  NOTE_G4,8, NOTE_D4,8, NOTE_E4,-2,  
+  NOTE_G4,8, NOTE_D4,8, NOTE_E4,-2,  */
 
 };
+
+int16_t BZR_SEQUENCE_MARIO_OVER[] = {
+    NOTE_C5,-4, NOTE_G4,-4, NOTE_E4,4, //45
+    NOTE_A4,-8, NOTE_B4,-8, NOTE_A4,-8, NOTE_GS4,-8, NOTE_AS4,-8, NOTE_GS4,-8,
+    NOTE_G4,8, NOTE_D4,8, NOTE_E4,-2,
+};
+
 /* Dart Vader theme (Imperial March) - Star wars */
 int16_t BZR_SEQUENCE_IMPERIAL[] = {
-    NOTE_A4,  -4, NOTE_A4,  -4, NOTE_A4,  16, NOTE_A4,  16,
+    /*NOTE_A4,  -4, NOTE_A4,  -4, NOTE_A4,  16, NOTE_A4,  16,
     NOTE_A4,  16, NOTE_A4,  16, NOTE_F4,   8, REST,      8,
     NOTE_A4,  -4, NOTE_A4,  -4, NOTE_A4,  16, NOTE_A4,  16,
-    NOTE_A4,  16, NOTE_A4,  16, NOTE_F4,   8, REST,      8,
+    NOTE_A4,  16, NOTE_A4,  16, NOTE_F4,   8, REST,      8,*/
     NOTE_A4,   4, NOTE_A4,   4, NOTE_A4,   4,
     NOTE_F4,  -8, NOTE_C5,  16, NOTE_A4,   4,
     NOTE_F4,  -8, NOTE_C5,  16, NOTE_A4,   2,
-    NOTE_E5,   4, NOTE_E5,   4, NOTE_E5,   4,
+    /*NOTE_E5,   4, NOTE_E5,   4, NOTE_E5,   4,
     NOTE_F5,  -8, NOTE_C5,  16, NOTE_A4,   4,
     NOTE_F4,  -8, NOTE_C5,  16, NOTE_A4,   2,
     NOTE_A5,   4, NOTE_A4,  -8, NOTE_A4,  16,
@@ -246,7 +323,33 @@ int16_t BZR_SEQUENCE_IMPERIAL[] = {
     NOTE_C5,  16, NOTE_B4,  16, NOTE_C5,  16, REST,      8,
     NOTE_F4,   8, NOTE_GS4,  4, NOTE_F4,  -8, NOTE_A4, -16,
     NOTE_A4,   4, NOTE_F4,  -8, NOTE_C5,  16,
-    NOTE_A4,   2,
+    NOTE_A4,   2,*/
+};
+
+int16_t BZR_SEQUENCE_PACMAN[] = {
+
+  // Pacman
+  // Score available at https://musescore.com/user/85429/scores/107109
+  NOTE_B4, 16, NOTE_B5, 16, NOTE_FS5, 16, NOTE_DS5, 16, //1
+  NOTE_B5, 32, NOTE_FS5, -16, NOTE_DS5, 8, //NOTE_E5, 16,
+  //NOTE_C6, 16, NOTE_G6, 16, NOTE_E6, 16, NOTE_C6, 32, NOTE_G6, -16, NOTE_E6, 8,
+
+  /*
+  NOTE_B4, 16,  NOTE_B5, 16,  NOTE_FS5, 16,   NOTE_DS5, 16,  NOTE_B5, 32,  //2
+  NOTE_FS5, -16, NOTE_DS5, 8,  NOTE_DS5, 32, NOTE_E5, 32,  NOTE_F5, 32,
+  NOTE_F5, 32,  NOTE_FS5, 32,  NOTE_G5, 32,  NOTE_G5, 32, NOTE_GS5, 32,  NOTE_A5, 16, NOTE_B5, 8*/
+};
+int16_t BZR_SEQUENCE_ERROR[] = {
+    NOTE_A1,4, REST,8, NOTE_A1, 4,
+    
+};
+
+int16_t BZR_SEQUENCE_TIMEOUT[] = {
+    NOTE_A4,8, REST,16, NOTE_A4, 8, REST,16, NOTE_A4, 8,
+};
+
+int16_t BZR_SEQUENCE_TURNOFF[] = {
+    NOTE_A4,8, REST,8, NOTE_A3, 8, REST,8, NOTE_A2, 8,
 };
 
 /******************************************************************************/
@@ -259,17 +362,58 @@ S_BZR_SEQ BZR_SEQUENCES[] = {
         .size = sizeof(BZR_SEQUENCE_TEST),
         .notes = BZR_SEQUENCE_TEST,
     },
+    /* ZELDA SONG */
+    {
+        .tempo = 100,
+        .size = sizeof(BZR_SEQUENCE_ZELDA),
+        .notes = BZR_SEQUENCE_ZELDA,
+    },
+    /* ZELDA LULLABY SONG */
+    {
+        .tempo = 108,
+        .size = sizeof(BZR_SEQUENCE_ZELDA_LULLABY),
+        .notes = BZR_SEQUENCE_ZELDA_LULLABY,
+    },
     /* MARIO BROS SONG */
     {
         .tempo = 200,
         .size = sizeof(BZR_SEQUENCE_MARIO),
         .notes = BZR_SEQUENCE_MARIO,
     },
+    {
+        .tempo = 200,
+        .size = sizeof(BZR_SEQUENCE_MARIO_OVER),
+        .notes = BZR_SEQUENCE_MARIO_OVER,
+    },
     /* IMPERIAL MARCH */
     {
         .tempo = 120,
         .size = sizeof(BZR_SEQUENCE_IMPERIAL),
         .notes = BZR_SEQUENCE_IMPERIAL,
+    },
+    /* PACMAN */
+    {
+        .tempo = 105,
+        .size = sizeof(BZR_SEQUENCE_PACMAN),
+        .notes = BZR_SEQUENCE_PACMAN,
+    },
+    /* ERROR */
+    {
+        .tempo = 150,
+        .size = sizeof(BZR_SEQUENCE_ERROR),
+        .notes = BZR_SEQUENCE_ERROR,
+    },
+    /* TIMEOUT */
+    {
+        .tempo = 200,
+        .size = sizeof(BZR_SEQUENCE_TIMEOUT),
+        .notes = BZR_SEQUENCE_TIMEOUT,
+    },
+    /* TURNOFF */
+    {
+        .tempo = 200,
+        .size = sizeof(BZR_SEQUENCE_TURNOFF),
+        .notes = BZR_SEQUENCE_TURNOFF,
     },
 };
 
@@ -342,6 +486,8 @@ void BZR_Tasks ( void )
         {
             BZR_SetFrequency(bzrData.currentNote[0]);
             BZR_SetCounter(bzrData.currentNote[1]);
+            TLC_SetDriver(LED_RFID, bzrData.currentNote[0], 0x00, 0x00);
+            TLC_Transmit();
             bzrData.state = BZR_STATE_PLAYING;
             break;
         }
@@ -355,8 +501,12 @@ void BZR_Tasks ( void )
                 {
                     PLIB_TMR_Stop(BZR_TMR_ID);
                     PLIB_OC_Disable(BZR_OC_ID);
+                    TLC_SetDriver(LED_RFID, 0x00, 0x00, 0x00);
+                    TLC_Transmit();
                     bzrData.newSequence = false;
                     bzrData.state = BZR_STATE_IDLE;
+                    
+                    
                 }
                 else
                 {

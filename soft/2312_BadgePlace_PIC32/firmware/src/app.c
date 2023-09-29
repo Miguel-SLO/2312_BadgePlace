@@ -33,14 +33,17 @@
 #include "driver/tmr/drv_tmr_mapping.h"
 
 #define LED_WIFI TLC_DRV_ID_0
+#define LED_RFID TLC_DRV_ID_1
+#define LED_TIME TLC_DRV_ID_2
+
 
 /******************************************************************************/
 
 /* Timeout for turning off output (in milliseconds) */
-#define APP_TIME_OUT_MS 7200000
+#define APP_TIME_OUT_MS 10000
 
 /* Wait time to allow user to react (in milliseconds) */
-#define APP_TIME_WAIT_MS 60000
+#define APP_TIME_WAIT_MS 3000
 
 /******************************************************************************/
 
@@ -64,6 +67,8 @@ void APP_Initialize ( void )
     appData.state = APP_STATE_INIT;
     
     appData.setup_rfid = APP_RFID_STATE_START;
+    
+    appData.output = false;
 
     /* Initialize TLC5973 interface */
     TLC_Initialize();
@@ -72,10 +77,13 @@ void APP_Initialize ( void )
     DRV_TMR0_Start();
     
     /* Initialize timeout counter */
-    CNT_Initialize(&appData.timeOut, 100);
+    CNT_Initialize(&appData.timeOut, APP_TIME_OUT_MS);
+    CNT_Initialize(&appData.timeUser, APP_TIME_WAIT_MS);
     
     /* Initialize timeout counter */
-    CNT_Initialize(&appData.cntSetup, 1200);
+    CNT_Initialize(&appData.cntSetup, 200);
+    
+    CNT_Initialize(&appData.cntRelay, 50);
 }
 
 /******************************************************************************/
@@ -102,6 +110,8 @@ void APP_Tasks ( void )
                 TLC_SetAll(0, 0, 0);
                 TLC_Transmit();
                 
+                CNT_Set(&appData.cntSetup, 1200);
+                
                 appData.state = APP_STATE_SETUP_WIFI;
             }
             break;
@@ -119,7 +129,7 @@ void APP_Tasks ( void )
             {
                 case APP_RFID_STATE_START:
                 {
-                    TLC_SetDriver(RFID_LED, 0x00, 0x066, 0xFFF);
+                    TLC_SetDriver(LED_RFID, 0x00, 0x066, 0xFFF);
                     TLC_Transmit();
                     appData.setup_rfid = APP_RFID_STATE_SETUP;
                     CNT_Reset(&appData.cntSetup);
@@ -143,12 +153,12 @@ void APP_Tasks ( void )
                         {
                             if(CHU_RFID_IsOk())
                             {
-                                TLC_SetDriver(RFID_LED, 0x000, 0xFFF, 0x000);
+                                TLC_SetDriver(LED_RFID, 0x000, 0xFFF, 0x000);
                                 appData.setup_rfid = APP_RFID_STATE_STOP;
                             }
                             else
                             {
-                                TLC_SetDriver(RFID_LED, 0x000, 0x000, 0xFFF);
+                                TLC_SetDriver(LED_RFID, 0x000, 0x000, 0xFFF);
                                 appData.setup_rfid = APP_RFID_STATE_START;
                                 appData.state = APP_STATE_INIT;
                             }
@@ -161,9 +171,9 @@ void APP_Tasks ( void )
                 {
                     if(CNT_Check(&appData.cntSetup))
                     {
-                        TLC_SetDriver(RFID_LED, 0x000, 0x000, 0x000);
+                        TLC_SetDriver(LED_RFID, 0x000, 0x000, 0x000);
                         TLC_Transmit();
-                        appData.state = APP_STATE_IDLE;
+                        appData.state = APP_STATE_OFF;
                     }
                     break;
                 }
@@ -173,16 +183,97 @@ void APP_Tasks ( void )
         
         case APP_STATE_IDLE:
         {
-            if(CHU_RFID_NewMessage())
+            if(CNT_Check(&appData.timeOut) && appData.output)
             {
-                CHU_RFID_GetMessage(appData.uuid);
-                if(strcmp(appData.uuid, "321B4A90"))
-                {
-                    BZR_PlaySequence(BZR_SEQ_IMPERIAL);
-                }
-                break;
+                BZR_PlaySequence(BZR_SEQ_TIMEOUT);
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0xFF0);
+                TLC_Transmit();
+                appData.user = true;
+                CNT_Reset(&appData.timeUser);
             }
             
+            if(CNT_Check(&appData.timeUser) && appData.user)
+            {
+                appData.user = false;
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+                TLC_Transmit();
+                CNT_Reset(&appData.cntRelay);
+                appData.state = APP_STATE_OFF;
+            }
+            
+            if(CHU_RFID_NewMessage())
+            {
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+                appData.user = false;
+                
+                CHU_RFID_GetMessage(appData.uuid);
+                if(!memcmp(appData.uuid, "3440064A", 8))
+                {
+                    if(appData.output)
+                    {
+                        BZR_PlaySequence(BZR_SEQ_MARIO_OVER);
+                        appData.state = APP_STATE_OFF; 
+                    }
+                    else
+                    {
+                        BZR_PlaySequence(BZR_SEQ_MARIO);
+                        appData.state = APP_STATE_ON;  
+                    }
+                    
+                }
+                else if(!memcmp(appData.uuid, "42B3C98E", 8))
+                {
+                    if(appData.output)
+                    {
+                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+                        appData.state = APP_STATE_OFF;
+                    }
+                    else
+                    {
+                        BZR_PlaySequence(BZR_SEQ_IMPERIAL);
+                        appData.state = APP_STATE_ON;
+                    }
+                    
+                }
+                else if(!memcmp(appData.uuid, "B469635F", 8))
+                {
+                    if(appData.output)
+                    {
+                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+                        appData.state = APP_STATE_OFF;
+                    }
+                    else
+                    {
+                        BZR_PlaySequence(BZR_SEQ_ZELDA);
+                        appData.state = APP_STATE_ON;
+                    }
+                    
+                }
+                else if(!memcmp(appData.uuid, "11111111", 8))
+                {
+                    if(appData.output)
+                    {
+                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+                        appData.state = APP_STATE_OFF;
+                    }
+                    else
+                    {
+                        BZR_PlaySequence(BZR_SEQ_PACMAN);
+                        appData.state = APP_STATE_ON;
+                    }
+                    
+                }
+                
+                else
+                {
+                    BZR_PlaySequence(BZR_SEQ_ERROR);
+                    appData.state = APP_STATE_OFF;
+                }
+                
+                CNT_Reset(&appData.cntRelay);
+                
+                break;
+            }
             break;
         }
         
@@ -193,13 +284,31 @@ void APP_Tasks ( void )
         
         case APP_STATE_OFF:
         {
+            AC_RSTOn();
+            
+            if(CNT_Check(&appData.cntRelay))
+            {
+                AC_RSTOff();
+                
+                appData.output = false;
+                appData.state = APP_STATE_IDLE;
+            }            
             break;
         }
         
         case APP_STATE_ON:
         {
+            AC_SETOn();
+            if(CNT_Check(&appData.cntRelay))
+            {
+                AC_SETOff();
+                appData.output = true;
+                CNT_Reset(&appData.timeOut);                
+                appData.state = APP_STATE_IDLE;
+            }
+            
             break;
-        } 
+        }
 
         /* The default state should never be executed. */
         default:

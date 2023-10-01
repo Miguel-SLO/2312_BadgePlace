@@ -75,12 +75,13 @@ typedef enum {
     B1ResponseInvalidPacket = 0xFE,
 } B1ResponseT;
 
-#define B1AsyncPacketParamBit_IO0Edge     (0x01 << 0)
-#define B1AsyncPacketParamBit_IO1Edge     (0x01 << 1)
-#define B1AsyncPacketParamBit_IO2Edge     (0x01 << 2)
-#define B1AsyncPacketParamBit_IO3Edge     (0x01 << 3)
-#define B1AsyncPacketParamBit_Comparator  (0x01 << 4)
-#define B1AsyncPacketParamBit_RFIDCommand (0x01 << 5)
+#define B1AsyncPacketParamBit_IO0Edge     0x01
+#define B1AsyncPacketParamBit_IO1Edge     0x02
+#define B1AsyncPacketParamBit_IO2Edge     0x04
+#define B1AsyncPacketParamBit_IO3Edge     0x08
+#define B1AsyncPacketParamBit_Comparator  0x10
+#define B1AsyncPacketParamBit_RFIDCommand 0x20
+#define B1AsyncPacketParamBit_Polling     0x40
 
 typedef enum {
     B1RequestCommandDummy = 0x00,

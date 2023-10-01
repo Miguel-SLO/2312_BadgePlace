@@ -65,6 +65,7 @@ bool CNT_Check( S_Counter *counter )
 void CNT_Set( S_Counter *counter, uint32_t target )
 {
     counter->target = target;
+    CNT_Reset(counter);
 }
 
 /******************************************************************************/

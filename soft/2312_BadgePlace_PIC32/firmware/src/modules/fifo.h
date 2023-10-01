@@ -40,7 +40,7 @@
 /******************************************************************************/
 
 /* FIFO descriptor structure */
-typedef struct fifo {
+typedef struct {
    uint16_t size;
    uint8_t *write;  
    uint8_t *read;   

@@ -47,74 +47,6 @@
 
 /******************************************************************************/
 
-/* Fifo buffer size */
-#define CHU_FIFO_SIZE 0xFF
-    
-/* Polling period must be a 100ms multiple */
-#define CHU_POLLING_PERIOD_MS 500
-
-/******************************************************************************/
-
-/* Chilli UART State machine*/
-typedef enum
-{            
-    /* Waiting for a command */
-    CHU_STATE_IDLE,
-            
-    /* Transmitting a command */
-    CHU_STATE_TRANSMIT,
-            
-    /* Receiving a command */
-    CHU_STATE_RECEIVE,
-            
-    /* Translating the UART message */
-    CHU_STATE_TRANSLATE,
-            
-    /* Waiting for main application */
-    CHU_STATE_WAIT,
-
-} CHU_STATES;
-
-/******************************************************************************/
-
-/* Chilli UART structure of global data */
-typedef struct
-{
-    /* The application's current state */
-    CHU_STATES state;
-    
-    /* Applications's flags */
-    bool transmit;
-    bool receive;
-    bool waiting;
-    
-    /* Application's counters */
-    S_Counter cntReceive;
-    
-    /* Application's FIFOS descriptors */
-    S_Fifo fifoDesc_tx;
-    S_Fifo fifoDesc_rx; 
-
-    /* Application's FIFOS buffers */
-    uint8_t fifoBuff_tx[CHU_FIFO_SIZE];
-    uint8_t fifoBuff_rx[CHU_FIFO_SIZE];
-    
-    uint8_t rfidBuff_in[CHU_FIFO_SIZE];
-    uint8_t rfidBuff_out[CHU_FIFO_SIZE];
-    
-    uint8_t rfidBuffer[CHU_FIFO_SIZE];
-    uint8_t rfidSize;
-    RFIDB1_StatusT rfidStatus;
-    bool rfidWaiting;
-    bool rfidOk;
-    bool rfidNewMessage;
-
-    char rfid_uuid[12];
-
-} CHU_DATA;
-
-/******************************************************************************/
-
 /**
  * @brief CHU_Initialize
  *
@@ -177,14 +109,14 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
  * @param  void
  * @return void
  */
-void CHU_RFID_EnablePolling( void );
+void CHU_EnablePolling( void );
 
-bool CHU_IsWaiting( void );
+bool CHU_NewRES( void );
+bool CHU_NewACK( void );
+bool CHU_NewUID( void );
+void CHU_ResetFlags( void );
 
-bool CHU_RFID_IsOk( void );
-
-bool CHU_RFID_NewMessage( void );
-void CHU_RFID_GetMessage( char* outMessage );
+void CHU_GetUID( uint8_t* uid );
 
 
 /******************************************************************************/

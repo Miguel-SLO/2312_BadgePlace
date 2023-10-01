@@ -31,7 +31,8 @@
  ******************************************************************************/
 
 #include "chu.h"
-#include "modules/ccittcrc.h"
+#include "modules/fifo.h"
+//#include "modules/ccittcrc.h"
 #include "modules/TLC5973.h"
 
 /******************************************************************************/
@@ -53,13 +54,76 @@
 
 /******************************************************************************/
 
-/* Declaration of global application data */
-CHU_DATA chuData;
+/* Application's buffers size */
+#define CHU_FIFO_SIZE 0xFF
 
-/* RFID B1 UART objects */
-RFIDB1_InterfaceConfigurationT chuRfid_config;
-RFIDB1_InterfaceT chuRfid_interface;
-RFIDB1_ObjectT chuRfid_object;
+#define RFIDB1_BUFF_SIZE CHU_FIFO_SIZE
+
+#define RFIDB1_UID_MAX_SIZE 7
+
+/******************************************************************************/
+
+/* Chilli UART State machine*/
+typedef enum
+{            
+    /* Waiting for a command */
+    CHU_STATE_IDLE,            
+    /* Transmitting a command */
+    CHU_STATE_TRANSMIT,            
+    /* Receiving a command */
+    CHU_STATE_RECEIVE,            
+
+} CHU_STATES;
+
+/******************************************************************************/
+
+/* RFIDB1 UART objects */
+RFIDB1_InterfaceConfigurationT  RFIDB1_config;
+RFIDB1_InterfaceT               RFIDB1_interface;
+RFIDB1_ObjectT                  RFIDB1_object;
+RFIDB1_StatusT                  RFIDB1_status;
+B1ResponseT                     RFIDB1_response;
+uint8_t                         RFIDB1_async;
+
+/* RFIDB1 buffers */
+uint8_t RFIDB1_TX_buffer[RFIDB1_BUFF_SIZE];
+uint8_t RFIDB1_RX_buffer[RFIDB1_BUFF_SIZE];
+
+uint8_t RFIDB1_GL_buffer[RFIDB1_BUFF_SIZE];
+uint8_t RFIDB1_GL_size;
+
+uint8_t RFIDB1_UID_data[RFIDB1_UID_MAX_SIZE];
+uint8_t RFIDB1_UID_size;
+
+/******************************************************************************/
+
+/* Application's current state */
+CHU_STATES CHU_state;
+
+/******************************************************************************/
+
+/* Application's flags */
+bool CHU_transmit;
+bool CHU_receive;
+
+bool CHU_newRES;
+bool CHU_newACK;
+bool CHU_newUID;
+
+/******************************************************************************/
+
+/* Application's counters */
+S_Counter CNT_receive;
+
+/******************************************************************************/
+
+/* Application's FIFOs */
+S_Fifo CHU_FIFO_TX_descriptor;
+S_Fifo CHU_FIFO_RX_descriptor;
+
+/* Application's FIFOs buffers */
+uint8_t CHU_FIFO_TX_buffer[CHU_FIFO_SIZE];
+uint8_t CHU_FIFO_RX_buffer[CHU_FIFO_SIZE];
 
 /******************************************************************************/
 
@@ -75,34 +139,35 @@ RFIDB1_ObjectT chuRfid_object;
 void CHU_Initialize ( void )
 {
     /* Place the state machine in its initial state. */
-    chuData.state = CHU_STATE_IDLE;
+    CHU_state = CHU_STATE_IDLE;
     
     /* Initial flags values */
-    chuData.transmit = false;
-    chuData.receive  = false;
-    chuData.waiting  = false;
+    CHU_transmit = false;
+    CHU_receive  = false;
     
     /* Reception counter waiting the duration of 2/3 bytes by uart */
-    CNT_Initialize(&chuData.cntReceive, 3);
+    CNT_Initialize(&CNT_receive, 3);
     
     /* Initialize UART communication fifos */
-    FIFO_Initialize(&chuData.fifoDesc_rx, CHU_FIFO_SIZE,
-                        chuData.fifoBuff_rx, 0x00);
-    FIFO_Initialize(&chuData.fifoDesc_tx, CHU_FIFO_SIZE,
-                        chuData.fifoBuff_tx, 0x00);
+    FIFO_Initialize(&CHU_FIFO_RX_descriptor, CHU_FIFO_SIZE,
+                        CHU_FIFO_RX_buffer, 0x00);
+    FIFO_Initialize(&CHU_FIFO_TX_descriptor, CHU_FIFO_SIZE,
+                        CHU_FIFO_TX_buffer, 0x00);
     
     /* Config setup for RFIDB1 */
-    chuRfid_config.InputBuffer = chuData.rfidBuff_in;
-    chuRfid_config.InputBufferSize = CHU_FIFO_SIZE;
-    chuRfid_config.OutputBuffer = chuData.rfidBuff_out;
-    chuRfid_config.OutputBufferSize = CHU_FIFO_SIZE;
-    chuRfid_config.handleResponse = CHU_RFID_Response;
-    chuRfid_config.handleRequest = CHU_RFID_Request;
+    RFIDB1_config.InputBuffer       = RFIDB1_TX_buffer;
+    RFIDB1_config.InputBufferSize   = RFIDB1_BUFF_SIZE;
+    
+    RFIDB1_config.OutputBuffer      = RFIDB1_RX_buffer;
+    RFIDB1_config.OutputBufferSize  = RFIDB1_BUFF_SIZE;
+    
+    RFIDB1_config.handleResponse    = CHU_RFID_Response;
+    RFIDB1_config.handleRequest     = CHU_RFID_Request;
     
     /* Initialise RFIDB1 objects */
-    GetRFIDB1Interface(&chuRfid_interface);
-    chuRfid_interface.Initialise(&chuRfid_object, &chuRfid_config);
-    chuRfid_interface.SetPacketHeaderType(&chuRfid_object, HeaderTypeA);
+    GetRFIDB1Interface(&RFIDB1_interface);
+    RFIDB1_interface.Initialise(&RFIDB1_object, &RFIDB1_config);
+    RFIDB1_interface.SetPacketHeaderType(&RFIDB1_object, HeaderTypeA);
 }
 
 /******************************************************************************/
@@ -118,26 +183,31 @@ void CHU_Initialize ( void )
 void CHU_Tasks ( void )
 {    
     /* Check the application's current state. */
-    switch ( chuData.state )
+    switch ( CHU_state )
     {
-        /* Application's initial state. */
+        /* ------------------------------------------------------------------ */
+        /* Waiting for event on flags                                         */
+        /* ------------------------------------------------------------------ */
         case CHU_STATE_IDLE:
         {       
-            if(chuData.transmit)
+            if(CHU_transmit)
             {
-                chuData.state = CHU_STATE_TRANSMIT;
+                CHU_state = CHU_STATE_TRANSMIT;
             }
-            else if(chuData.receive)
+            else if(CHU_receive)
             {
-                chuData.state = CHU_STATE_RECEIVE;
+                CHU_state = CHU_STATE_RECEIVE;
             }
             break;
         }
         
+        /* ------------------------------------------------------------------ */
+        /* Transmiting command by UART                                        */
+        /* ------------------------------------------------------------------ */
         case CHU_STATE_TRANSMIT:
         {
             /* Check if data still available in FIFO */
-            if(FIFO_GetReadSpace(&chuData.fifoDesc_tx))
+            if(FIFO_GetReadSpace(&CHU_FIFO_TX_descriptor))
             {
                 /* Enable the interrupt if needed */
                 if(!SYS_INT_SourceIsEnabled(CHU_INT_SOURCE_USART_TRANSMIT))
@@ -147,112 +217,72 @@ void CHU_Tasks ( void )
             }
             else
             {
-                /* Leave state when fifo is empty */
-                chuData.transmit = false;
-                chuData.state = CHU_STATE_IDLE;
+                /* Leave state when FIFO is empty */
+                CHU_transmit = false;
+                CHU_state = CHU_STATE_IDLE;
             }
             break;
         }
-            
+        
+        /* ------------------------------------------------------------------ */
+        /* Receiving a command by UART                                        */
+        /* ------------------------------------------------------------------ */
         case CHU_STATE_RECEIVE:
         {
-            if(CNT_Check(&chuData.cntReceive))
+            /* Waiting for FIFO to be filled */
+            if(CNT_Check(&CNT_receive))
             {
-                chuData.rfidSize = FIFO_GetReadSpace(&chuData.fifoDesc_rx);
-                FIFO_GetBuffer(&chuData.fifoDesc_rx, chuData.rfidBuffer);
-                if(chuData.rfidWaiting)
-                {        
-                    chuData.rfidStatus = chuRfid_interface.ParseIncomingData(
-                        &chuRfid_object, chuData.rfidBuffer, chuData.rfidSize);
-                    
-                    chuData.rfidWaiting = false;
-                }
-                else
-                {
-                    
-                    strcpy(chuData.rfid_uuid, (char*)chuData.rfidBuffer);
-                    //chuData.rfid_uuid = (char*)chuData.rfidBuffer;
-                    chuData.rfidNewMessage = true;
-                }
+                RFIDB1_GL_size = FIFO_GetReadSpace(&CHU_FIFO_RX_descriptor);
                 
-                chuData.receive = false;
-                chuData.state = CHU_STATE_IDLE;
+                FIFO_GetBuffer(&CHU_FIFO_RX_descriptor, RFIDB1_GL_buffer);
+                
+                RFIDB1_status = RFIDB1_interface.ParseIncomingData(
+                            &RFIDB1_object, RFIDB1_GL_buffer, RFIDB1_GL_size);
+                
+                CHU_newRES = true;
+                
+                CHU_receive = false;
+                
+                CHU_state = CHU_STATE_IDLE;
             }
-            
             break;
         }
         
-        case CHU_STATE_TRANSLATE:
-        {
-            break;
-        }
-        
-        case CHU_STATE_WAIT:
-        {
-            break;
-        }        
-
-        /* The default state should never be executed. */
+        /* ------------------------------------------------------------------ */
+        /* Errors handle                                                      */
+        /* ------------------------------------------------------------------ */
         default:
         {
-            /* TODO: Handle error in application's state machine. */
             break;
         }
     }
 }
 
-bool CHU_IsWaiting( void )
+bool CHU_NewRES( void )
 {
-    return chuData.rfidWaiting;
+    return CHU_newRES;
 }
 
-bool CHU_RFID_IsOk( void )
+bool CHU_NewACK( void )
 {
-    return chuData.rfidOk;
+    return CHU_newACK;
 }
 
-bool CHU_RFID_NewMessage( void )
+bool CHU_NewUID( void )
 {
-    return chuData.rfidNewMessage;
+    return CHU_newUID;
 }
 
-void CHU_RFID_GetMessage( char* outMessage )
+void CHU_ResetFlags( void )
 {
-    strcpy(outMessage, &chuData.rfid_uuid[2]);
-    chuData.rfidNewMessage = false;
+    CHU_newRES = false;
+    CHU_newACK = false;
+    CHU_newUID = false;
 }
 
-/******************************************************************************/
-
-/**
- * @brief CHU_RFID_Response
- *
- * Function used by interface library to get a command received by UART
- * Should not be called by user !
- * 
- * @param RFIDB1_ObjectT* rfid_object Pointer to RFIDB1 object used by Chilli
- * @param uint8_t *data Output buffer of data to be receive by UART
- * @param uint16_t size Size of the buffer
- */
-void CHU_RFID_Response( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size )
+void CHU_GetUID(uint8_t* uid)
 {
-    if(size == 1)
-    {
-        switch(data[0])
-        {
-            case B1ResponseACK:
-            {
-                chuData.rfidOk = true;
-                break;
-            }
-            default:
-            {
-                chuData.rfidOk = false;
-                break;
-            }
-        }
-    }
-    chuData.waiting = false;
+    memcpy(uid, RFIDB1_UID_data, RFIDB1_UID_size);
 }
 
 
@@ -277,7 +307,7 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
     uint8_t fifoData;
     
     /* Get the space available in fifo */
-    freeSize = FIFO_GetWriteSpace(&chuData.fifoDesc_tx);
+    freeSize = FIFO_GetWriteSpace(&CHU_FIFO_TX_descriptor);
     
     if(freeSize >= size)
     {
@@ -285,11 +315,11 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
         for(i_data = 0; i_data < size; i_data++)
         {
             fifoData = *(data + i_data);
-            FIFO_Add(&chuData.fifoDesc_tx, fifoData); 
+            FIFO_Add(&CHU_FIFO_TX_descriptor, fifoData); 
         }
         
         /* Data transmission enabled */
-        chuData.transmit = true;
+        CHU_transmit = true;
         
         /* Enable the transmission interrupt */       
         SYS_INT_SourceEnable(CHU_INT_SOURCE_USART_TRANSMIT);
@@ -299,15 +329,84 @@ void CHU_RFID_Request( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size
 /******************************************************************************/
 
 /**
+ * @brief CHU_RFID_Response
+ *
+ * Function used by interface library to get a command received by UART
+ * Should not be called by user !
+ * 
+ * @param RFIDB1_ObjectT* rfid_object Pointer to RFIDB1 object used by Chilli
+ * @param uint8_t *data Output buffer of data to be receive by UART
+ * @param uint16_t size Size of the buffer
+ */
+void CHU_RFID_Response( RFIDB1_ObjectT* rfid_object, uint8_t *data, uint16_t size )
+{
+    /* Asynchronous Packet Parameter at index 0x00 */
+    RFIDB1_response = data[0];
+    
+    switch(RFIDB1_response)
+    {
+        case B1ResponseACK:
+        {
+            CHU_newACK = true;
+            break;
+        }
+        case B1ResponseAsyncPacket:
+        {
+            RFIDB1_async = data[1];
+            switch(RFIDB1_async)
+            {
+                case B1AsyncPacketParamBit_RFIDCommand:
+                {
+                    break;
+                }
+                case B1AsyncPacketParamBit_Polling:
+                {
+                    RFIDB1_UID_size = data[2];
+                    memcpy(RFIDB1_UID_data, &data[3], RFIDB1_UID_size);
+                    CHU_newUID = true;
+                    break;
+                }
+                case B1AsyncPacketParamBit_IO0Edge:
+                case B1AsyncPacketParamBit_IO1Edge:
+                case B1AsyncPacketParamBit_IO2Edge:
+                case B1AsyncPacketParamBit_IO3Edge:
+                case B1AsyncPacketParamBit_Comparator:
+                default:
+                {
+                    break;
+                }
+            }
+            break;
+        }
+        case B1ResponseInvalidCommand:
+        case B1ResponseInvalidParameter:
+        case B1ResponseProtocolError:
+        case B1ResponseMemoryError:
+        case B1ResponseSystemError:
+        case B1ResponseModuleTimeout:
+        case B1ResponseOverflow:        
+        case B1ResponseBusy:
+        case B1ResponseSystemStart:
+        case B1ResponseInvalidPacket:
+        default:
+        {
+            break;
+        }
+    }
+}
+
+/******************************************************************************/
+
+/**
  * @brief CHU_RFID_EnablePolling
  *
- * Send a raw command to enable polling
+ * Send a command to enable polling
  * Modifiy function as needed, based on datasheet
  *
  * @param  void
  * @return void
  */
-void CHU_RFID_EnablePolling( void )
+void CHU_EnablePolling( void )
 {
     /* Local variables declaration */
     uint8_t pollingPacket[19];
@@ -315,8 +414,8 @@ void CHU_RFID_EnablePolling( void )
     /* Command : Polling */
     pollingPacket[0]    = 0x22;
 
-    /* Polling period */
-    pollingPacket[1]    = 0x01;
+    /* Polling period x[100ms] */
+    pollingPacket[1]    = 0x05;
 
     /* Defined tags */
     pollingPacket[2]    = 0x00; // Number
@@ -327,25 +426,22 @@ void CHU_RFID_EnablePolling( void )
     pollingPacket[7]    = 0x00; // PWM period (lsb)
     pollingPacket[8]    = 0x00; // PWM period 
     pollingPacket[9]    = 0x00; // PWM period (msb)
-    pollingPacket[10]   = 0x00; // Timeout [100ms]
+    pollingPacket[10]   = 0x00; // Timeout x[100ms]
 
     /* Undefined tags */
-    pollingPacket[11]   = 0x03; // ASYNC mode
+    pollingPacket[11]   = 0x01; // ASYNC mode
     pollingPacket[12]   = 0x00; // IO Config
     pollingPacket[13]   = 0x03; // PWM
     pollingPacket[14]   = 0x00; // PWM Duty
     pollingPacket[15]   = 0x00; // PWM period (lsb)
     pollingPacket[16]   = 0x00; // PWM period 
     pollingPacket[17]   = 0x00; // PWM period (msb)
-    pollingPacket[18]   = 0x0A; // Timeout [100ms]
-    
-    chuData.rfidWaiting = true;
+    pollingPacket[18]   = 0x14; // Timeout x[100ms]
     
     /* Send command through interface */
-    chuRfid_interface.SendWriteToRFIDMemoryCommand(&chuRfid_object, 0x0001,
-            pollingPacket, 19);
+    RFIDB1_status = RFIDB1_interface.SendWriteToRFIDMemoryCommand(
+                    &RFIDB1_object, B1RegisterCommand, pollingPacket, 19);
 }
-
 
 /******************************************************************************/
 
@@ -366,8 +462,8 @@ void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
     USART_ERROR usartStatus;
 
     /* Pointers to fifo descriptors */
-    RX_fifoDescriptor = &chuData.fifoDesc_rx;
-    TX_fifoDescriptor = &chuData.fifoDesc_tx;
+    RX_fifoDescriptor = &CHU_FIFO_RX_descriptor;
+    TX_fifoDescriptor = &CHU_FIFO_TX_descriptor;
     
     /* DEBUG */
     #ifdef DEBUG_CHU_UART
@@ -397,8 +493,8 @@ void __ISR(_UART_2_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance1(void)
         }
         else
         {
-            chuData.receive = true;
-            CNT_Reset(&chuData.cntReceive);
+            CHU_receive = true;
+            CNT_Reset(&CNT_receive);
             
             while(PLIB_USART_ReceiverDataIsAvailable(CHU_USART_ID))
             {

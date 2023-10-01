@@ -36,7 +36,6 @@
 #define LED_RFID TLC_DRV_ID_1
 #define LED_TIME TLC_DRV_ID_2
 
-
 /******************************************************************************/
 
 /* Timeout for turning off output (in milliseconds) */
@@ -48,8 +47,14 @@
 /******************************************************************************/
 
 /* Declaration of global application data */
-
 APP_DATA appData;
+
+uint8_t BADGES[][4] = {
+    {0x34, 0x40, 0x06, 0x4A},
+    {0x42, 0xB3, 0xC9, 0x8E},
+    {0xB4, 0x69, 0x63, 0x5F},
+    {0x11, 0x11, 0x11, 0x11},    
+};
 
 /******************************************************************************/
 
@@ -67,6 +72,7 @@ void APP_Initialize ( void )
     appData.state = APP_STATE_INIT;
     
     appData.setup_rfid = APP_RFID_STATE_START;
+    appData.setup_wifi = APP_WIFI_STATE_START;
     
     appData.output = false;
 
@@ -108,10 +114,8 @@ void APP_Tasks ( void )
             {
                 TLC_SetAll(0xFF, 0xFF, 0xFF);
                 TLC_SetAll(0, 0, 0);
-                TLC_Transmit();
-                
-                CNT_Set(&appData.cntSetup, 1200);
-                
+                TLC_Transmit();                
+                CNT_Set(&appData.cntSetup, 200);                
                 appData.state = APP_STATE_SETUP_WIFI;
             }
             break;
@@ -119,7 +123,66 @@ void APP_Tasks ( void )
 
         case APP_STATE_SETUP_WIFI:
         {
-            appData.state = APP_STATE_SETUP_RFID;
+            switch(appData.setup_wifi)
+            {
+                case APP_WIFI_STATE_START:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        TLC_SetDriver(LED_WIFI, 0x00, 0x0F6, 0xFFF);
+                        TLC_Transmit();
+                        ESP_SendCommand(AT_CMD_CWJAP);
+                        CNT_Set(&appData.cntSetup, 2000); 
+                        appData.setup_wifi = APP_WIFI_STATE_SETUP;
+                    }
+                    break;
+                }
+                case APP_WIFI_STATE_SETUP:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        if(ESP_WIFI_Confirmed())
+                        {
+                            TLC_SetDriver(LED_WIFI, 0x000, 0xFFF, 0x000);
+                            TLC_Transmit();
+                            ESP_SendCommand(AT_CMD_CIPSTART);
+                            appData.setup_wifi = APP_WIFI_STATE_TCP;
+                        }
+                        else
+                        {
+                            TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0xFFF);
+                            TLC_Transmit();
+                            appData.setup_wifi = APP_WIFI_STATE_START;
+                        }
+                        
+                        CNT_Set(&appData.cntSetup, 1000);
+                    }
+                    break;
+                }
+                case APP_WIFI_STATE_TCP:
+                {
+                    if(ESP_TCP_Connected())
+                    {
+                        TLC_SetDriver(LED_WIFI, 0xFFF, 0x000, 0x000);
+                        TLC_Transmit();
+                        appData.setup_wifi = APP_WIFI_STATE_STOP;
+                    }
+                    break;
+                }
+                case APP_WIFI_STATE_STOP:
+                {
+                    if(CNT_Check(&appData.cntSetup))
+                    {
+                        /* Turn LED off */
+                        TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0x000);
+                        TLC_Transmit();
+                        ESP_SendCommand(AT_CMD_CIPSEND);
+                        appData.setup_wifi = APP_WIFI_STATE_START;
+                        appData.state = APP_STATE_SETUP_RFID;
+                    }
+                    break;
+                }
+            }
             break;
         }
         
@@ -131,39 +194,26 @@ void APP_Tasks ( void )
                 {
                     TLC_SetDriver(LED_RFID, 0x00, 0x066, 0xFFF);
                     TLC_Transmit();
+                    CHU_EnablePolling();
                     appData.setup_rfid = APP_RFID_STATE_SETUP;
-                    CNT_Reset(&appData.cntSetup);
                     break;
                 }
                 case APP_RFID_STATE_SETUP:
                 {
-                    if(CNT_Check(&appData.cntSetup))
+                    if(CHU_NewRES())
                     {
-                        CHU_RFID_EnablePolling();
-                        appData.setup_rfid = APP_RFID_STATE_CHECK;
-                        CNT_Reset(&appData.cntSetup);
-                    }
-                    break;
-                }
-                case APP_RFID_STATE_CHECK:
-                {
-                    if(CNT_Check(&appData.cntSetup))
-                    {
-                        if(!CHU_IsWaiting())
+                        if(CHU_NewACK())
                         {
-                            if(CHU_RFID_IsOk())
-                            {
-                                TLC_SetDriver(LED_RFID, 0x000, 0xFFF, 0x000);
-                                appData.setup_rfid = APP_RFID_STATE_STOP;
-                            }
-                            else
-                            {
-                                TLC_SetDriver(LED_RFID, 0x000, 0x000, 0xFFF);
-                                appData.setup_rfid = APP_RFID_STATE_START;
-                                appData.state = APP_STATE_INIT;
-                            }
-                            TLC_Transmit();
+                            TLC_SetDriver(LED_RFID, 0x000, 0xFFF, 0x000);
+                            appData.setup_rfid = APP_RFID_STATE_STOP;
                         }
+                        else
+                        {
+                            TLC_SetDriver(LED_RFID, 0x000, 0x000, 0xFFF);
+                            appData.setup_rfid = APP_RFID_STATE_START;
+                        }
+                        CHU_ResetFlags();
+                        TLC_Transmit();
                     }
                     break;
                 }
@@ -171,12 +221,15 @@ void APP_Tasks ( void )
                 {
                     if(CNT_Check(&appData.cntSetup))
                     {
+                        /* Turn LED off */
                         TLC_SetDriver(LED_RFID, 0x000, 0x000, 0x000);
                         TLC_Transmit();
+
+                        /* Turn off the relay */
                         CNT_Reset(&appData.cntRelay);
                         appData.state = APP_STATE_OFF;
+                        break;
                     }
-                    break;
                 }
             }
             break;
@@ -202,13 +255,16 @@ void APP_Tasks ( void )
                 appData.state = APP_STATE_OFF;
             }
             
-            if(CHU_RFID_NewMessage())
+            if(CHU_NewUID())
             {
+                CHU_ResetFlags();
                 TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+
+                CHU_GetUID(appData.uuid);
                 
+                ESP_SendCommand((char *)(appData.uuid));
                 
-                CHU_RFID_GetMessage(appData.uuid);
-                if(!memcmp(appData.uuid, "3440064A", 8))
+                if(!memcmp(appData.uuid, &BADGES[0], 4))
                 {
                     if(appData.output && !appData.user)
                     {
@@ -223,7 +279,7 @@ void APP_Tasks ( void )
                     }
                     
                 }
-                else if(!memcmp(appData.uuid, "42B3C98E", 8))
+                else if(!memcmp(appData.uuid, &BADGES[1], 4))
                 {
                     if(appData.output && !appData.user)
                     {
@@ -238,7 +294,7 @@ void APP_Tasks ( void )
                     }
                     
                 }
-                else if(!memcmp(appData.uuid, "B469635F", 8))
+                else if(!memcmp(appData.uuid, &BADGES[2], 4))
                 {
                     if(appData.output && !appData.user)
                     {
@@ -253,7 +309,7 @@ void APP_Tasks ( void )
                     }
                     
                 }
-                else if(!memcmp(appData.uuid, "11111111", 8))
+                else if(!memcmp(appData.uuid, &BADGES[3], 4))
                 {
                     if(appData.output && !appData.user)
                     {

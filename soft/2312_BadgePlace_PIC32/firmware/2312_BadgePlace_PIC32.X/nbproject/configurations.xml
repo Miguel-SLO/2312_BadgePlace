@@ -13,6 +13,7 @@
           <itemPath>../src/modules/counter.h</itemPath>
           <itemPath>../src/modules/SerialTimer.h</itemPath>
           <itemPath>../src/modules/TLC5973.h</itemPath>
+          <itemPath>../src/modules/sfifo.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="2312_Config" projectFiles="true">
@@ -127,6 +128,7 @@
           <itemPath>../src/modules/counter.c</itemPath>
           <itemPath>../src/modules/SerialTimer.c</itemPath>
           <itemPath>../src/modules/TLC5973.c</itemPath>
+          <itemPath>../src/modules/sfifo.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="2312_Config" projectFiles="true">
@@ -250,6 +252,10 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../src/modules/sfifo.c" ex="true" overriding="false">
+      </item>
+      <item path="../src/modules/sfifo.h" ex="true" overriding="false">
+      </item>
       <C32>
         <property key="additional-warnings" value="true"/>
         <property key="addresss-attribute-use" value="false"/>

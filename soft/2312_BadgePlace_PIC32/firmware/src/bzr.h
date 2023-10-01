@@ -58,6 +58,7 @@ typedef enum
     BZR_SEQ_ERROR,
     BZR_SEQ_TIMEOUT,
     BZR_SEQ_TURNOFF,
+    BZR_SEQ_TETRIS,
 }E_BZR_SEQ;
 
 /******************************************************************************/

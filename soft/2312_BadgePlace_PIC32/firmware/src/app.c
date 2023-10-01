@@ -173,6 +173,7 @@ void APP_Tasks ( void )
                     {
                         TLC_SetDriver(LED_RFID, 0x000, 0x000, 0x000);
                         TLC_Transmit();
+                        CNT_Reset(&appData.cntRelay);
                         appData.state = APP_STATE_OFF;
                     }
                     break;
@@ -204,12 +205,12 @@ void APP_Tasks ( void )
             if(CHU_RFID_NewMessage())
             {
                 TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
-                appData.user = false;
+                
                 
                 CHU_RFID_GetMessage(appData.uuid);
                 if(!memcmp(appData.uuid, "3440064A", 8))
                 {
-                    if(appData.output)
+                    if(appData.output && !appData.user)
                     {
                         BZR_PlaySequence(BZR_SEQ_MARIO_OVER);
                         appData.state = APP_STATE_OFF; 
@@ -217,13 +218,14 @@ void APP_Tasks ( void )
                     else
                     {
                         BZR_PlaySequence(BZR_SEQ_MARIO);
+                        appData.user = false;
                         appData.state = APP_STATE_ON;  
                     }
                     
                 }
                 else if(!memcmp(appData.uuid, "42B3C98E", 8))
                 {
-                    if(appData.output)
+                    if(appData.output && !appData.user)
                     {
                         BZR_PlaySequence(BZR_SEQ_TURNOFF);
                         appData.state = APP_STATE_OFF;
@@ -231,13 +233,14 @@ void APP_Tasks ( void )
                     else
                     {
                         BZR_PlaySequence(BZR_SEQ_IMPERIAL);
+                        appData.user = false;
                         appData.state = APP_STATE_ON;
                     }
                     
                 }
                 else if(!memcmp(appData.uuid, "B469635F", 8))
                 {
-                    if(appData.output)
+                    if(appData.output && !appData.user)
                     {
                         BZR_PlaySequence(BZR_SEQ_TURNOFF);
                         appData.state = APP_STATE_OFF;
@@ -245,13 +248,14 @@ void APP_Tasks ( void )
                     else
                     {
                         BZR_PlaySequence(BZR_SEQ_ZELDA);
+                        appData.user = false;
                         appData.state = APP_STATE_ON;
                     }
                     
                 }
                 else if(!memcmp(appData.uuid, "11111111", 8))
                 {
-                    if(appData.output)
+                    if(appData.output && !appData.user)
                     {
                         BZR_PlaySequence(BZR_SEQ_TURNOFF);
                         appData.state = APP_STATE_OFF;
@@ -259,6 +263,7 @@ void APP_Tasks ( void )
                     else
                     {
                         BZR_PlaySequence(BZR_SEQ_PACMAN);
+                        appData.user = false;
                         appData.state = APP_STATE_ON;
                     }
                     

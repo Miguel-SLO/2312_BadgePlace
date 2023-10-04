@@ -131,8 +131,10 @@ void APP_Tasks ( void )
                     {
                         TLC_SetDriver(LED_WIFI, 0x00, 0x0F6, 0xFFF);
                         TLC_Transmit();
+                        
                         ESP_SendCommand(AT_CMD_CWJAP);
-                        CNT_Set(&appData.cntSetup, 2000); 
+                        
+                        CNT_Set(&appData.cntSetup, 2000);                        
                         appData.setup_wifi = APP_WIFI_STATE_SETUP;
                     }
                     break;
@@ -145,13 +147,17 @@ void APP_Tasks ( void )
                         {
                             TLC_SetDriver(LED_WIFI, 0x000, 0xFFF, 0x000);
                             TLC_Transmit();
+                            
                             ESP_SendCommand(AT_CMD_CIPSTART);
+                            
+                            CNT_Set(&appData.cntSetup, 1000); 
                             appData.setup_wifi = APP_WIFI_STATE_TCP;
                         }
                         else
                         {
                             TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0xFFF);
                             TLC_Transmit();
+                            
                             appData.setup_wifi = APP_WIFI_STATE_START;
                         }
                         
@@ -161,11 +167,23 @@ void APP_Tasks ( void )
                 }
                 case APP_WIFI_STATE_TCP:
                 {
-                    if(ESP_TCP_Connected())
+                    if(CNT_Check(&appData.cntSetup))
                     {
-                        TLC_SetDriver(LED_WIFI, 0xFFF, 0x000, 0x000);
-                        TLC_Transmit();
-                        appData.setup_wifi = APP_WIFI_STATE_STOP;
+                        if(ESP_TCP_Connected())
+                        {
+                            TLC_SetDriver(LED_WIFI, 0xFFF, 0x000, 0x000);
+                            TLC_Transmit();
+                            
+                            CNT_Set(&appData.cntSetup, 1000);
+                            appData.setup_wifi = APP_WIFI_STATE_STOP;
+                        }
+                        else
+                        {
+                            TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0xFFF);
+                            TLC_Transmit();
+                            
+                            appData.setup_wifi = APP_WIFI_STATE_SETUP;                            
+                        }
                     }
                     break;
                 }
@@ -173,10 +191,9 @@ void APP_Tasks ( void )
                 {
                     if(CNT_Check(&appData.cntSetup))
                     {
-                        /* Turn LED off */
                         TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0x000);
                         TLC_Transmit();
-                        ESP_SendCommand(AT_CMD_CIPSEND);
+                        
                         appData.setup_wifi = APP_WIFI_STATE_START;
                         appData.state = APP_STATE_SETUP_RFID;
                     }
@@ -257,89 +274,107 @@ void APP_Tasks ( void )
             
             if(CHU_NewUID())
             {
+                /* Reset RFID flags */
                 CHU_ResetFlags();
-                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
-
+                
+                /* Get UID scanned */
                 CHU_GetUID(appData.uuid);
                 
-                ESP_SendCommand((char *)(appData.uuid));
+                /* Reset timeout led */
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+                TLC_SetDriver(LED_WIFI, 0xF00, 0x000, 0x000);
+                TLC_Transmit();
                 
-                if(!memcmp(appData.uuid, &BADGES[0], 4))
-                {
-                    if(appData.output && !appData.user)
-                    {
-                        BZR_PlaySequence(BZR_SEQ_MARIO_OVER);
-                        appData.state = APP_STATE_OFF; 
-                    }
-                    else
-                    {
-                        BZR_PlaySequence(BZR_SEQ_MARIO);
-                        appData.user = false;
-                        appData.state = APP_STATE_ON;  
-                    }
-                    
-                }
-                else if(!memcmp(appData.uuid, &BADGES[1], 4))
-                {
-                    if(appData.output && !appData.user)
-                    {
-                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-                        appData.state = APP_STATE_OFF;
-                    }
-                    else
-                    {
-                        BZR_PlaySequence(BZR_SEQ_IMPERIAL);
-                        appData.user = false;
-                        appData.state = APP_STATE_ON;
-                    }
-                    
-                }
-                else if(!memcmp(appData.uuid, &BADGES[2], 4))
-                {
-                    if(appData.output && !appData.user)
-                    {
-                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-                        appData.state = APP_STATE_OFF;
-                    }
-                    else
-                    {
-                        BZR_PlaySequence(BZR_SEQ_ZELDA);
-                        appData.user = false;
-                        appData.state = APP_STATE_ON;
-                    }
-                    
-                }
-                else if(!memcmp(appData.uuid, &BADGES[3], 4))
-                {
-                    if(appData.output && !appData.user)
-                    {
-                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-                        appData.state = APP_STATE_OFF;
-                    }
-                    else
-                    {
-                        BZR_PlaySequence(BZR_SEQ_PACMAN);
-                        appData.user = false;
-                        appData.state = APP_STATE_ON;
-                    }
-                    
-                }
+                /* Prepare ESP to send data */
+                ESP_Reset_Acknowledge();
+                ESP_SendCommand(AT_CMD_CIPSEND);
                 
-                else
-                {
-                    BZR_PlaySequence(BZR_SEQ_ERROR);
-                    appData.state = APP_STATE_OFF;
-                }
+                appData.state = APP_STATE_ASKING;
+
+//                if(!memcmp(appData.uuid, &BADGES[0], 4))
+//                {
+//                    if(appData.output && !appData.user)
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_MARIO_OVER);
+//                        appData.state = APP_STATE_OFF; 
+//                    }
+//                    else
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_MARIO);
+//                        appData.user = false;
+//                        appData.state = APP_STATE_ON;  
+//                    }
+//                    
+//                }
+//                else if(!memcmp(appData.uuid, &BADGES[1], 4))
+//                {
+//                    if(appData.output && !appData.user)
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+//                        appData.state = APP_STATE_OFF;
+//                    }
+//                    else
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_IMPERIAL);
+//                        appData.user = false;
+//                        appData.state = APP_STATE_ON;
+//                    }
+//                    
+//                }
+//                else if(!memcmp(appData.uuid, &BADGES[2], 4))
+//                {
+//                    if(appData.output && !appData.user)
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+//                        appData.state = APP_STATE_OFF;
+//                    }
+//                    else
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_ZELDA);
+//                        appData.user = false;
+//                        appData.state = APP_STATE_ON;
+//                    }
+//                    
+//                }
+//                else if(!memcmp(appData.uuid, &BADGES[3], 4))
+//                {
+//                    if(appData.output && !appData.user)
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
+//                        appData.state = APP_STATE_OFF;
+//                    }
+//                    else
+//                    {
+//                        BZR_PlaySequence(BZR_SEQ_PACMAN);
+//                        appData.user = false;
+//                        appData.state = APP_STATE_ON;
+//                    }
+//                    
+//                }
+//                
+//                else
+//                {
+//                    BZR_PlaySequence(BZR_SEQ_ERROR);
+//                    appData.state = APP_STATE_OFF;
+//                }
+//                
+//                CNT_Reset(&appData.cntRelay);
                 
-                CNT_Reset(&appData.cntRelay);
-                
-                break;
             }
             break;
         }
         
         case APP_STATE_ASKING:
         {
+            /* Waiting for ESP to acknowledge */
+            if(ESP_Acknowledged())
+            {
+                TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0x000);
+                TLC_Transmit();
+                ESP_Reset_Acknowledge();
+                ESP_SendData(appData.uuid, 4);
+                appData.state = APP_STATE_IDLE;                
+            }
             break;
         }
         

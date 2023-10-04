@@ -308,6 +308,34 @@ bool ESP_SendCommand( char *p_command )
     return false;
 }
 
+bool ESP_SendData( uint8_t *data, uint8_t size )
+{
+    /* Local variables */
+    S_Fifo *p_fifoDesc;
+    uint8_t i_data;
+
+    /* Point to the desired FIFO */
+    p_fifoDesc = &espData.fifoDesc_tx;
+
+    /* Check if enough space in FIFO */
+    if(FIFO_GetWriteSpace(p_fifoDesc) >= size)
+    {   
+        /* Loop to add command */
+        for(i_data = 0; i_data < size; i_data++)
+        {
+            FIFO_Add(p_fifoDesc, data[i_data]);
+        }
+
+        /* Data added to FIFO */
+        espData.transmit = true;
+        
+        return true;
+    }
+ 
+    /* Feedback */
+    return false;
+}
+
 bool ESP_WIFI_Confirmed( void )
 {
     return (ESP_acknowledge && ESP_WIFI_connected && ESP_WIFI_gotip);
@@ -316,6 +344,16 @@ bool ESP_WIFI_Confirmed( void )
 bool ESP_TCP_Connected( void )
 {
     return ESP_TCP_connect;
+}
+
+bool ESP_Acknowledged( void )
+{
+    return ESP_acknowledge;
+}
+
+void ESP_Reset_Acknowledge( void )
+{
+    ESP_acknowledge = false;
 }
 
 /******************************************************************************/

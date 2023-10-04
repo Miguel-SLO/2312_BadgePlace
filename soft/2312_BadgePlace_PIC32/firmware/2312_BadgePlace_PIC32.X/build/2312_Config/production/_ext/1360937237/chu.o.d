@@ -245,8 +245,7 @@ build/2312_Config/production/_ext/1360937237/chu.o: ../src/chu.c \
  ../src/app.h ../src/modules/counter.h ../src/chu.h ../src/esp.h \
  ../src/modules/fifo.h ../src/bzr.h \
  ../src/modules/RFIDB1ClientInterface.h \
- ../src/modules/RFIDB1ClientProtocol.h ../src/modules/ccittcrc.h \
- ../src/modules/TLC5973.h
+ ../src/modules/RFIDB1ClientProtocol.h ../src/modules/TLC5973.h
 
 ../src/chu.h:
 
@@ -751,7 +750,5 @@ build/2312_Config/production/_ext/1360937237/chu.o: ../src/chu.c \
 ../src/modules/RFIDB1ClientInterface.h:
 
 ../src/modules/RFIDB1ClientProtocol.h:
-
-../src/modules/ccittcrc.h:
 
 ../src/modules/TLC5973.h:

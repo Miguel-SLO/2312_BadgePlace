@@ -43,8 +43,6 @@
 
 /******************************************************************************/
 
-
-
 /* Application states */
 typedef enum
 {
@@ -61,9 +59,17 @@ typedef enum
 {
     APP_RFID_STATE_START,
     APP_RFID_STATE_SETUP,
-    APP_RFID_STATE_CHECK,
     APP_RFID_STATE_STOP,
 }APP_RFID_STATES;
+
+typedef enum
+{
+    APP_WIFI_STATE_START,
+    APP_WIFI_STATE_SETUP,
+    APP_WIFI_STATE_TCP,
+    APP_WIFI_STATE_STOP,
+            
+}APP_WIFI_STATES;
 
 /******************************************************************************/
 
@@ -74,8 +80,9 @@ typedef struct
     APP_STATES state;
     
     APP_RFID_STATES setup_rfid;
+    APP_WIFI_STATES setup_wifi;
     
-    char uuid[8];
+    uint8_t uuid[8];
     
     S_Counter cntSetup;
     

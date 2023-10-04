@@ -44,10 +44,12 @@
 
 /* Buffers sizes */
 
-#define ESP_FIFO_SIZE 50
-#define AT_CMD_SIZE 50
+#define ESP_FIFO_SIZE 250
+
+#define AT_CMD_SIZE 60
+#define AT_ACK_SIZE 6
+#define AT_DATA_COUNT 4
 #define AT_DATA_SIZE 50
-#define AT_ACK_SIZE 10
 
 /******************************************************************************/
 
@@ -56,7 +58,9 @@
 #define AT_CMD_RST      "AT+RST"
 #define AT_CMD_CWMODEIS "AT+CWMODE=1"
 #define AT_CMD_CWMODE   "AT+CWMODE?"
-#define AT_CMD_CWJAP    "AT+CWJAP=\"ES-SLO-2\",\"slo-etml-es\""
+#define AT_CMD_CWJAP    "AT+CWJAP=\"Santos 2.4Ghz\",\"C@mBuse#1963\""
+#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"192.168.1.224\",8080"
+#define AT_CMD_CIPSEND  "AT+CIPSEND=4"
 
 /* AT acknowledge responses */
 #define AT_ACK_OK       "OK"
@@ -68,8 +72,8 @@
 typedef struct
 {
     char command[AT_CMD_SIZE];    
-    char data[AT_DATA_SIZE];    
     char ack[AT_ACK_SIZE];
+    char data[AT_DATA_COUNT][AT_DATA_SIZE];
     
 } S_AT_PACKET;
 
@@ -168,6 +172,10 @@ void ESP_Tasks( void );
  * @return bool True = command send ; False = Not allowed to send a command
  */
 bool ESP_SendCommand( char *command );
+
+bool ESP_WIFI_Confirmed( void );
+
+bool ESP_TCP_Connected( void );
 
 /******************************************************************************/
 

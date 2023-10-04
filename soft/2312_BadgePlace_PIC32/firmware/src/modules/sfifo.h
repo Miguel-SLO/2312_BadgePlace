@@ -8,18 +8,18 @@
  *                                                                      
  *******************************************************************************
  * 
- * File    		: fifo.h
+ * File    		: sfifo.h
  * Version		: 1.0
  * 
  *******************************************************************************
  *
- * Description 	: Managing a FIFO using descriptor and pointers
+ * Description 	: Managing a string FIFO using descriptor and pointers
  *                Maximal size of FIFO is 255
  *  
  *******************************************************************************
  *
  * Author 		: Miguel Santos
- * Date 		: 14.09.2023
+ * Date 		: 01.10.2023
  *
  *******************************************************************************
  *
@@ -29,8 +29,8 @@
  *
  ******************************************************************************/
 
-#ifndef FIFO_H
-#define FIFO_H
+#ifndef SSFIFO_H
+#define SSFIFO_H
 
 /******************************************************************************/
 
@@ -40,18 +40,20 @@
 /******************************************************************************/
 
 /* FIFO descriptor structure */
-typedef struct {
-   uint16_t size;
-   uint8_t *write;  
-   uint8_t *read;   
-   uint8_t *start;  	
-   uint8_t *end;  	
-} S_Fifo;
+typedef struct
+{
+    char    *start;
+    uint8_t size;
+    uint8_t write;  
+    uint8_t read;
+    uint8_t elements;
+   
+} S_Sfifo;
 
 /******************************************************************************/
 
 /**
- * @brief FIFO_Init
+ * @brief SFIFO_Init
  *
  * This function initializes a FIFO with the provided parameters,
  * setting its size, start address, and initializing all elements
@@ -62,13 +64,13 @@ typedef struct {
  * @param fifoStart     Pointer to the beginning of the FIFO memory.
  * @param initialValue  The initial value to set for all elements in the FIFO.
  */
-void FIFO_Initialize( S_Fifo *fifoDescriptor, uint16_t fifoSize,
-				uint8_t *fifoStart, uint8_t initialValue );
+void SFIFO_Initialize( S_Sfifo *fifoDescriptor, char *fifoStart,
+                        uint8_t fifoSize, char *initialValue );
 
 /******************************************************************************/
 
 /**
- * @brief FIFO_GetWriteSpace
+ * @brief SFIFO_GetWriteSpace
  *
  * This function calculates the available space for writing
  * in the provided FIFO descriptor,
@@ -77,12 +79,12 @@ void FIFO_Initialize( S_Fifo *fifoDescriptor, uint16_t fifoSize,
  * @param fifoDescriptor Pointer to the FIFO descriptor structure.
  * @return The available space for writing in the FIFO.
  */
-uint8_t FIFO_GetWriteSpace( S_Fifo *fifoDescriptor );
+uint8_t SFIFO_GetWriteSpace( S_Sfifo *fifoDescriptor );
 
 /******************************************************************************/
 
 /**
- * @brief FIFO_GetReadSpace
+ * @brief SFIFO_GetReadSpace
  *
  *
  * This function calculates the available space for reading
@@ -92,12 +94,12 @@ uint8_t FIFO_GetWriteSpace( S_Fifo *fifoDescriptor );
  * @param fifoDescriptor Pointer to the FIFO descriptor structure.
  * @return The available space for reading from the FIFO.
  */
-uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor );
+uint8_t SFIFO_GetReadSpace( S_Sfifo *fifoDescriptor );
 
 /******************************************************************************/
 
 /**
- * @brief FIFO_Add
+ * @brief SFIFO_Add
  *
  * This function attempts to put the specified character into the FIFO.
  * If the FIFO is full, returns 0 (FIFO FULL),
@@ -107,12 +109,12 @@ uint8_t FIFO_GetReadSpace( S_Fifo *fifoDescriptor );
  * @param value         The value to add to the FIFO.
  * @return 1 if (OK), 0 if (FIFO FULL).
  */
-bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
+bool SFIFO_AddString( S_Sfifo *fifoDescriptor , char *string );
 
 /******************************************************************************/
 
 /**
- * @brief FIFO_GetData
+ * @brief SFIFO_GetData
  *
  * This function attempts to get a value from the FIFO.
  * If the FIFO is empty, returns 0 (FIFO EMPTY),
@@ -122,22 +124,7 @@ bool FIFO_Add( S_Fifo *fifoDescriptor , uint8_t value );
  * @param value         Pointer to store the retrieved value.
  * @return 1 if (OK), 0 if (FIFO EMPTY).
  */
-bool FIFO_GetData( S_Fifo *fifoDescriptor , uint8_t *value );
-
-/******************************************************************************/
-
-/**
- * @brief FIFO_GetBuffer
- *
- * This function attempts to get all the FIFO in a buffer.
- * If the FIFO is empty, returns 0 (FIFO EMPTY),
- * otherwise, it gets the value and returns 1 (OK).
- *
- * @param fifoDescriptor Pointer to the FIFO descriptor structure.
- * @param buffer         Pointer to the buffer to sore the FIFO.
- * @return true if (OK), false if (FIFO EMPTY).
- */
-bool FIFO_GetBuffer( S_Fifo *fifoDescriptor , uint8_t *buffer );
+bool SFIFO_GetString( S_Sfifo *fifoDescriptor , char *string );
 
 /******************************************************************************/
 

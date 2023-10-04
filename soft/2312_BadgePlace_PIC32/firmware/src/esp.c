@@ -50,8 +50,12 @@
 
 /******************************************************************************/
 
+#define ESP_MAX_CHAR 40
+#define ESP_MAX_LINES 10
+
+
 /* Time to wait for fifo to be filled */
-#define ESP_COUNT_RECEIVE_MS 20
+#define ESP_COUNT_RECEIVE_MS 50
 
 /* Time waiting for a response of main app */
 #define ESP_COUNT_WAIT_MS 2000
@@ -60,6 +64,13 @@
 
 /* Declaration of global application data */
 ESP_DATA espData;
+
+bool ESP_acknowledge;
+bool ESP_error;
+bool ESP_WIFI_connected;
+bool ESP_WIFI_gotip;
+
+bool ESP_TCP_connect;
 
 /******************************************************************************/
 
@@ -176,25 +187,31 @@ void ESP_Tasks ( void )
         /* Translating different parts of the message received */
         case ESP_STATE_TRANSLATE:
         {
-            /* A command is detected */
-            if(espData.p_resBuffer[0] == 'A' && espData.p_resBuffer[1] == 'T')
-            {
-                strcpy(espData.atResponse.command, espData.p_resBuffer);
-            }
             /* Acknowledge detected */
-            if(strcmp(espData.p_resBuffer, AT_ACK_OK) ||
-                    strcmp(espData.p_resBuffer, AT_ACK_ERROR))
+            if(!strcmp(espData.p_resBuffer, "OK"))
             {
-                strcpy(espData.atResponse.ack, espData.p_resBuffer);
+                ESP_acknowledge = true;
             }
-            /* Data is detected */
-            else
+            /* Error detected */
+            else if(!strcmp(espData.p_resBuffer, "ERROR"))
             {
-                strcpy(espData.atResponse.data, espData.p_resBuffer);
+                ESP_error = true;
+            }
+            else if(!strcmp(espData.p_resBuffer, "WIFI CONNECTED"))
+            {
+                ESP_WIFI_connected = true;
+            }
+            else if(!strcmp(espData.p_resBuffer, "WIFI GOT IP"))
+            {
+                ESP_WIFI_gotip = true;
+            }
+            else if(!strcmp(espData.p_resBuffer, "CONNECT"))
+            {
+                ESP_TCP_connect = true;
             }
             
             /* Get next line in string */
-            espData.p_resBuffer = strtok(NULL, "\r\n");           
+            espData.p_resBuffer = strtok(NULL, "\r\n");          
             
             /* Leave state when no more lines */
             if(espData.p_resBuffer == NULL)
@@ -203,12 +220,8 @@ void ESP_Tasks ( void )
                 memset(espData.resBuffer, 0x00, sizeof(espData.resBuffer));
                 
                 /* Machine states and flags */
-                espData.newMessage = true;
                 espData.translate = false;
-                espData.wait = true;
-                espData.state = ESP_STATE_WAIT;
-                
-                CNT_Reset(&espData.cntWait);
+                espData.state = ESP_STATE_IDLE;
             }
             break;
         }
@@ -249,50 +262,60 @@ bool ESP_SendCommand( char *p_command )
     S_Fifo *p_fifoDesc;
     uint8_t commandSize;
     uint8_t i_string;
-    bool commandStatus;
     
     /* DEBUG */
     #ifdef DEBUG_ESP_SEND
         DEBUG_LED = true;
     #endif
-    
-    /* Default command status */
-    commandStatus = false;
         
     /* Dont send a command if not IDLE */
-    if(espData.state == ESP_STATE_IDLE)
+    if(espData.state != ESP_STATE_IDLE)
     {
-        /* Point to the desired FIFO */
-        p_fifoDesc = &espData.fifoDesc_tx;
-
-        /* Get number of characters to send */
-        commandSize = strlen(p_command);
-
-        /* Check if enough space in FIFO */
-        if(FIFO_GetWriteSpace(p_fifoDesc) >= (commandSize + 2))
-        {   
-            /* Loop to add command */
-            for(i_string = 0; i_string < commandSize; i_string++)
-            {
-                FIFO_Add(p_fifoDesc,(uint8_t)(p_command[i_string]));
-            }
-
-            /* Add CR and LF suffix to FIFO */
-            FIFO_Add(p_fifoDesc,(uint8_t)('\r'));
-            FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
-
-            /* Command added to FIFO */
-            espData.transmit = true;
-            commandStatus = true;
-        }
+        return false;
     }
-    /* DEBUG */
-    #ifdef DEBUG_ESP_SEND
-        DEBUG_LED = false;
-    #endif
-    
+        
+    /* Point to the desired FIFO */
+    p_fifoDesc = &espData.fifoDesc_tx;
+
+    /* Get number of characters to send */
+    commandSize = strlen(p_command);
+
+    /* Check if enough space in FIFO */
+    if(FIFO_GetWriteSpace(p_fifoDesc) >= (commandSize + 2))
+    {   
+        /* Loop to add command */
+        for(i_string = 0; i_string < commandSize; i_string++)
+        {
+            FIFO_Add(p_fifoDesc,(uint8_t)(p_command[i_string]));
+        }
+
+        /* Add CR and LF suffix to FIFO */
+        FIFO_Add(p_fifoDesc,(uint8_t)('\r'));
+        FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
+
+        /* Command added to FIFO */
+        espData.transmit = true;
+        
+        /* DEBUG */
+        #ifdef DEBUG_ESP_SEND
+            DEBUG_LED = false;
+        #endif
+        
+        return true;
+    }
+ 
     /* Feedback */
-    return commandStatus;
+    return false;
+}
+
+bool ESP_WIFI_Confirmed( void )
+{
+    return (ESP_acknowledge && ESP_WIFI_connected && ESP_WIFI_gotip);
+}
+
+bool ESP_TCP_Connected( void )
+{
+    return ESP_TCP_connect;
 }
 
 /******************************************************************************/
@@ -335,26 +358,25 @@ void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
         /* Checks overrun or parity error */
         usartStatus = PLIB_USART_ErrorsGet(ESP_USART_ID);
 
-        if(usartStatus)
+        if(usartStatus & USART_ERROR_RECEIVER_OVERRUN)
         {
             /* Errors are auto cleaned when read, except overrun */
-            if ( usartStatus & USART_ERROR_RECEIVER_OVERRUN )
-            {
-                PLIB_USART_ReceiverOverrunErrorClear(ESP_USART_ID);
-            }
+            PLIB_USART_ReceiverOverrunErrorClear(ESP_USART_ID);
         }
         else
         {
-            espData.receive = true;
-            
             while(PLIB_USART_ReceiverDataIsAvailable(ESP_USART_ID))
             {
                 dataFifo = PLIB_USART_ReceiverByteReceive(ESP_USART_ID);
                 FIFO_Add(RX_fifoDescriptor, dataFifo);
             }
-
+            
             /* Clear up the interrupt flag when buffer is empty */
             SYS_INT_SourceStatusClear(ESP_INT_SOURCE_USART_RECEIVE);
+            
+            espData.receive = true;
+            
+            CNT_Reset(&espData.cntReceive);
         }  
     }
 

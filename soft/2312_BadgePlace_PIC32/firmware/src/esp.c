@@ -262,50 +262,50 @@ bool ESP_SendCommand( char *p_command )
     S_Fifo *p_fifoDesc;
     uint8_t commandSize;
     uint8_t i_string;
-    bool commandStatus;
     
     /* DEBUG */
     #ifdef DEBUG_ESP_SEND
         DEBUG_LED = true;
     #endif
-    
-    /* Default command status */
-    commandStatus = false;
         
     /* Dont send a command if not IDLE */
-    if(espData.state == ESP_STATE_IDLE)
+    if(espData.state != ESP_STATE_IDLE)
     {
-        /* Point to the desired FIFO */
-        p_fifoDesc = &espData.fifoDesc_tx;
-
-        /* Get number of characters to send */
-        commandSize = strlen(p_command);
-
-        /* Check if enough space in FIFO */
-        if(FIFO_GetWriteSpace(p_fifoDesc) >= (commandSize + 2))
-        {   
-            /* Loop to add command */
-            for(i_string = 0; i_string < commandSize; i_string++)
-            {
-                FIFO_Add(p_fifoDesc,(uint8_t)(p_command[i_string]));
-            }
-
-            /* Add CR and LF suffix to FIFO */
-            FIFO_Add(p_fifoDesc,(uint8_t)('\r'));
-            FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
-
-            /* Command added to FIFO */
-            espData.transmit = true;
-            commandStatus = true;
-        }
+        return false;
     }
-    /* DEBUG */
-    #ifdef DEBUG_ESP_SEND
-        DEBUG_LED = false;
-    #endif
-    
+        
+    /* Point to the desired FIFO */
+    p_fifoDesc = &espData.fifoDesc_tx;
+
+    /* Get number of characters to send */
+    commandSize = strlen(p_command);
+
+    /* Check if enough space in FIFO */
+    if(FIFO_GetWriteSpace(p_fifoDesc) >= (commandSize + 2))
+    {   
+        /* Loop to add command */
+        for(i_string = 0; i_string < commandSize; i_string++)
+        {
+            FIFO_Add(p_fifoDesc,(uint8_t)(p_command[i_string]));
+        }
+
+        /* Add CR and LF suffix to FIFO */
+        FIFO_Add(p_fifoDesc,(uint8_t)('\r'));
+        FIFO_Add(p_fifoDesc,(uint8_t)('\n'));
+
+        /* Command added to FIFO */
+        espData.transmit = true;
+        
+        /* DEBUG */
+        #ifdef DEBUG_ESP_SEND
+            DEBUG_LED = false;
+        #endif
+        
+        return true;
+    }
+ 
     /* Feedback */
-    return commandStatus;
+    return false;
 }
 
 bool ESP_WIFI_Confirmed( void )
@@ -358,13 +358,10 @@ void __ISR(_UART_1_VECTOR, ipl7AUTO) _IntHandlerDrvUsartInstance0(void)
         /* Checks overrun or parity error */
         usartStatus = PLIB_USART_ErrorsGet(ESP_USART_ID);
 
-        if(usartStatus)
+        if(usartStatus & USART_ERROR_RECEIVER_OVERRUN)
         {
             /* Errors are auto cleaned when read, except overrun */
-            if ( usartStatus & USART_ERROR_RECEIVER_OVERRUN )
-            {
-                PLIB_USART_ReceiverOverrunErrorClear(ESP_USART_ID);
-            }
+            PLIB_USART_ReceiverOverrunErrorClear(ESP_USART_ID);
         }
         else
         {

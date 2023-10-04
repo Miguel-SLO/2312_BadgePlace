@@ -91,7 +91,7 @@ void STR_CallBack( void )
     bitPosition++;
     
     /* Go back to lsb when reached limit */
-    if(bitPosition>= SERIAL_BITS)
+    if(bitPosition >= SERIAL_BITS)
     {
         bitPosition= 0;
         strPointer++;

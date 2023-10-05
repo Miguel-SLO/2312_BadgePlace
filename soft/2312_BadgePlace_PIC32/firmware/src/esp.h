@@ -60,8 +60,8 @@
 #define AT_CMD_CWMODE   "AT+CWMODE?"
 #define AT_CMD_CWJAP    "AT+CWJAP=\"kpp-55143\",\"Jvey-mjD9-V3g4-WNvt\""
 //#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"badgeplace\",8080"
-#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"DESKTOP-PHANTEK-1\",8080"
-#define AT_CMD_CIPSEND  "AT+CIPSEND=4"
+#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"badgeplace\",8080"
+#define AT_CMD_CIPSEND  "AT+CIPSEND=6"
 
 /* AT acknowledge responses */
 #define AT_ACK_OK       "OK"
@@ -175,6 +175,10 @@ void ESP_Tasks( void );
 bool ESP_SendCommand( char *command );
 
 bool ESP_SendData( uint8_t *data, uint8_t size );
+
+bool ESP_NewMessage( void );
+
+void ESP_GetMessage( uint8_t *message);
 
 bool ESP_WIFI_Confirmed( void );
 

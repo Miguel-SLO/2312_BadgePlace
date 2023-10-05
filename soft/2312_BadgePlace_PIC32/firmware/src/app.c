@@ -49,13 +49,6 @@
 /* Declaration of global application data */
 APP_DATA appData;
 
-uint8_t BADGES[][4] = {
-    {0x34, 0x40, 0x06, 0x4A},
-    {0x42, 0xB3, 0xC9, 0x8E},
-    {0xB4, 0x69, 0x63, 0x5F},
-    {0x11, 0x11, 0x11, 0x11},    
-};
-
 /******************************************************************************/
 
 /**
@@ -244,7 +237,7 @@ void APP_Tasks ( void )
 
                         /* Turn off the relay */
                         CNT_Reset(&appData.cntRelay);
-                        appData.state = APP_STATE_OFF;
+                        appData.state = APP_STATE_REL_OFF;
                         break;
                     }
                 }
@@ -254,113 +247,20 @@ void APP_Tasks ( void )
         
         case APP_STATE_IDLE:
         {
-            if(CNT_Check(&appData.timeOut) && appData.output)
-            {
-                BZR_PlaySequence(BZR_SEQ_TIMEOUT);
-                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0xFF0);
-                TLC_Transmit();
-                appData.user = true;
-                CNT_Reset(&appData.timeUser);
-            }
-            
-            if(CNT_Check(&appData.timeUser) && appData.user)
-            {
-                appData.user = false;
-                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
-                TLC_Transmit();
-                CNT_Reset(&appData.cntRelay);
-                appData.state = APP_STATE_OFF;
-            }
-            
             if(CHU_NewUID())
             {
                 /* Reset RFID flags */
                 CHU_ResetFlags();
                 
                 /* Get UID scanned */
-                CHU_GetUID(appData.uuid);
-                
-                /* Reset timeout led */
-                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
-                TLC_SetDriver(LED_WIFI, 0xF00, 0x000, 0x000);
-                TLC_Transmit();
+                CHU_GetUID(appData.UID);
                 
                 /* Prepare ESP to send data */
                 ESP_Reset_Acknowledge();
                 ESP_SendCommand(AT_CMD_CIPSEND);
                 
                 appData.state = APP_STATE_ASKING;
-
-//                if(!memcmp(appData.uuid, &BADGES[0], 4))
-//                {
-//                    if(appData.output && !appData.user)
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_MARIO_OVER);
-//                        appData.state = APP_STATE_OFF; 
-//                    }
-//                    else
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_MARIO);
-//                        appData.user = false;
-//                        appData.state = APP_STATE_ON;  
-//                    }
-//                    
-//                }
-//                else if(!memcmp(appData.uuid, &BADGES[1], 4))
-//                {
-//                    if(appData.output && !appData.user)
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-//                        appData.state = APP_STATE_OFF;
-//                    }
-//                    else
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_IMPERIAL);
-//                        appData.user = false;
-//                        appData.state = APP_STATE_ON;
-//                    }
-//                    
-//                }
-//                else if(!memcmp(appData.uuid, &BADGES[2], 4))
-//                {
-//                    if(appData.output && !appData.user)
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-//                        appData.state = APP_STATE_OFF;
-//                    }
-//                    else
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_ZELDA);
-//                        appData.user = false;
-//                        appData.state = APP_STATE_ON;
-//                    }
-//                    
-//                }
-//                else if(!memcmp(appData.uuid, &BADGES[3], 4))
-//                {
-//                    if(appData.output && !appData.user)
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_TURNOFF);
-//                        appData.state = APP_STATE_OFF;
-//                    }
-//                    else
-//                    {
-//                        BZR_PlaySequence(BZR_SEQ_PACMAN);
-//                        appData.user = false;
-//                        appData.state = APP_STATE_ON;
-//                    }
-//                    
-//                }
-//                
-//                else
-//                {
-//                    BZR_PlaySequence(BZR_SEQ_ERROR);
-//                    appData.state = APP_STATE_OFF;
-//                }
-//                
-//                CNT_Reset(&appData.cntRelay);
-                
-            }
+            }              
             break;
         }
         
@@ -369,41 +269,147 @@ void APP_Tasks ( void )
             /* Waiting for ESP to acknowledge */
             if(ESP_Acknowledged())
             {
-                TLC_SetDriver(LED_WIFI, 0x000, 0x000, 0x000);
-                TLC_Transmit();
-                ESP_Reset_Acknowledge();
-                ESP_SendData(appData.uuid, 4);
-                appData.state = APP_STATE_IDLE;                
+                ESP_Reset_Acknowledge();               
+                ESP_SendData(appData.UID, 4);
+                appData.state = APP_STATE_WAITING;                
             }
             break;
         }
         
-        case APP_STATE_OFF:
+        case APP_STATE_WAITING:
         {
-            AC_RSTOn();
-            
+            if(ESP_NewMessage())
+            {
+                /* Get message received by TCP */
+                ESP_GetMessage(appData.tcp_message);
+                
+                /* Confirm message is correct */
+                if(!memcmp(&appData.tcp_message[0], "MS", 2) && 
+                   !memcmp(&appData.tcp_message[2], appData.UID, 4))
+                {
+                    if(appData.tcp_message[6] == 'Y')
+                    {
+                        appData.state = APP_STATE_REL_ON;
+                    }
+                    else if(appData.tcp_message[6] == 'N')
+                    {
+                        BZR_PlaySequence(BZR_SEQ_ERROR);
+                        appData.state = APP_STATE_IDLE;
+                    }
+                    CNT_Reset(&appData.cntRelay);
+                }
+            }
+            break;
+        }
+        
+        case APP_STATE_REL_OFF:
+        {
+            AC_RSTOn();            
             if(CNT_Check(&appData.cntRelay))
             {
                 AC_RSTOff();
-                
+                BZR_PlaySequence(BZR_SEQ_TURNOFF);
                 appData.output = false;
                 appData.state = APP_STATE_IDLE;
             }            
             break;
         }
         
-        case APP_STATE_ON:
+        case APP_STATE_REL_ON:
         {
             AC_SETOn();
             if(CNT_Check(&appData.cntRelay))
             {
                 AC_SETOff();
+                BZR_PlaySequence(BZR_SEQ_MARIO);
                 appData.output = true;
-                CNT_Reset(&appData.timeOut);                
-                appData.state = APP_STATE_IDLE;
-            }
-            
+                appData.state = APP_STATE_ON;
+                CNT_Reset(&appData.timeOut);
+            }            
             break;
+        }
+        
+        case APP_STATE_ON:
+        {
+            if(CHU_NewUID())
+            {
+                /* Reset RFID flags */
+                CHU_ResetFlags();
+                
+                /* Get UID scanned */
+                CHU_GetUID(appData.newUID);
+                
+                if(!memcmp(appData.UID, appData.newUID, 4))
+                {
+                    /* Prepare ESP to send data */
+                    ESP_Reset_Acknowledge();
+                    ESP_SendCommand(AT_CMD_CIPSEND);
+                    appData.state = APP_STATE_REPORT;
+                    break;
+                }
+                else
+                {
+                    BZR_PlaySequence(BZR_SEQ_ERROR);
+                }
+            }
+
+            if(CNT_Check(&appData.timeOut))
+            {
+                BZR_PlaySequence(BZR_SEQ_TIMEOUT);
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0xFFF);
+                TLC_Transmit();
+                appData.state = APP_STATE_TIMEOUT;
+                CNT_Reset(&appData.timeUser);
+            }
+            break;
+        }
+        
+        case APP_STATE_REPORT:
+        {
+            /* Waiting for ESP to acknowledge */
+            if(ESP_Acknowledged())
+            {
+                ESP_Reset_Acknowledge();              
+                ESP_SendData(appData.UID, 4);
+                
+                CNT_Reset(&appData.cntRelay);
+                appData.state = APP_STATE_REL_OFF;                
+            }
+            break;
+        }
+        
+        case APP_STATE_TIMEOUT:
+        {
+            if(CHU_NewUID())
+            {
+                /* Reset RFID flags */
+                CHU_ResetFlags();
+                
+                /* Get UID scanned */
+                CHU_GetUID(appData.newUID);
+                
+                if(!memcmp(appData.UID, appData.newUID, 4))
+                {
+                    TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+                    TLC_Transmit();
+                    
+                    CNT_Reset(&appData.timeOut);                    
+                    appData.state = APP_STATE_ON;
+                    break;
+                }
+                else
+                {
+                    BZR_PlaySequence(BZR_SEQ_ERROR);
+                }
+            }
+            if(CNT_Check(&appData.timeUser))
+            {
+                TLC_SetDriver(LED_TIME, 0x000, 0x000, 0x000);
+                TLC_Transmit();
+                
+                CNT_Reset(&appData.cntRelay);                
+                appData.state = APP_STATE_REL_OFF;
+            }
         }
 
         /* The default state should never be executed. */

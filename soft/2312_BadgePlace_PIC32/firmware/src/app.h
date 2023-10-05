@@ -51,8 +51,12 @@ typedef enum
     APP_STATE_SETUP_WIFI,
     APP_STATE_SETUP_RFID,
     APP_STATE_ASKING,
-    APP_STATE_OFF,
-    APP_STATE_ON,  
+    APP_STATE_WAITING,
+    APP_STATE_REPORT,
+    APP_STATE_REL_OFF,
+    APP_STATE_REL_ON,
+    APP_STATE_ON,
+    APP_STATE_TIMEOUT,
 } APP_STATES;
 
 typedef enum
@@ -82,7 +86,9 @@ typedef struct
     APP_RFID_STATES setup_rfid;
     APP_WIFI_STATES setup_wifi;
     
-    uint8_t uuid[8];
+    uint8_t UID[8];
+    uint8_t newUID[8];
+    uint8_t tcp_message[8];
     
     S_Counter cntSetup;
     

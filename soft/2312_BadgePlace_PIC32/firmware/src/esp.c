@@ -65,11 +65,13 @@
 /* Declaration of global application data */
 ESP_DATA espData;
 
+uint8_t ESP_message[7];
+
+bool ESP_newMessage;
 bool ESP_acknowledge;
 bool ESP_error;
 bool ESP_WIFI_connected;
 bool ESP_WIFI_gotip;
-
 bool ESP_TCP_connect;
 
 /******************************************************************************/
@@ -197,6 +199,11 @@ void ESP_Tasks ( void )
             {
                 ESP_error = true;
             }
+            else if(strstr(espData.p_resBuffer, "+IPD,"))
+            {
+                ESP_newMessage = true;
+                memcpy(ESP_message, &espData.p_resBuffer[7], 7);
+            }
             else if(!strcmp(espData.p_resBuffer, "WIFI CONNECTED"))
             {
                 ESP_WIFI_connected = true;
@@ -318,8 +325,12 @@ bool ESP_SendData( uint8_t *data, uint8_t size )
     p_fifoDesc = &espData.fifoDesc_tx;
 
     /* Check if enough space in FIFO */
-    if(FIFO_GetWriteSpace(p_fifoDesc) >= size)
-    {   
+    if(FIFO_GetWriteSpace(p_fifoDesc) >= (size + 2))
+    {
+        /* Add prefix to FIFO */
+        FIFO_Add(p_fifoDesc,(uint8_t)('M'));
+        FIFO_Add(p_fifoDesc,(uint8_t)('S'));
+        
         /* Loop to add command */
         for(i_data = 0; i_data < size; i_data++)
         {
@@ -334,6 +345,17 @@ bool ESP_SendData( uint8_t *data, uint8_t size )
  
     /* Feedback */
     return false;
+}
+
+bool ESP_NewMessage( void )
+{
+    return ESP_newMessage;
+}
+
+void ESP_GetMessage( uint8_t *message)
+{
+    ESP_newMessage = false;
+    memcpy(message, ESP_message, 7);
 }
 
 bool ESP_WIFI_Confirmed( void )

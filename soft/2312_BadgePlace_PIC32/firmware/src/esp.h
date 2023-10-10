@@ -58,9 +58,8 @@
 #define AT_CMD_RST      "AT+RST"
 #define AT_CMD_CWMODEIS "AT+CWMODE=1"
 #define AT_CMD_CWMODE   "AT+CWMODE?"
-#define AT_CMD_CWJAP    "AT+CWJAP=\"kpp-55143\",\"Jvey-mjD9-V3g4-WNvt\""
-//#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"badgeplace\",8080"
-#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"badgeplace\",8080"
+#define AT_CMD_CWJAP    "AT+CWJAP=\"ES-SLO-2\",\"SLO-2-ES\""
+#define AT_CMD_CIPSTART "AT+CIPSTART=\"TCP\",\"192.168.0.100\",8080"
 #define AT_CMD_CIPSEND  "AT+CIPSEND=6"
 
 /* AT acknowledge responses */

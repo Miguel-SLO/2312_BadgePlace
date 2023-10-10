@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ed26f6b3-ea15-42cd-b381-c1f6c2697637" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/app.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/app.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/bzr.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/bzr.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/chu.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/chu.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/esp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/esp.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/main.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1360937237/main.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/15694449/sys_clk_pic32mx.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/15694449/sys_clk_pic32mx.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_exceptions.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_exceptions.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_init.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_init.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_interrupt.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_interrupt.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_tasks.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1708948888/system_tasks.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_mapping.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_mapping.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_static.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_static.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_static_byte_model.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/1753970347/drv_usart_static_byte_model.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/2062741761/drv_tmr_mapping.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/2062741761/drv_tmr_mapping.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/2062741761/drv_tmr_static.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/2062741761/drv_tmr_static.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/220851720/drv_oc_mapping.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/220851720/drv_oc_mapping.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/220851720/drv_oc_static.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/220851720/drv_oc_static.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/604921471/sys_ports_static.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/604921471/sys_ports_static.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/711155467/sys_int_pic32.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/711155467/sys_int_pic32.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/945820938/sys_devcon.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/945820938/sys_devcon.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/945820938/sys_devcon_pic32mx.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/945820938/sys_devcon_pic32mx.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/RFIDB1ClientInterface.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/RFIDB1ClientInterface.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/RFIDB1ClientProtocol.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/RFIDB1ClientProtocol.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/SerialTimer.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/SerialTimer.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/TLC5973.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/TLC5973.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/counter.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/counter.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/fifo.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/debug/_ext/946520205/fifo.o.d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/production/_ext/1360937237/app.o" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/production/_ext/1360937237/app.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/production/_ext/1360937237/esp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/build/2312_Config/production/_ext/1360937237/esp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/debug/2312_BadgePlace_PIC32.X.debug.elf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/debug/2312_BadgePlace_PIC32.X.debug.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/debug/memoryfile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.hex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.map" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/2312_BadgePlace_PIC32.X/dist/2312_Config/production/2312_BadgePlace_PIC32.X.production.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/src/esp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/src/esp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/src/modules/SerialTimer.c" beforeDir="false" afterPath="$PROJECT_DIR$/../2312_BadgePlace_PIC32/firmware/src/modules/SerialTimer.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WCgZW18jnXh3fOM3lIIMAqN9U0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="2312_BadgePlace_RPI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed26f6b3-ea15-42cd-b381-c1f6c2697637" name="Changes" comment="" />
+      <created>1696242032058</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696242032058</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
